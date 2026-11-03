@@ -21,6 +21,8 @@ research_areas:
 application_tags:
   - health
   - neurodevelopment
+  - autism
+  - social-robotics
 project_ids: []
 featured: true
 featured_rank: 1
@@ -35,21 +37,29 @@ dataset_url: null
 video_url: null
 slides_url: null
 project_url: null
-award: null
+award: "CHI 2024 Honorable Mention"
 source_keys:
   - "ashwini_chi"
 sources:
   - label: Crossref
     url: "https://doi.org/10.1145/3613904.3642836"
-  - label: OpenAlex
-    url: "https://openalex.org/W4396833540"
+  - label: First-author academic website (Ashwini B)
+    url: "https://sites.google.com/view/ashwini-b/"
+    note: Lists CHI ’24 paper with Honourable Mention; also lists award under Honours
+  - label: HMI lab reference design / site materials
+    note: HMI REFERENCE_DESIGN_CONCEPT and prior lab materials present the CHI 2024 Honorable Mention distinction
+  - label: SIGCHI CHI ’24 program (paper-specific badge)
+    url: "https://programs.sigchi.org/chi/2024/authors/141227"
+    note: Author program page shows HONORABLE MENTION for this paper; not an invented ACM awards URL
 evidence_note: >-
-  Verified against Crossref/OpenAlex DOI 10.1145/3613904.3642836 on 2026-11-03.
-  Author bibliography (ashwini_chi) claims Honourable Mention. ACM DL paper page and CHI 2024 awards listings checked 2026-11-03 did not yield paper-specific confirmation; award field remains null.
+  Bibliographic metadata verified against Crossref DOI 10.1145/3613904.3642836.
+  Honorable Mention corroborated by the first author’s academic website and HMI lab
+  materials; SIGCHI CHI ’24 program page also shows a paper-specific HONORABLE MENTION
+  badge. Award recorded pending faculty confirmation to close the residual gate note.
 verified_at: "2026-11-03"
 unresolved_notes:
   - "Source key ashwini_chi lists authors as Ashwini; Ghosal; Veni; Suri; Shukla — Crossref/ACM order and spellings used instead (Ghoshal; Suri; Krishnaveni Achary)."
-  - "CHI 2024 Honorable Mention claimed on prior materials but not independently confirmed via ACM awards listing in M3 audit."
+  - "CHI 2024 Honorable Mention: evidence recorded from first-author site + HMI materials (+ SIGCHI program corroboration); faculty confirmation requested to close award gate."
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

@@ -9,36 +9,62 @@ The lab finalized scientific positioning under a single research identity with t
 
 ## Decision
 
-1. **Canonical identity**
-   - Lab: Human–Machine Interaction Research Group  
-   - Institution: IIIT-Delhi  
-   - Research identity: **Interactive Intelligence**  
-   - Punchline: **Intelligence emerges through interaction.**
+### Canonical identity
 
-2. **Primary themes** (exactly three; ordered):
-   1. `perception-understanding` — Perception & Understanding  
-   2. `learning-coordination` — Learning & Coordination  
-   3. `interaction-adaptation` — Interaction & Adaptation  
+- **Lab:** Human–Machine Interaction Research Group  
+- **Institution:** IIIT-Delhi  
+- **Research identity:** Interactive Intelligence  
+- **Punchline:** Intelligence emerges through interaction.
 
-3. **Cross-cutting applications** remain a separate searchable dimension (`application_tags`), including neurodevelopment, autism, ADHD, health, accessibility, social robotics, education, and pervasive computing. Papers may map to multiple themes and multiple tags.
+### Three scientific themes
 
-4. **Authoritative prose** is stored verbatim at `src/content/identity/approved-description.md`. Do not paraphrase for site surfaces that claim to render the approved description. Homepage uses only the approved punchline plus a short approved hero sentence (M3.5); full five paragraphs render on `/about/` (M3.5).
+1. **Perception & Understanding** (`perception-understanding`)  
+2. **Learning & Coordination** (`learning-coordination`)  
+3. **Interaction & Adaptation** (`interaction-adaptation`)
 
-5. **Logo** (M3.5): sole official mark is the historic HMI logo (`hmi-iiitd.github.io` `images/logo/logo_new.jpg`). No redesign in M3.
+### Cross-cutting application tags
 
-6. **Minsky quotation (About, M3.5):** The brief cited *The Society of Mind* §16.1 p.163. Independent check places the intended “no trick / diversity” passage at **§30.8 ≈ p.308**. M3.5 must reconcile the locator before publishing the About aside; do not invent alternative slogans.
+Separate searchable dimension (not primary themes), with prominent visibility for **neurodevelopment**, **ADHD**, **autism**, **health**, and **accessibility**, plus social robotics, education, and pervasive computing. Papers may belong to multiple themes and multiple tags.
 
-7. **Sequencing**
-   - **M3 (this PR):** canonical file, this ADR, three-theme + tag schemas, publication remapping, architecture tests; M3.5 UI tests exist but are skipped.  
-   - **M3.5 (separate PR):** homepage hero, About page + verified Minsky quotation, logo derivatives, research index display, nav/metadata, redirects if needed.  
-   - **M4:** rich theme/project pages.
+### Complete approved HMI description (verbatim)
+
+Canonical file: `src/content/identity/approved-description.md`  
+Do not paraphrase. Reproduced here in full:
+
+---
+
+# Human–Machine Interaction Research Group
+
+## Intelligence emerges through interaction.
+
+At the Human–Machine Interaction (HMI) Research Group at IIIT-Delhi, we study **interactive intelligence**: how intelligent systems perceive and understand people and other agents, learn and reason through interaction, and adapt their behaviour in response.
+
+Our research spans three closely connected themes: **perception and understanding**, **learning and coordination**, and **interaction and adaptation**. We develop multimodal methods for understanding human behaviour, affect, attention, physiology, and social signals; computational methods for learning about and coordinating with other agents; and interactive systems that translate these capabilities into adaptive interfaces, robots, assistive technologies, and intelligent physical systems.
+
+Interaction is central to this view of intelligence. People and agents differ in their behaviours, preferences, capabilities, and responses, and these can change as interaction unfolds. Increasingly, our work asks how intelligent systems can learn in such settings, reason about what they observe, and decide how that knowledge should shape subsequent interaction and coordination.
+
+We investigate these questions across human–AI interaction, multi-agent systems, affective and multimodal computing, pervasive sensing, social robotics, **neurodevelopment, accessibility, and health**. Our work ranges from fundamental computational models to novel interactive systems, real-world applications, and technology translation.
+
+Across these directions, our broader goal is to build intelligent systems that can **understand, learn from, and adapt through interaction—with people, other intelligent agents, and the physical world.**
+
+---
+
+### Sequencing
+
+- **M3 (this PR):** Record identity (this ADR + canonical file), confirm three-theme + application-tag data-model compatibility, publication remapping, architecture tests.  
+- **M3.5 (separate PR):** Homepage hero, About page, official logo, Minsky quotation, metadata, visual changes.  
+- **M4:** Rich theme/project pages.
+
+### Minsky quotation (About, M3.5 only)
+
+Brief cited *The Society of Mind* §16.1 p.163. Independent check places the “no trick / diversity” passage at **§30.8 ≈ p.308**. Reconcile locator in M3.5 before publishing.
 
 ## Migration from four themes
 
 | Retired id | Maps primarily to |
 |---|---|
 | `adaptive-social-intelligence` | `learning-coordination` |
-| `ai-human-wellbeing` | `interaction-adaptation` (+ application tags `health`, `neurodevelopment` where applicable) |
+| `ai-human-wellbeing` | `interaction-adaptation` (+ `health` / `neurodevelopment` tags where applicable) |
 | `behavioral-intelligence` | `perception-understanding` |
 | `novel-interaction-sensing` | `interaction-adaptation` and/or `perception-understanding` |
 
@@ -46,6 +72,6 @@ Stable publication `id` / `slug` / DOI values are unchanged.
 
 ## Consequences
 
-- Content and CI must enforce exactly three published primary themes.  
+- Content and CI enforce exactly three published primary themes.  
 - Application tags must not be conflated with primary themes.  
-- M3.5 UI tests remain skipped until that PR; architecture tests pass on M3.
+- M3.5 UI remains out of scope for PR #1.

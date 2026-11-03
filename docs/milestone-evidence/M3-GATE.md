@@ -1,7 +1,7 @@
 # M3 completion gate
 
-**Recommendation:** **PASS (pending PR review + merge to staging)**  
-**Date:** 2026-11-03 (bibliography intake revision)  
+**Recommendation:** **PASS pending independent approving review, then merge to GitHub staging only**  
+**Date:** 2026-11-03 (final cleanup)  
 **Branch:** `feat/m3-publications` (PR #1)  
 **Do not start M3.5 or M4** without explicit approval.
 
@@ -11,31 +11,30 @@ Identity prep on this PR (ADR-003): canonical approved description + three-theme
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Publication inventory + reconciliation | `docs/publications/M3-RECONCILIATION.md` + `m3-source-classification.json` (68 keys) |
+| 1 | Publication inventory + reconciliation | `docs/publications/M3-RECONCILIATION.md` — **68** keys; **32** public papers (31 published + 1 accepted); **2** incomplete; **6** excluded; **5** patents; **22** unresolved; **59** unique research works after 4 dup pairs |
 | 2 | Provenance / verification decisions | Per-record YAML + reconciliation; raw bib private |
-| 3 | Publications archive + paper pages | 32 public records; `/publications/`, `/papers/[slug]/` |
-| 4 | Homepage featured verified research | CHI 2024, ExpressEar, MobiTangibles |
-| 5 | RED/GREEN evidence + CI | Reconciliation tests + local `npm run ci` + e2e green |
+| 3 | Publications archive + paper pages | Labeled as verified records currently available |
+| 4 | Homepage featured verified research | CHI 2024 (HM evidenced), ExpressEar, MobiTangibles |
+| 5 | RED/GREEN evidence + CI | `M3-TEST-LOG.md`; full local + GitHub `quality` |
 | 6 | Desktop/mobile screenshots | `m3-publications-*.png` |
 | 7 | Staging URL + deployed SHA | After merge to `main` → Pages deploy |
-| 8 | Branch-protection verification | ADR-002; probe rejected direct push (GH006) |
+| 8 | Branch-protection verification | ADR-002; enforce_admins; PR + review + `quality` |
 | 9 | Risks + PASS/FAIL | See below |
 
 ## Branch protection
 
 - PRs required; 1 approving review; required check `quality`; `enforce_admins: true`.
-- Direct push to `main` rejected (GH006). M3 ships only via this PR.
+- Direct push to `main` rejected (GH006). Merge authorized to **staging only** after independent approval.
 
-## Outstanding risks
+## Outstanding risks / follow-ups
 
-1. **NeurIPS 2026 ESL** — public as `accepted` from author bib; proceedings DOI pending.
-2. **CHI 2024 Honorable Mention** — not confirmed on ACM awards page; award left null.
-3. **ISS 2026 magnetic/UFO** — incomplete; unpublished pending DOI.
-4. **~22 historical source keys** — classified unresolved; not silently published.
-5. **Patents** — inventoried separately; grant vs application unverified at IPO/EPO.
-6. **Solo-maintainer merge** — requires a non-author approving review.
-7. **Code/dataset/PDF links** — omitted when unverified.
+1. **22 unresolved historical source keys** — documented backlog; not silently excluded.  
+2. **ISS 2026 magnetic/UFO** — incomplete; unpublished pending DOI.  
+3. **CHI HM** — evidence recorded; faculty confirmation requested to close residual note.  
+4. **ESL** — accepted/public; proceedings DOI pending.  
+5. **Patents** — application vs granted unverified at IPO/EPO.  
+6. **Solo-maintainer merge** — requires non-author approving review.
 
 ## Integrity stance
 
-Scientific accuracy over completeness. No invented DOIs, awards, rankings, or artifact links. Conflicts recorded, not silently resolved.
+Scientific accuracy over completeness. Archive = verified subset currently available, not the full historical bibliography.

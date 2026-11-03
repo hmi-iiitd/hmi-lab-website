@@ -45,12 +45,34 @@ describe("M3 bibliography reconciliation", () => {
     entries: ClassEntry[];
   };
 
-  it("records all 68 source keys exactly once", () => {
+  it("records all 68 source keys exactly once with reconciled bucket counts", () => {
     expect(classification.raw_entry_count).toBe(68);
     expect(classification.entries).toHaveLength(68);
     const keys = classification.entries.map((e) => e.key);
     expect(new Set(keys).size).toBe(68);
     expect(classification.source_sha256).toMatch(/^[a-f0-9]{64}$/);
+    const buckets = classification.entries.reduce<Record<string, number>>((acc, e) => {
+      acc[e.bucket] = (acc[e.bucket] ?? 0) + 1;
+      return acc;
+    }, {});
+    expect(buckets.unresolved_candidate).toBe(22);
+    expect(buckets.excluded_draft).toBe(6);
+    expect(buckets.patent).toBe(5);
+    expect(buckets.incomplete_unpublished).toBe(2);
+    expect(
+      (buckets.verified_matched ?? 0) +
+        (buckets.verified_new ?? 0) +
+        (buckets.accepted_verified ?? 0),
+    ).toBe(33);
+    const publicSlugs = new Set(
+      classification.entries
+        .filter((e) =>
+          ["verified_matched", "verified_new", "accepted_verified"].includes(e.bucket),
+        )
+        .map((e) => e.record_slug)
+        .filter(Boolean),
+    );
+    expect(publicSlugs.size).toBe(32);
   });
 
   it("maps verified/accepted source keys to existing site records without DOI/slug collisions", () => {
@@ -140,7 +162,7 @@ describe("M3 bibliography reconciliation", () => {
     expect(bib).not.toMatch(/CORE|IF\s*=/);
   });
 
-  it("keeps CHI authors in Crossref order and does not invent Honorable Mention", () => {
+  it("keeps CHI authors in Crossref order and records Honorable Mention with evidence", () => {
     const chi = pubs.find((p) => p.slug === "social-robots-autism-care-india");
     expect(chi!.authors.map((a) => a.name)).toEqual([
       "B Ashwini",
@@ -149,8 +171,20 @@ describe("M3 bibliography reconciliation", () => {
       "Krishnaveni Achary",
       "Jainendra Shukla",
     ]);
-    expect(chi!.award == null).toBe(true);
-    expect(chi!.unresolved_notes.some((n) => /Honorable Mention/i.test(n))).toBe(true);
+    expect(chi!.award).toBe("CHI 2024 Honorable Mention");
+    expect(chi!.sources.some((s) => /Ashwini|first-author/i.test(s.label))).toBe(true);
+    expect(chi!.unresolved_notes.some((n) => /faculty confirmation/i.test(n))).toBe(true);
+    // Do not invent a dedicated ACM awards-list URL
+    expect(chi!.sources.every((s) => !/award.*acm\.org\/awards/i.test(s.url ?? ""))).toBe(true);
+  });
+
+  it("lists ESL as accepted with NeurIPS provenance and no fabricated DOI", () => {
+    const esl = pubs.find((p) => p.slug === "epistemic-social-learning");
+    expect(esl!.status).toBe("accepted");
+    expect(esl!.doi == null || esl!.doi === "").toBe(true);
+    expect(esl!.paper_url).toContain("neurips.cc");
+    expect(esl!.sources.some((s) => /NeurIPS 2026 Downloads/i.test(s.label))).toBe(true);
+    expect(esl!.sources.some((s) => /CDNM|IIIT-Delhi/i.test(s.label))).toBe(true);
   });
 
   it("rejects status transitions that would publish incomplete records", () => {

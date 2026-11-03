@@ -17,8 +17,13 @@ test.describe("M3 publications archive", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(/Epistemic Social Learning/i);
     await expect(page.getByText(/status: accepted/i)).toBeVisible();
     await expect(page.getByRole("link", { name: "DOI" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Publisher" })).toHaveAttribute(
+      "href",
+      /neurips\.cc\/virtual\/2026\/poster\/150541/,
+    );
     await expect(page.locator("#bibtex pre code")).toContainText("note = {Accepted}");
     await expect(page.locator("#bibtex pre code")).toContainText("Jainendra Shukla");
+    await expect(page.getByText(/distinct from formal proceedings publication/i)).toBeVisible();
   });
 
   test("search and filters reduce visible rows without removing markup for no-js users", async ({

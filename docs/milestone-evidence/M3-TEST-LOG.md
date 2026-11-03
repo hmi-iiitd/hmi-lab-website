@@ -1,36 +1,33 @@
 # M3 test log (RED → GREEN → REFACTOR)
 
 **Branch:** `feat/m3-publications`  
-**Date:** 2026-11-03
+**Latest gate cleanup:** 2026-11-03  
+**Public archive:** 32 papers (31 published + 1 accepted NeurIPS ESL)
 
 ## RED
 
-- Added `tests/content/m3-publications.test.ts` covering unique IDs/DOIs/slugs, author metadata, status/year validity, theme relations, draft exclusion, BibTeX escaping, and publishable filtering.
-- Added `tests/e2e/publications.spec.ts` covering archive listing, search/filter progressive enhancement, paper pages (BibTeX + DOI), screenshots, and no-JS full list.
-- Updated homepage e2e so Selected Research asserts verified featured papers (not M2 placeholders).
-
-Initial failures (expected): missing publication records, incomplete schemas (`verification_status`, `lab_attribution`, provenance), archive/filter UI absent, paper pages lacking BibTeX, homepage still on placeholders.
+- Content integrity, reconciliation (68 keys), identity architecture (ADR-003), BibTeX, draft exclusion, archive/filter e2e, paper pages.
+- M3.5 UI contracts written and **skipped** until a separate PR.
 
 ## GREEN
 
-- Extended Zod publication schema with verification fields and lab attribution.
-- Added Crossref-verified publication Markdown (16 published) plus incomplete ESL candidate and draft fixture.
-- Implemented `src/lib/publications.ts` and `src/lib/bibtex.ts`.
-- Built `/publications/` archive with year/theme/type filters and search; permanent `/papers/[slug]/` pages.
-- Wired homepage Selected Research to verified featured set.
-- Fixed filter visibility: author CSS `display: grid` overrode HTML `[hidden]`; added `.pub[hidden] { display: none !important; }` and moved filter script to `public/js/publications-filter.js`.
+- 32 public verified/accepted records; patents and drafts excluded.
+- ESL accepted with NeurIPS poster + CDNM provenance; no fabricated DOI.
+- CHI 2024 HM award evidenced (first-author site + HMI materials; SIGCHI program corroboration); faculty confirmation noted.
+- Three Interactive Intelligence themes + independent application tags.
 
-## FULL SUITE (local)
+## FULL SUITE
 
 | Gate | Result |
 |---|---|
 | `npm run lint` | pass |
 | `npm run typecheck` | 0 errors |
-| `npm test` (Vitest) | 12/12 |
-| `npm run validate:content` | 18 pubs (16 publishable + 2 unpublished) |
-| `npm run build:staging` | 20 pages |
-| `npm run test:e2e` | 25/25 |
+| `npm test` (Vitest) | pass (identity + reconciliation suites included) |
+| `npm run validate:content` | pass |
+| `npm run build:staging` | 36 pages |
+| `npm run test:e2e` | pass (M3.5 specs skipped) |
 | `npm run ci` | exit 0 |
+| GitHub Actions `quality` | required on PR #1 |
 
 ## Evidence screenshots
 
