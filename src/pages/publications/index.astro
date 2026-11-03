@@ -1,0 +1,47 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/url";
+
+const pubs: CollectionEntry<"publications">[] = (await getCollection("publications"))
+  .filter(
+    (e: CollectionEntry<"publications">) => e.data.published && e.data.metadata_verified,
+  )
+  .sort(
+    (a: CollectionEntry<"publications">, b: CollectionEntry<"publications">) =>
+      b.data.publication_year - a.data.publication_year,
+  );
+---
+
+<BaseLayout title="Publications · HMI Lab">
+  <section class="section wrap">
+    <div class="section-label">Publications</div>
+    <h1 class="section-title">Verified records only</h1>
+    <p class="muted">
+      Listings are generated from the publications collection. Draft or unverified entries are
+      excluded from this page and from the static build listings.
+    </p>
+    {
+      pubs.length === 0 ? (
+        <p style="margin-top: 2rem;">
+          No verified public publication records are available yet. Incomplete seeds remain draft
+          until author order, venue, and evidence are confirmed.
+        </p>
+      ) : (
+        <div class="card-list">
+          {pubs.map((pub) => (
+            <article>
+              <p class="muted" style="margin: 0;">
+                {pub.data.publication_year}
+                {pub.data.venue_short ? ` · ${pub.data.venue_short}` : ""}
+              </p>
+              <h2 style="font-size: 1.15rem; margin: 0.35rem 0;">
+                <a href={withBase(`papers/${pub.data.slug}/`)}>{pub.data.title}</a>
+              </h2>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>

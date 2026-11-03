@@ -1,0 +1,21 @@
+---
+import { withBase } from "../lib/url";
+
+const links = [
+  { href: withBase("research/"), label: "Research" },
+  { href: withBase("publications/"), label: "Publications" },
+  { href: withBase("people/"), label: "People" },
+];
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap">
+  <a class="brand" href={withBase("/")}>
+    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span>HMI <small>Research Group · IIIT-Delhi</small></span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    <a class="btn" href="mailto:hmi@iiitd.ac.in">Contact</a>
+  </nav>
+</header>

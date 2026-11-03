@@ -1,0 +1,43 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas"))
+  .filter((e: CollectionEntry<"research-areas">) => e.data.published)
+  .sort(
+    (a: CollectionEntry<"research-areas">, b: CollectionEntry<"research-areas">) =>
+      a.data.order - b.data.order,
+  );
+
+const projects: CollectionEntry<"projects">[] = (await getCollection("projects")).filter(
+  (e: CollectionEntry<"projects">) => e.data.published,
+);
+---
+
+<BaseLayout title="Research · HMI Lab">
+  <section class="section wrap">
+    <div class="section-label">Research</div>
+    <h1 class="section-title">Themes and selected projects</h1>
+    <p class="muted">Structured from the research-areas and projects content collections.</p>
+    <div class="card-list">
+      {
+        themes.map((theme) => (
+          <article>
+            <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.6rem;">
+              {theme.data.title}
+            </h2>
+            <p class="muted">{theme.data.summary}</p>
+          </article>
+        ))
+      }
+    </div>
+    {
+      projects.length === 0 && (
+        <p class="muted" style="margin-top: 2rem;">
+          No published project pages yet. Flagship showcases arrive after bibliographic verification
+          (M3/M4).
+        </p>
+      )
+    }
+  </section>
+</BaseLayout>

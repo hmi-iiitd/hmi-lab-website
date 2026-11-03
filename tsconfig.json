@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["vitest/globals", "node"],
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "tests", "scripts", "astro.config.ts", "vitest.config.ts", "playwright.config.ts", "eslint.config.js"],
+  "exclude": ["dist", "node_modules"]
+}

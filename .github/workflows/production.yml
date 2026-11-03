@@ -1,0 +1,21 @@
+# Manual production publish — DISABLED until M8 explicit approval.
+# Do not enable without a signed release decision. Staging merges must not trigger this.
+
+name: Production publish (manual — disabled)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type PUBLISH-PRODUCTION to confirm'
+        required: true
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block until M8 authorization
+        run: |
+          echo "Production workflow is intentionally inactive until M8."
+          echo "Received confirmation input: ${{ inputs.confirm }}"
+          exit 1

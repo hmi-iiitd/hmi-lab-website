@@ -1,0 +1,24 @@
+legacy_path,http_status_observed_2026-11-03,proposed_new_path,notes
+/,200,/,"Homepage — redesign; keep as /"
+/index.html,200,/,"Alias of homepage"
+/publication.html,200,/publications/,"Publications index (legacy singular)"
+/team.html,200,/people/,"People index"
+/project.html,200,/research/,"Projects/research listing (confirm IA in M2)"
+/contact.php,200,/,"No PHP on Pages; contact via mailto only in MVP"
+/contact_us.html,200,/,"Legacy contact page"
+/faq.html,200,/,"FAQ — defer content to M6+"
+/blog.html,200,/news/,"News/blog mapping TBD"
+/join_us.html,200,/,"Opportunities — M6"
+/resources.html,200,/,"Resources — later milestone"
+/updates.html,200,/news/,"News mapping TBD"
+/old_projects.html,200,/research/,"Archive listing"
+/ExpressEar.html,200,/papers/express-ear,"Candidate paper/project URL — verify slug in M3"
+/Feature-extraction-selection-for-emotion-recognition.html,200,/papers/emotion-recognition-eda,"Candidate — verify in M3"
+/semi-supervised-learning-predicting-listener-backchannels.html,200,/papers/listener-backchannels,"Candidate — verify in M3"
+/HRI-for-ASD-Diagnosis.html,200,/projects/,"Flagship mapping TBD"
+/Emotionalyzer.html,200,/projects/,"Flagship mapping TBD"
+/img/carousel-1.jpg,200,,asset-only
+/img/carousel-2.jpg,200,,asset-only
+/img/carousel-3.jpg,200,,asset-only
+/css/style.css,200,,legacy-asset
+/images/header/banner_final_2.jpg,200,,legacy-asset

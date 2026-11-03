@@ -1,0 +1,45 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/url";
+
+const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas"))
+  .filter((entry: CollectionEntry<"research-areas">) => entry.data.published)
+  .sort(
+    (a: CollectionEntry<"research-areas">, b: CollectionEntry<"research-areas">) =>
+      a.data.order - b.data.order,
+  );
+---
+
+<BaseLayout>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="eyebrow">Human–Machine Interaction · IIIT-Delhi</div>
+    <h1 id="hero-title">Intelligence is<br /><em>an interaction.</em></h1>
+    <p class="lead">
+      We study how people and intelligent systems perceive, learn from, and adapt to one
+      another—bridging AI, human–computer interaction, robotics, and behavioral science.
+    </p>
+    <p style="margin-top: 1.75rem;">
+      <a class="btn" href={withBase("research/")}>Explore research</a>
+    </p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="themes-title">
+    <div class="section-label">Research directions</div>
+    <h2 class="section-title" id="themes-title">Questions that connect disciplines.</h2>
+    <div class="card-list">
+      {
+        themes.map((theme) => (
+          <article>
+            <h3 style="font-family: var(--font-display); font-weight: 400; margin: 0 0 0.4rem;">
+              {theme.data.title}
+            </h3>
+            <p class="muted" style="margin: 0;">
+              {theme.data.summary}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

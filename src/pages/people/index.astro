@@ -1,0 +1,35 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const people: CollectionEntry<"people">[] = (await getCollection("people")).filter(
+  (e: CollectionEntry<"people">) => e.data.published,
+);
+---
+
+<BaseLayout title="People · HMI Lab">
+  <section class="section wrap">
+    <div class="section-label">People</div>
+    <h1 class="section-title">Research is a collective effort</h1>
+    <p class="muted">
+      Profiles render only when marked published with approved metadata. Placeholder drafts stay out
+      of the public listing.
+    </p>
+    {
+      people.length === 0 ? (
+        <p style="margin-top: 2rem;">Public people profiles will appear after verification (M5).</p>
+      ) : (
+        <div class="card-list">
+          {people.map((person) => (
+            <article>
+              <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.5rem;">
+                {person.data.name}
+              </h2>
+              <p class="muted">{person.data.title ?? person.data.role}</p>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>

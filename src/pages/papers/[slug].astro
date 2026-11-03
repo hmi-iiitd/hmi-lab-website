@@ -1,0 +1,42 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const pubs = await getCollection("publications");
+  return pubs
+    .filter(
+      (entry: CollectionEntry<"publications">) =>
+        entry.data.published && entry.data.metadata_verified,
+    )
+    .map((entry: CollectionEntry<"publications">) => ({
+      params: { slug: entry.data.slug },
+      props: { entry },
+    }));
+}
+
+interface Props {
+  entry: CollectionEntry<"publications">;
+}
+
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} · HMI Lab`}>
+  <article class="section wrap">
+    <div class="section-label">{entry.data.venue_short ?? entry.data.kind}</div>
+    <h1 class="section-title">{entry.data.title}</h1>
+    <p class="muted">
+      {entry.data.publication_year}
+      {
+        entry.data.authors.length > 0
+          ? ` · ${entry.data.authors.map((a: { name: string }) => a.name).join(", ")}`
+          : ""
+      }
+    </p>
+    <div style="margin-top: 2rem;">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

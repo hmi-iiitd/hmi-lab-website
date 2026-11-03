@@ -1,0 +1,29 @@
+# Dependencies / build
+node_modules/
+dist/
+.astro/
+.vite/
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local-only mirrors (never commit historic clone)
+_historic_ro/
+*.zip

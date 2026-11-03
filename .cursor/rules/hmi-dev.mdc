@@ -1,0 +1,25 @@
+---
+description: "HMI website test-first engineering, scientific content integrity, milestone gates, and deployment safety"
+alwaysApply: true
+---
+
+# HMI website engineering rules
+
+1. Read `HMI_WEBSITE_PRD.md` before changing features or architecture. The PRD is authoritative; record deviations in an ADR for human approval.
+2. Work ONLY on the current explicitly approved milestone. M0/M1 before M2. Never self-approve a gate.
+3. Begin by identifying acceptance criteria and writing failing automated tests. Follow RED → GREEN → REFACTOR → FULL SUITE → REVIEW.
+4. Report only tests actually executed and outputs actually observed. If unavailable, state why, with blocker status; never invent green checks, links, visuals, or citations.
+5. Never edit, push to, replace, or delete the historic repository `hmi-iiitd/hmi-iiitd.github.io` unless later explicit instruction authorizes a specific operation.
+6. Never change `hmi.iiitd.edu.in`, DNS, GitHub custom domains, institutional server contents, or production deployment from Cursor without separate explicit release authorization.
+7. Every new feature must have an acceptance test; every bug must gain a regression test before its fix.
+8. Prefer Astro static rendering, typed structured data, progressive enhancement, and minimal JavaScript. Avoid major dependencies without ADR.
+9. Build links and asset paths using the configured Astro `base`; test `/hmi-lab-website/` staging separately from `/` production.
+10. No publication may ship without verified ordered authors, title, venue/status, year, evidence, and allowed resources. Don't fabricate missing DOIs, PDFs, code, datasets, awards, impact, or results.
+11. Use real, approved lab research assets with alt/caption/license/consent metadata. Label illustrative figures; avoid generic decorative AI imagery on production.
+12. Target WCAG 2.2 AA: semantic HTML, keyboard access, skip link, visible focus, proper contrast, captions, responsive reflow, `prefers-reduced-motion`.
+13. No static-site PHP server dependencies. No public contact form in MVP; no secrets, participant data, or unpublished patient information in repo, Actions logs, or staging.
+14. Do not silently broaden scope, rewrite research claims, or replace a working design with fashion-driven effects.
+15. For each milestone PR include: test-first evidence, exact commands/results, responsive screenshots, a11y scan, content provenance, risks, rollback path, and PASS/FAIL recommendation.
+16. Production is always an independently approved human-triggered operation; staging merge cannot publish to production.
+17. Use small commits/PRs, a committed lockfile, deterministic dependency installation and reproducible CI.
+18. Stop at milestone review. Do not start the next milestone just because local tests pass.
