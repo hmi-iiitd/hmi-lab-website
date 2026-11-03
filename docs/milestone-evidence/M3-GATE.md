@@ -5,6 +5,8 @@
 **Branch:** `feat/m3-publications` (PR #1)  
 **Do not start M3.5 or M4** without explicit approval.
 
+Identity prep on this PR (ADR-003): canonical approved description + three-theme/tag architecture only. Homepage hero rewrite, `/about/`, logo swap, and metadata are **M3.5**.
+
 ## Deliverables checklist
 
 | # | Item | Status |

@@ -1,10 +1,13 @@
+import { PRIMARY_THEME_IDS } from "../identity";
 import {
+  applicationTagSchema,
   newsSchema,
   personSchema,
   projectSchema,
   publicationDraftSchema,
   publicationPublishableSchema,
   researchThemeSchema,
+  type ApplicationTag,
   type NewsItem,
   type Person,
   type Project,
@@ -16,6 +19,7 @@ export type ContentBundle = {
   publications: PublicationDraft[];
   people: Person[];
   themes: ResearchTheme[];
+  applicationTags?: ApplicationTag[];
   projects: Project[];
   news: NewsItem[];
 };
@@ -122,6 +126,49 @@ export function validateContentBundle(bundle: ContentBundle): ValidationIssue[] 
   }
   issues.push(...assertNoDuplicateKeys(bundle.themes, "themes"));
 
+  const publishedThemes = bundle.themes.filter((t) => t.published);
+  if (publishedThemes.length !== PRIMARY_THEME_IDS.length) {
+    issues.push({
+      collection: "themes",
+      message: `Expected exactly ${PRIMARY_THEME_IDS.length} published primary themes; found ${publishedThemes.length}`,
+    });
+  }
+  const publishedThemeIds = new Set(publishedThemes.map((t) => t.id));
+  for (const id of PRIMARY_THEME_IDS) {
+    if (!publishedThemeIds.has(id)) {
+      issues.push({
+        collection: "themes",
+        id,
+        message: `Missing required primary theme id: ${id}`,
+      });
+    }
+  }
+  for (const theme of publishedThemes) {
+    if (!(PRIMARY_THEME_IDS as readonly string[]).includes(theme.id)) {
+      issues.push({
+        collection: "themes",
+        id: theme.id,
+        message: `Unexpected published theme id (not in Interactive Intelligence primary set): ${theme.id}`,
+      });
+    }
+  }
+
+  if (bundle.applicationTags) {
+    for (const tag of bundle.applicationTags) {
+      const parsed = applicationTagSchema.safeParse(tag);
+      if (!parsed.success) {
+        issues.push(
+          ...parsed.error.issues.map((i) => ({
+            collection: "application-tags",
+            id: tag.id,
+            message: i.message,
+          })),
+        );
+      }
+    }
+    issues.push(...assertNoDuplicateKeys(bundle.applicationTags, "application-tags"));
+  }
+
   for (const project of bundle.projects) {
     const parsed = projectSchema.safeParse(project);
     if (!parsed.success) {
@@ -151,6 +198,7 @@ export function validateContentBundle(bundle: ContentBundle): ValidationIssue[] 
   issues.push(...assertNoDuplicateKeys(bundle.news, "news"));
 
   const themeIds = new Set(bundle.themes.map((t) => t.id));
+  const tagIds = new Set((bundle.applicationTags ?? []).map((t) => t.id));
   const personIds = new Set(bundle.people.map((p) => p.id));
   const pubIds = new Set(bundle.publications.map((p) => p.id));
 
@@ -161,6 +209,29 @@ export function validateContentBundle(bundle: ContentBundle): ValidationIssue[] 
           collection: "publications",
           id: pub.id,
           message: `Unknown research_areas id: ${area}`,
+        });
+      }
+      if (tagIds.has(area)) {
+        issues.push({
+          collection: "publications",
+          id: pub.id,
+          message: `research_areas must not reuse application tag id: ${area}`,
+        });
+      }
+    }
+    for (const tag of pub.application_tags ?? []) {
+      if (tagIds.size > 0 && !tagIds.has(tag)) {
+        issues.push({
+          collection: "publications",
+          id: pub.id,
+          message: `Unknown application_tags id: ${tag}`,
+        });
+      }
+      if (themeIds.has(tag)) {
+        issues.push({
+          collection: "publications",
+          id: pub.id,
+          message: `application_tags must not reuse primary theme id: ${tag}`,
         });
       }
     }

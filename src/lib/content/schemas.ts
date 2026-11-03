@@ -125,6 +125,28 @@ export const researchThemeSchema = z.object({
   order: z.number().int().default(0),
 });
 
+/** Cross-cutting application/topic tags — independent of primary research themes. */
+export const applicationTagSchema = z.object({
+  id: z.string().min(1),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  title: z.string().min(1),
+  summary: z.string().min(1),
+  published: z.boolean().default(false),
+  order: z.number().int().default(0),
+});
+
+export const identityDocumentSchema = z.object({
+  id: z.string().min(1),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  title: z.string().min(1),
+  punchline: z.string().min(1),
+  research_identity: z.string().min(1),
+  lab_name: z.string().min(1),
+  institution: z.string().min(1),
+  version: z.string().min(1),
+  published: z.boolean().default(false),
+});
+
 export const projectSchema = z.object({
   id: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -150,5 +172,7 @@ export type PublicationDraft = z.infer<typeof publicationDraftSchema>;
 export type PublicationPublishable = z.infer<typeof publicationPublishableSchema>;
 export type Person = z.infer<typeof personSchema>;
 export type ResearchTheme = z.infer<typeof researchThemeSchema>;
+export type ApplicationTag = z.infer<typeof applicationTagSchema>;
+export type IdentityDocument = z.infer<typeof identityDocumentSchema>;
 export type Project = z.infer<typeof projectSchema>;
 export type NewsItem = z.infer<typeof newsSchema>;
