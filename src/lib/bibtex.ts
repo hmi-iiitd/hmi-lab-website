@@ -30,6 +30,10 @@ export function toBibtex(pub: PublicationDraft): string {
     ["booktitle", pub.kind !== "journal" ? escapeBibtex(pub.venue_full || "") : undefined],
     ["doi", pub.doi ? escapeBibtex(pub.doi) : undefined],
     ["url", pub.paper_url || (pub.doi ? `https://doi.org/${pub.doi}` : undefined)],
+    [
+      "note",
+      pub.status === "accepted" ? "Accepted" : undefined,
+    ],
   ];
 
   const body = fields

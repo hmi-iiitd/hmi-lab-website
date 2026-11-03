@@ -13,7 +13,9 @@ authors:
   - name: "Aman Parnami"
   - name: "Jainendra Shukla"
 research_areas:
-  - novel-interaction-sensing
+  - interaction-adaptation
+  - perception-understanding
+application_tags: []
 project_ids: []
 featured: true
 featured_rank: 3
@@ -29,6 +31,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "AbhijeetUbiComp24"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1109/tvcg.2024.3456191"

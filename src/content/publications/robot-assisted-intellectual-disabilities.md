@@ -13,7 +13,10 @@ authors:
   - name: "Joan Oliver"
   - name: "Domènec Puig"
 research_areas:
-  - ai-human-wellbeing
+  - interaction-adaptation
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: false
 published: true
@@ -28,6 +31,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "shukla2019robot"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1007/s12369-019-00527-w"

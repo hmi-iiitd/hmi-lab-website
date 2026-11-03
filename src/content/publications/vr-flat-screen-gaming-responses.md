@@ -15,8 +15,9 @@ authors:
   - name: "Ojaswa Sharma"
   - name: "Jainendra Shukla"
 research_areas:
-  - behavioral-intelligence
-  - novel-interaction-sensing
+  - perception-understanding
+  - interaction-adaptation
+application_tags: []
 project_ids: []
 featured: false
 published: true
@@ -31,6 +32,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "Ritik"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1109/taffc.2024.3368703"

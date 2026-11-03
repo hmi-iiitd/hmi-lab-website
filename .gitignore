@@ -27,3 +27,9 @@ npm-debug.log*
 # Local-only mirrors (never commit historic clone)
 _historic_ro/
 *.zip
+
+# Author-supplied bibliography intake (may contain unpublished/submitted titles)
+HMI_M3_Bibliography_Source_Raw.txt
+HMI_M3_Publications_Import_Audit.md
+**/HMI_M3_Bibliography_Source_Raw.txt
+**/HMI_M3_Publications_Import_Audit.md

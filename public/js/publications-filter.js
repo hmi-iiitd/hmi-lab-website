@@ -11,10 +11,12 @@
     const yearEl = document.getElementById("pub-year");
     const kindEl = document.getElementById("pub-kind");
     const themeEl = document.getElementById("pub-theme");
+    const tagEl = document.getElementById("pub-tag");
     const q = (qEl && "value" in qEl ? String(qEl.value) : "").trim().toLowerCase();
     const year = yearEl && "value" in yearEl ? String(yearEl.value) : "";
     const kind = kindEl && "value" in kindEl ? String(kindEl.value) : "";
     const theme = themeEl && "value" in themeEl ? String(themeEl.value) : "";
+    const tag = tagEl && "value" in tagEl ? String(tagEl.value) : "";
 
     let visible = 0;
     for (const item of items) {
@@ -27,7 +29,8 @@
         (!q || hay.includes(q)) &&
         (!year || item.getAttribute("data-year") === year) &&
         (!kind || item.getAttribute("data-kind") === kind) &&
-        (!theme || (item.getAttribute("data-themes") || "").includes(theme));
+        (!theme || (item.getAttribute("data-themes") || "").includes(theme)) &&
+        (!tag || (item.getAttribute("data-tags") || "").split(/\s+/).includes(tag));
       item.hidden = !show;
       if (show) visible += 1;
     }

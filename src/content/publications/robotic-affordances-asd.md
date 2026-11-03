@@ -14,7 +14,10 @@ authors:
   - name: "Krit Verma"
   - name: "Prarthana Kansal"
 research_areas:
-  - ai-human-wellbeing
+  - interaction-adaptation
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: false
 published: true
@@ -29,6 +32,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "shukla2019mapping"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1109/ro-man46459.2019.8956247"

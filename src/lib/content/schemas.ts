@@ -23,6 +23,7 @@ export const publicationDraftSchema = z.object({
   venue_short: z.string().min(1).optional(),
   authors: z.array(authorRefSchema).default([]),
   research_areas: z.array(z.string().min(1)).default([]),
+  application_tags: z.array(z.string().min(1)).default([]),
   project_ids: z.array(z.string().min(1)).default([]),
   featured: z.boolean().default(false),
   featured_rank: z.number().int().positive().optional(),
@@ -46,6 +47,7 @@ export const publicationDraftSchema = z.object({
   project_url: z.string().url().optional().nullable(),
   award: z.string().min(1).optional().nullable(),
   bibtex_key: z.string().min(1).optional(),
+  source_keys: z.array(z.string().min(1)).default([]),
   sources: z.array(sourceRefSchema).default([]),
   evidence_note: z.string().optional(),
   verified_at: z.string().optional().nullable(),
@@ -57,6 +59,7 @@ export const publicationPublishableSchema = publicationDraftSchema
   .extend({
     published: z.literal(true),
     verification_status: z.literal("verified"),
+    status: z.enum(["published", "accepted"]),
     authors: z.array(authorRefSchema).min(1),
     venue_full: z.string().min(1),
     metadata_verified: z.literal(true),
@@ -72,11 +75,20 @@ export const publicationPublishableSchema = publicationDraftSchema
         path: ["authors"],
       });
     }
-    if (!value.doi && !value.paper_url && !value.pdf_url) {
+    const hasLocator = Boolean(value.doi || value.paper_url || value.pdf_url);
+    if (value.status === "published" && !hasLocator) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Verified publications require DOI or an official paper/PDF URL",
+        message: "Published records require DOI or an official paper/PDF URL",
         path: ["doi"],
+      });
+    }
+    if (value.status === "accepted" && !hasLocator && value.sources.length < 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          "Accepted records without DOI/URL require documented acceptance sources",
+        path: ["sources"],
       });
     }
   });

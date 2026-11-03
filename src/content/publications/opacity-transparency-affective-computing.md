@@ -14,8 +14,11 @@ authors:
   - name: "Jainendra Shukla"
   - name: "Raghava Mutharaju"
 research_areas:
-  - behavioral-intelligence
-  - ai-human-wellbeing
+  - perception-understanding
+  - interaction-adaptation
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: false
 published: true
@@ -30,6 +33,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "2023manohar"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1109/taffc.2023.3278230"

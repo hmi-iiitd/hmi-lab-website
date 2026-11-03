@@ -14,7 +14,8 @@ authors:
   - name: "G. C. Nandi"
   - name: "Domenec Puig"
 research_areas:
-  - behavioral-intelligence
+  - perception-understanding
+application_tags: []
 project_ids: []
 featured: false
 published: true
@@ -29,6 +30,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "shukla2019feature"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1109/taffc.2019.2901673"

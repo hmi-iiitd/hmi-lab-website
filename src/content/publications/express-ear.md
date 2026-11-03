@@ -14,7 +14,9 @@ authors:
   - name: "Jainendra Shukla"
   - name: "Aman Parnami"
 research_areas:
-  - novel-interaction-sensing
+  - interaction-adaptation
+  - perception-understanding
+application_tags: []
 project_ids: []
 featured: true
 featured_rank: 2
@@ -30,6 +32,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "ExpressEar"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1145/3478085"

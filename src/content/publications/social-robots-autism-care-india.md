@@ -16,8 +16,11 @@ authors:
   - name: Krishnaveni Achary
   - name: Jainendra Shukla
 research_areas:
-  - ai-human-wellbeing
-  - adaptive-social-intelligence
+  - interaction-adaptation
+  - learning-coordination
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: true
 featured_rank: 1
@@ -33,6 +36,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "ashwini_chi"
 sources:
   - label: Crossref
     url: "https://doi.org/10.1145/3613904.3642836"
@@ -40,10 +45,10 @@ sources:
     url: "https://openalex.org/W4396833540"
 evidence_note: >-
   Verified against Crossref/OpenAlex DOI 10.1145/3613904.3642836 on 2026-11-03.
-  Honorable Mention claims from concept/live pages remain UNCONFIRMED in this pass
-  and are not shown as awards.
+  Author bibliography (ashwini_chi) claims Honourable Mention. ACM DL paper page and CHI 2024 awards listings checked 2026-11-03 did not yield paper-specific confirmation; award field remains null.
 verified_at: "2026-11-03"
 unresolved_notes:
+  - "Source key ashwini_chi lists authors as Ashwini; Ghosal; Veni; Suri; Shukla — Crossref/ACM order and spellings used instead (Ghoshal; Suri; Krishnaveni Achary)."
   - "CHI 2024 Honorable Mention claimed on prior materials but not independently confirmed via ACM awards listing in M3 audit."
 ---
 

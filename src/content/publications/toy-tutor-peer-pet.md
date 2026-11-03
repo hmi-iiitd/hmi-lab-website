@@ -13,8 +13,11 @@ authors:
   - name: "Jainendra Shukla"
   - name: "Grace Eden"
 research_areas:
-  - ai-human-wellbeing
-  - adaptive-social-intelligence
+  - interaction-adaptation
+  - learning-coordination
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: false
 published: true
@@ -29,6 +32,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "kumar2020toy"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1145/3371382.3378315"

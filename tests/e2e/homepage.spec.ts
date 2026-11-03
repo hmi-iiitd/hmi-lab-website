@@ -77,14 +77,13 @@ test.describe("M2 homepage structure", () => {
     ).toBeVisible();
   });
 
-  test("four research themes render with questions", async ({ page }) => {
+  test("three research themes render with questions", async ({ page }) => {
     await page.goto("./");
     const themes = page.locator("#research-themes article");
-    await expect(themes).toHaveCount(4);
-    await expect(page.getByRole("heading", { name: /adaptive/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /novel interaction/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /behavioral intelligence/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /well-being|wellbeing/i })).toBeVisible();
+    await expect(themes).toHaveCount(3);
+    await expect(page.getByRole("heading", { name: /Perception & Understanding/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Learning & Coordination/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Interaction & Adaptation/i })).toBeVisible();
   });
 
   test("footer includes institute affiliation and verified lab email", async ({ page }) => {
@@ -190,7 +189,7 @@ test.describe("M2 no-JS resilience", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByRole("link", { name: "Explore research", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: "View publications", exact: true })).toBeVisible();
-    await expect(page.locator("#research-themes article")).toHaveCount(4);
+    await expect(page.locator("#research-themes article")).toHaveCount(3);
     await expect(page.getByRole("navigation", { name: /main/i }).getByRole("link", { name: "Research" })).toBeVisible();
   });
 });

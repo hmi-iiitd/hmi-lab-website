@@ -13,8 +13,9 @@ authors:
   - name: "Rajiv Ratn Shah"
   - name: "Jainendra Shukla"
 research_areas:
-  - adaptive-social-intelligence
-  - behavioral-intelligence
+  - learning-coordination
+  - perception-understanding
+application_tags: []
 project_ids: []
 featured: false
 published: true
@@ -29,6 +30,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "jain2021exploring"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1145/3411764.3445449"

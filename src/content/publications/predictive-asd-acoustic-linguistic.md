@@ -13,8 +13,11 @@ authors:
   - name: "Sheffali Gulati"
   - name: "Jainendra Shukla"
 research_areas:
-  - behavioral-intelligence
-  - ai-human-wellbeing
+  - perception-understanding
+  - interaction-adaptation
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: false
 published: true
@@ -29,6 +32,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "ashwini_TAI"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1109/tai.2024.3439288"

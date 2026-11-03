@@ -16,6 +16,11 @@ const themes: CollectionEntry<"research-areas">[] = (await getCollection("resear
 const yearSet = new Set<number>();
 for (const pub of pubs) yearSet.add(pub.data.publication_year);
 const years = Array.from(yearSet).sort((a, b) => b - a);
+const tagSet = new Set<string>();
+for (const pub of pubs) {
+  for (const tag of pub.data.application_tags ?? []) tagSet.add(tag);
+}
+const applicationTags = Array.from(tagSet).sort();
 ---
 
 <BaseLayout title="Publications · HMI Lab">
@@ -23,9 +28,9 @@ const years = Array.from(yearSet).sort((a, b) => b - a);
     <p class="section-label">Publications</p>
     <h1 class="section-title">Verified research archive</h1>
     <p class="muted" style="max-width: 42rem; margin-top: 1rem;">
-      Records below are Crossref-verified. Draft and incomplete candidates are excluded until
-      bibliographic reconciliation is complete. Search and filters progressively enhance the full
-      static list.
+      Records below are bibliographically verified (publisher/Crossref DOI or documented acceptance).
+      Drafts, submitted/target-venue entries, incomplete candidates, and patents are excluded from
+      this archive. Search and filters progressively enhance the full static list.
     </p>
 
     <form class="pub-filters" id="pub-filters" role="search">
@@ -68,6 +73,13 @@ const years = Array.from(yearSet).sort((a, b) => b - a);
           }
         </select>
       </label>
+      <label class="filter-field">
+        <span>Application</span>
+        <select id="pub-tag" name="tag">
+          <option value="">All applications</option>
+          {applicationTags.map((tag) => <option value={tag}>{tag}</option>)}
+        </select>
+      </label>
       <p class="muted" id="pub-count" aria-live="polite">{pubs.length} publications</p>
     </form>
 
@@ -82,6 +94,7 @@ const years = Array.from(yearSet).sort((a, b) => b - a);
             data-year={String(pub.data.publication_year)}
             data-kind={pub.data.kind}
             data-themes={pub.data.research_areas.join(" ")}
+            data-tags={(pub.data.application_tags ?? []).join(" ")}
           >
             <div class="year">{pub.data.publication_year}</div>
             <div>

@@ -14,8 +14,11 @@ authors:
   - name: "Deepa Singh"
   - name: "Jainendra Shukla"
 research_areas:
-  - ai-human-wellbeing
-  - adaptive-social-intelligence
+  - interaction-adaptation
+  - learning-coordination
+application_tags:
+  - health
+  - neurodevelopment
 project_ids: []
 featured: false
 published: true
@@ -30,6 +33,8 @@ video_url: null
 slides_url: null
 project_url: null
 award: null
+source_keys:
+  - "singh2022ethical"
 sources:
   - label: "Crossref"
     url: "https://doi.org/10.1007/s12369-022-00882-1"

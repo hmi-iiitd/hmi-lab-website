@@ -7,7 +7,18 @@ test.describe("M3 publications archive", () => {
     await expect(page.getByRole("heading", { level: 1, name: /verified research archive/i })).toBeVisible();
     await expect(page.locator("#pub-list article.pub").first()).toBeVisible();
     await expect(page.getByText(/DRAFT_ONLY_DO_NOT_PUBLISH/i)).toHaveCount(0);
-    await expect(page.getByText(/Epistemic Social Learning/i)).toHaveCount(0);
+    await expect(page.getByText(/Epistemic Social Learning/i)).toBeVisible();
+    await expect(page.getByText(/magnetic field shielding/i)).toHaveCount(0);
+    await expect(page.getByText(/UFO: Passively Enabling/i)).toHaveCount(0);
+  });
+
+  test("accepted NeurIPS paper page renders without inventing a DOI", async ({ page }) => {
+    await page.goto("./papers/epistemic-social-learning/");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/Epistemic Social Learning/i);
+    await expect(page.getByText(/status: accepted/i)).toBeVisible();
+    await expect(page.getByRole("link", { name: "DOI" })).toHaveCount(0);
+    await expect(page.locator("#bibtex pre code")).toContainText("note = {Accepted}");
+    await expect(page.locator("#bibtex pre code")).toContainText("Jainendra Shukla");
   });
 
   test("search and filters reduce visible rows without removing markup for no-js users", async ({

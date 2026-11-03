@@ -6,7 +6,8 @@ export function isPublicPublication(entry: PubEntry): boolean {
   return (
     entry.data.published &&
     entry.data.metadata_verified &&
-    entry.data.verification_status === "verified"
+    entry.data.verification_status === "verified" &&
+    (entry.data.status === "published" || entry.data.status === "accepted")
   );
 }
 
