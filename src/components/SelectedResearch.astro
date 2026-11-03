@@ -1,94 +1,92 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import SectionHeader from "./SectionHeader.astro";
 import { withBase } from "../lib/url";
+import { featuredPublications } from "../lib/publications";
+
+interface Props {
+  publications: CollectionEntry<"publications">[];
+}
+
+const { publications } = Astro.props;
+const featured = featuredPublications(publications);
+const primary = featured[0];
+const secondary = featured.slice(1, 3);
 ---
 
 <section class="section wrap" id="selected-research" aria-labelledby="selected-title">
   <SectionHeader
     label="01 / Selected work"
     title="Ideas made tangible."
-    intro="Layout preview for featured research. Cards below are development placeholders until bibliographic records are verified in M3."
+    intro="A curated set of verified contributions across social robotics, sensing, and interactive systems—not an auto-sorted recency feed."
     titleId="selected-title"
   />
 
-  <p class="placeholder-banner">Development placeholder · Not a verified publication record</p>
+  {
+    !primary ? (
+      <p class="placeholder-banner">No verified featured publications are available yet</p>
+    ) : (
+      <>
+        <article class="feature" aria-labelledby="feature-title">
+          <div class="feature-viz">
+            <span class="viz-kicker">Verified record</span>
+            <svg
+              viewBox="0 0 530 320"
+              role="img"
+              aria-label="Decorative schematic representing interaction research"
+              style="width:100%;max-width:510px;height:auto"
+            >
+              <g fill="none" stroke="#88b9ae" stroke-width="1.35" opacity=".78">
+                <path d="M95 165 Q105 70 255 70 Q390 70 418 164"></path>
+                <path d="M415 184 Q389 273 253 273 Q105 273 95 186"></path>
+              </g>
+              <g fill="#d5efe5" font-family="Georgia, serif" font-size="15" text-anchor="middle">
+                <circle cx="94" cy="177" r="41" fill="#315c57" stroke="#8bb6ac"></circle>
+                <text x="94" y="182">People</text>
+                <circle cx="262" cy="89" r="47" fill="#315c57" stroke="#8bb6ac"></circle>
+                <text x="262" y="94">Systems</text>
+                <circle cx="421" cy="177" r="42" fill="#315c57" stroke="#8bb6ac"></circle>
+                <text x="421" y="182">Evidence</text>
+                <circle cx="262" cy="258" r="48" fill="#315c57" stroke="#8bb6ac"></circle>
+                <text x="262" y="263">Design</text>
+              </g>
+            </svg>
+            <span class="viz-foot">Illustrative layout art · not study data</span>
+          </div>
+          <div class="feature-body">
+            <p class="feature-meta">
+              {primary.data.venue_short ?? primary.data.kind}
+              {" · "}
+              {primary.data.publication_year}
+            </p>
+            <h3 class="feature-title" id="feature-title">{primary.data.title}</h3>
+            <p>
+              {primary.data.authors.map((a: { name: string }) => a.name).join(", ")}
+            </p>
+            <a class="text-link" href={withBase(`papers/${primary.data.slug}/`)}>
+              Paper page <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
 
-  <article class="feature" aria-labelledby="feature-placeholder-title">
-    <div class="feature-viz">
-      <span class="viz-kicker">Illustrative schematic</span>
-      <svg
-        viewBox="0 0 530 320"
-        role="img"
-        aria-label="Conceptual feedback loop diagram used only as a layout placeholder"
-        style="width:100%;max-width:510px;height:auto"
-      >
-        <g fill="none" stroke="#88b9ae" stroke-width="1.35" opacity=".78">
-          <path d="M95 165 Q105 70 255 70 Q390 70 418 164"></path>
-          <path d="M415 184 Q389 273 253 273 Q105 273 95 186"></path>
-          <path
-            d="M145 148 L225 110 M315 110 L385 147 M388 196 L320 234 M218 236 L145 196"
-            stroke-dasharray="4 7"></path>
-        </g>
-        <g fill="#d5efe5" font-family="Georgia, serif" font-size="15" text-anchor="middle">
-          <circle cx="94" cy="177" r="41" fill="#315c57" stroke="#8bb6ac"></circle>
-          <text x="94" y="182">Actions</text>
-          <circle cx="262" cy="89" r="47" fill="#315c57" stroke="#8bb6ac"></circle>
-          <text x="262" y="94">Observed</text>
-          <circle cx="421" cy="177" r="42" fill="#315c57" stroke="#8bb6ac"></circle>
-          <text x="421" y="182">Beliefs</text>
-          <circle cx="262" cy="258" r="48" fill="#315c57" stroke="#8bb6ac"></circle>
-          <text x="262" y="263">Models</text>
-        </g>
-      </svg>
-      <span class="viz-foot">Schematic only · not experimental data</span>
-    </div>
-    <div class="feature-body">
-      <p class="feature-meta">Featured slot · Pending verification</p>
-      <h3 class="feature-title" id="feature-placeholder-title">Selected research placeholder</h3>
-      <p>
-        A verified flagship paper will appear here after author order, venue, and evidence are
-        confirmed. This block exists only to establish composition and accessibility for the
-        homepage design system.
-      </p>
-      <a class="text-link" href={withBase("research/")}>Browse research index <span aria-hidden="true">↗</span></a>
-    </div>
-  </article>
-
-  <div class="mini-grid">
-    <article class="mini-card">
-      <div class="mini-art" aria-hidden="true">
-        <svg width="340" height="175" viewBox="0 0 340 175">
-          <g fill="none" stroke="#3c8078" stroke-width="1.4">
-            <circle cx="120" cy="65" r="22"></circle>
-            <path d="M80 153c3-39 18-54 40-54s37 15 40 54"></path>
-            <rect x="205" y="49" width="66" height="58" rx="18"></rect>
-            <circle cx="225" cy="76" r="3" fill="#3c8078"></circle>
-            <circle cx="252" cy="76" r="3" fill="#3c8078"></circle>
-          </g>
-        </svg>
-      </div>
-      <p class="mini-meta">Development placeholder · Not a verified publication</p>
-      <h3>Selected work slot</h3>
-      <p>
-        Reserved for a cross-theme contribution once metadata and media permissions are approved.
-      </p>
-    </article>
-    <article class="mini-card">
-      <div class="mini-art alt" aria-hidden="true">
-        <svg width="330" height="176" viewBox="0 0 330 176">
-          <g fill="none" stroke="#777b70" stroke-width="1.4">
-            <rect x="70" y="39" width="180" height="110" rx="15"></rect>
-            <path d="M95 62H226M95 82H171 M94 115H150" stroke-dasharray="3 5"></path>
-            <circle cx="183" cy="87" r="59" stroke-dasharray="3 8"></circle>
-          </g>
-        </svg>
-      </div>
-      <p class="mini-meta">Development placeholder · Not a verified publication</p>
-      <h3>Selected work slot</h3>
-      <p>
-        Reserved for an interaction or sensing artifact page after the publications source of truth
-        is complete.
-      </p>
-    </article>
-  </div>
+        {
+          secondary.length > 0 && (
+            <div class="mini-grid">
+              {secondary.map((pub) => (
+                <article class="mini-card">
+                  <p class="mini-meta">
+                    {pub.data.venue_short ?? pub.data.kind} · {pub.data.publication_year}
+                  </p>
+                  <h3>
+                    <a href={withBase(`papers/${pub.data.slug}/`)}>{pub.data.title}</a>
+                  </h3>
+                  <p>{pub.data.authors.map((a: { name: string }) => a.name).join(", ")}</p>
+                </article>
+              ))}
+            </div>
+          )
+        }
+      </>
+    )
+  }
 </section>

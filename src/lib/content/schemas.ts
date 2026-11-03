@@ -6,6 +6,12 @@ export const authorRefSchema = z.object({
   affiliation: z.string().min(1).optional(),
 });
 
+export const sourceRefSchema = z.object({
+  label: z.string().min(1),
+  url: z.string().url().optional(),
+  note: z.string().optional(),
+});
+
 export const publicationDraftSchema = z.object({
   id: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -19,26 +25,44 @@ export const publicationDraftSchema = z.object({
   research_areas: z.array(z.string().min(1)).default([]),
   project_ids: z.array(z.string().min(1)).default([]),
   featured: z.boolean().default(false),
+  featured_rank: z.number().int().positive().optional(),
   published: z.boolean().default(false),
   metadata_verified: z.boolean().default(false),
+  verification_status: z
+    .enum(["verified", "incomplete", "conflicting", "excluded"])
+    .default("incomplete"),
+  lab_attribution: z
+    .enum(["lab-led", "collaborative", "historical-faculty", "unknown"])
+    .default("unknown"),
   abstract: z.string().optional(),
   doi: z.string().min(1).optional().nullable(),
+  arxiv_id: z.string().min(1).optional().nullable(),
   paper_url: z.string().url().optional().nullable(),
+  pdf_url: z.string().url().optional().nullable(),
   code_url: z.string().url().optional().nullable(),
+  dataset_url: z.string().url().optional().nullable(),
+  video_url: z.string().url().optional().nullable(),
+  slides_url: z.string().url().optional().nullable(),
+  project_url: z.string().url().optional().nullable(),
   award: z.string().min(1).optional().nullable(),
+  bibtex_key: z.string().min(1).optional(),
+  sources: z.array(sourceRefSchema).default([]),
   evidence_note: z.string().optional(),
   verified_at: z.string().optional().nullable(),
+  unresolved_notes: z.array(z.string()).default([]),
 });
 
 /** Publishability: stricter than draft. Incomplete records must fail. */
 export const publicationPublishableSchema = publicationDraftSchema
   .extend({
     published: z.literal(true),
+    verification_status: z.literal("verified"),
     authors: z.array(authorRefSchema).min(1),
     venue_full: z.string().min(1),
     metadata_verified: z.literal(true),
     evidence_note: z.string().min(1),
     verified_at: z.string().min(1),
+    sources: z.array(sourceRefSchema).min(1),
   })
   .superRefine((value, ctx) => {
     if (value.authors.some((a) => !a.name.trim())) {
@@ -46,6 +70,13 @@ export const publicationPublishableSchema = publicationDraftSchema
         code: z.ZodIssueCode.custom,
         message: "Every author must have a non-empty name in order",
         path: ["authors"],
+      });
+    }
+    if (!value.doi && !value.paper_url && !value.pdf_url) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Verified publications require DOI or an official paper/PDF URL",
+        path: ["doi"],
       });
     }
   });

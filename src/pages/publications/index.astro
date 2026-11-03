@@ -2,46 +2,119 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { withBase } from "../../lib/url";
+import {
+  isPublicPublication,
+  sortPubsNewestFirst,
+  type PubEntry,
+} from "../../lib/publications";
 
-const pubs: CollectionEntry<"publications">[] = (await getCollection("publications"))
-  .filter(
-    (e: CollectionEntry<"publications">) => e.data.published && e.data.metadata_verified,
-  )
-  .sort(
-    (a: CollectionEntry<"publications">, b: CollectionEntry<"publications">) =>
-      b.data.publication_year - a.data.publication_year,
-  );
+const all: PubEntry[] = await getCollection("publications");
+const pubs: PubEntry[] = all.filter(isPublicPublication).sort(sortPubsNewestFirst);
+const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas")).filter(
+  (t: CollectionEntry<"research-areas">) => t.data.published,
+);
+const yearSet = new Set<number>();
+for (const pub of pubs) yearSet.add(pub.data.publication_year);
+const years = Array.from(yearSet).sort((a, b) => b - a);
 ---
 
 <BaseLayout title="Publications · HMI Lab">
   <section class="section wrap">
     <p class="section-label">Publications</p>
-    <h1 class="section-title">Verified records only</h1>
-    <p class="muted">
-      Listings are generated from the publications collection. Draft or unverified entries are
-      excluded from this page and from the static build listings.
+    <h1 class="section-title">Verified research archive</h1>
+    <p class="muted" style="max-width: 42rem; margin-top: 1rem;">
+      Records below are Crossref-verified. Draft and incomplete candidates are excluded until
+      bibliographic reconciliation is complete. Search and filters progressively enhance the full
+      static list.
     </p>
-    {
-      pubs.length === 0 ? (
-        <p style="margin-top: 2rem;">
-          No verified public publication records are available yet. Incomplete seeds remain draft
-          until author order, venue, and evidence are confirmed.
-        </p>
-      ) : (
-        <div class="card-list">
-          {pubs.map((pub) => (
-            <article>
-              <p class="muted" style="margin: 0;">
-                {pub.data.publication_year}
-                {pub.data.venue_short ? ` · ${pub.data.venue_short}` : ""}
+
+    <form class="pub-filters" id="pub-filters" role="search">
+      <label class="filter-field">
+        <span>Search</span>
+        <input
+          type="search"
+          id="pub-q"
+          name="q"
+          placeholder="Title, author, or venue"
+          autocomplete="off"
+        />
+      </label>
+      <label class="filter-field">
+        <span>Year</span>
+        <select id="pub-year" name="year">
+          <option value="">All years</option>
+          {years.map((year) => <option value={String(year)}>{year}</option>)}
+        </select>
+      </label>
+      <label class="filter-field">
+        <span>Type</span>
+        <select id="pub-kind" name="kind">
+          <option value="">All types</option>
+          <option value="journal">Journal</option>
+          <option value="conference">Conference</option>
+          <option value="workshop">Workshop</option>
+          <option value="preprint">Preprint</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label class="filter-field">
+        <span>Theme</span>
+        <select id="pub-theme" name="theme">
+          <option value="">All themes</option>
+          {
+            themes.map((theme) => (
+              <option value={theme.data.id}>{theme.data.title}</option>
+            ))
+          }
+        </select>
+      </label>
+      <p class="muted" id="pub-count" aria-live="polite">{pubs.length} publications</p>
+    </form>
+
+    <div class="pub-list" id="pub-list">
+      {
+        pubs.map((pub) => (
+          <article
+            class="pub"
+            data-title={pub.data.title.toLowerCase()}
+            data-authors={pub.data.authors.map((a: { name: string }) => a.name.toLowerCase()).join(" | ")}
+            data-venue={(pub.data.venue_full || "").toLowerCase()}
+            data-year={String(pub.data.publication_year)}
+            data-kind={pub.data.kind}
+            data-themes={pub.data.research_areas.join(" ")}
+          >
+            <div class="year">{pub.data.publication_year}</div>
+            <div>
+              <p class="pub-kind">
+                {pub.data.kind}
+                {" · "}
+                {pub.data.status}
+                {pub.data.lab_attribution !== "unknown"
+                  ? ` · ${pub.data.lab_attribution}`
+                  : ""}
               </p>
-              <h2 style="font-size: 1.15rem; margin: 0.35rem 0;">
+              <h2>
                 <a href={withBase(`papers/${pub.data.slug}/`)}>{pub.data.title}</a>
               </h2>
-            </article>
-          ))}
-        </div>
-      )
-    }
+              <p class="muted">{pub.data.authors.map((a: { name: string }) => a.name).join(", ")}</p>
+              <p class="venue">{pub.data.venue_short || pub.data.venue_full}</p>
+              <p class="pub-links">
+                {pub.data.doi && <a href={`https://doi.org/${pub.data.doi}`}>DOI</a>}
+                {pub.data.paper_url &&
+                  pub.data.paper_url !== `https://doi.org/${pub.data.doi}` && (
+                    <a href={pub.data.paper_url}>Publisher</a>
+                  )}
+                {pub.data.pdf_url && <a href={pub.data.pdf_url}>PDF</a>}
+                {pub.data.code_url && <a href={pub.data.code_url}>Code</a>}
+                {pub.data.dataset_url && <a href={pub.data.dataset_url}>Dataset</a>}
+                <a href={withBase(`papers/${pub.data.slug}/#bibtex`)}>BibTeX</a>
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </section>
 </BaseLayout>
+
+<script src={`${import.meta.env.BASE_URL}js/publications-filter.js`} defer></script>

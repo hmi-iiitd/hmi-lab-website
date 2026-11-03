@@ -64,16 +64,17 @@ test.describe("M2 homepage structure", () => {
     }
   });
 
-  test("selected research and news placeholders are explicitly non-production", async ({
-    page,
-  }) => {
+  test("selected research uses verified papers; news stays honestly empty", async ({ page }) => {
     await page.goto("./");
     const selected = page.locator("#selected-research");
-    await expect(selected.getByText(/development placeholder/i).first()).toBeVisible();
-    await expect(selected.getByText(/not a verified publication/i).first()).toBeVisible();
+    await expect(selected.getByText(/development placeholder/i)).toHaveCount(0);
+    await expect(selected.getByRole("link", { name: /paper page/i })).toBeVisible();
+    await expect(selected.getByText(/ExpressEar|MobiTangibles|social robots|replace me/i).first()).toBeVisible();
 
     const news = page.locator("#news-highlights");
-    await expect(news.getByText(/development placeholder|no verified highlights/i).first()).toBeVisible();
+    await expect(
+      news.getByText(/development placeholder|no verified highlights/i).first(),
+    ).toBeVisible();
   });
 
   test("four research themes render with questions", async ({ page }) => {

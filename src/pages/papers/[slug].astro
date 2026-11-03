@@ -1,18 +1,15 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { isPublicPublication } from "../../lib/publications";
+import { toBibtex } from "../../lib/bibtex";
 
 export async function getStaticPaths() {
   const pubs = await getCollection("publications");
-  return pubs
-    .filter(
-      (entry: CollectionEntry<"publications">) =>
-        entry.data.published && entry.data.metadata_verified,
-    )
-    .map((entry: CollectionEntry<"publications">) => ({
-      params: { slug: entry.data.slug },
-      props: { entry },
-    }));
+  return pubs.filter(isPublicPublication).map((entry: CollectionEntry<"publications">) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
 }
 
 interface Props {
@@ -21,22 +18,66 @@ interface Props {
 
 const { entry } = Astro.props as Props;
 const { Content } = await render(entry);
+const bibtex = toBibtex(entry.data);
 ---
 
 <BaseLayout title={`${entry.data.title} · HMI Lab`}>
   <article class="section wrap">
-    <div class="section-label">{entry.data.venue_short ?? entry.data.kind}</div>
-    <h1 class="section-title">{entry.data.title}</h1>
-    <p class="muted">
-      {entry.data.publication_year}
-      {
-        entry.data.authors.length > 0
-          ? ` · ${entry.data.authors.map((a: { name: string }) => a.name).join(", ")}`
-          : ""
-      }
+    <p class="section-label">
+      {entry.data.venue_short ?? entry.data.kind} · {entry.data.publication_year}
     </p>
+    <h1 class="section-title">{entry.data.title}</h1>
+    <p class="muted" style="margin-top: 1rem; max-width: 48rem;">
+      {entry.data.authors.map((a: { name: string }) => a.name).join(", ")}
+    </p>
+    <p class="muted">
+      {entry.data.venue_full}
+      {" · "}
+      status: {entry.data.status}
+      {" · "}
+      attribution: {entry.data.lab_attribution}
+    </p>
+
+    <p class="pub-links" style="margin-top: 1.25rem;">
+      {entry.data.doi && <a class="btn" href={`https://doi.org/${entry.data.doi}`}>DOI</a>}
+      {entry.data.paper_url && <a class="btn" href={entry.data.paper_url}>Publisher</a>}
+      {entry.data.pdf_url && <a class="btn" href={entry.data.pdf_url}>PDF</a>}
+      {entry.data.code_url && <a class="btn" href={entry.data.code_url}>Code</a>}
+      {entry.data.dataset_url && <a class="btn" href={entry.data.dataset_url}>Dataset</a>}
+      {entry.data.project_url && <a class="btn" href={entry.data.project_url}>Project</a>}
+    </p>
+
+    {
+      entry.data.award && (
+        <p style="margin-top: 1rem;">
+          <strong>Distinction:</strong> {entry.data.award}
+        </p>
+      )
+    }
+
     <div style="margin-top: 2rem;">
       <Content />
     </div>
+
+    <section style="margin-top: 2.5rem;" aria-labelledby="provenance-title">
+      <h2 class="section-title" id="provenance-title" style="font-size: 1.5rem;">Provenance</h2>
+      <p class="muted">{entry.data.evidence_note}</p>
+      <ul>
+        {
+          entry.data.sources.map((source: { label: string; url?: string; note?: string }) => (
+            <li>
+              {source.url ? <a href={source.url}>{source.label}</a> : source.label}
+              {source.note ? ` — ${source.note}` : ""}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="muted">Verified at: {entry.data.verified_at}</p>
+    </section>
+
+    <section style="margin-top: 2.5rem;" aria-labelledby="bibtex-title" id="bibtex">
+      <h2 class="section-title" id="bibtex-title" style="font-size: 1.5rem;">BibTeX</h2>
+      <pre class="bibtex"><code>{bibtex}</code></pre>
+    </section>
   </article>
 </BaseLayout>
