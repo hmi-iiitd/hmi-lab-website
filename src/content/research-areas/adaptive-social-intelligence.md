@@ -2,7 +2,7 @@
 id: adaptive-social-intelligence
 slug: adaptive-social-intelligence
 title: "Adaptive & social intelligence"
-summary: "Learning, coordination, and decision-making in multi-agent and human–AI interaction."
+summary: "How do agents—and people—learn, coordinate, and decide when beliefs and behaviors continually reshape one another?"
 published: true
 order: 1
 ---

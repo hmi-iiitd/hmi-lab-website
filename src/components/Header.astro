@@ -14,8 +14,45 @@ const links = [
     <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
     <span>HMI <small>Research Group · IIIT-Delhi</small></span>
   </a>
-  <nav class="nav" aria-label="Main">
+  <button
+    type="button"
+    class="nav-toggle"
+    id="nav-toggle"
+    aria-controls="site-nav"
+    aria-expanded="false"
+  >
+    Menu
+  </button>
+  <nav class="nav" id="site-nav" aria-label="Main">
     {links.map((link) => <a href={link.href}>{link.label}</a>)}
     <a class="btn" href="mailto:hmi@iiitd.ac.in">Contact</a>
   </nav>
 </header>
+
+<script>
+  document.documentElement.classList.add("js");
+
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("site-nav");
+
+  function setOpen(open: boolean) {
+    if (!toggle || !nav) return;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    nav.classList.toggle("is-open", open);
+  }
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setOpen(open);
+    if (open) {
+      nav?.querySelector("a")?.focus();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setOpen(false);
+      toggle?.focus();
+    }
+  });
+</script>

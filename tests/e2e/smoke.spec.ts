@@ -33,7 +33,8 @@ test.describe("staging smoke", () => {
   test("captures baseline screenshot for design review", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("./");
-    const out = path.resolve("docs/milestone-evidence/m1-homepage-desktop.png");
+    const out = path.resolve("docs/milestone-evidence/m2-smoke-desktop.png");
     await page.screenshot({ path: out, fullPage: true });
   });
 });
+

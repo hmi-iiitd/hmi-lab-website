@@ -1,6 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SelectedResearch from "../components/SelectedResearch.astro";
+import ResearchThemes from "../components/ResearchThemes.astro";
+import CommunityPreview from "../components/CommunityPreview.astro";
+import NewsHighlights from "../components/NewsHighlights.astro";
 import { withBase } from "../lib/url";
 
 const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas"))
@@ -9,37 +13,57 @@ const themes: CollectionEntry<"research-areas">[] = (await getCollection("resear
     (a: CollectionEntry<"research-areas">, b: CollectionEntry<"research-areas">) =>
       a.data.order - b.data.order,
   );
+
+const news: CollectionEntry<"news">[] = await getCollection("news");
 ---
 
-<BaseLayout>
-  <section class="hero wrap" aria-labelledby="hero-title">
-    <div class="eyebrow">Human–Machine Interaction · IIIT-Delhi</div>
-    <h1 id="hero-title">Intelligence is<br /><em>an interaction.</em></h1>
-    <p class="lead">
-      We study how people and intelligent systems perceive, learn from, and adapt to one
-      another—bridging AI, human–computer interaction, robotics, and behavioral science.
-    </p>
-    <p style="margin-top: 1.75rem;">
-      <a class="btn" href={withBase("research/")}>Explore research</a>
-    </p>
-  </section>
+<BaseLayout
+  title="HMI Research Group · IIIT-Delhi"
+  description="Human–Machine Interaction Research Group at IIIT-Delhi — research at the intersection of AI, HCI, robotics, and behavioral science."
+>
+  <section class="hero wrap" id="hero" aria-labelledby="hero-title">
+    <svg
+      class="hero-art"
+      data-motion="decorative"
+      viewBox="0 0 360 360"
+      aria-hidden="true"
+    >
+      <g fill="none" stroke="#2b8579" stroke-width="1.4">
+        <circle cx="180" cy="180" r="130"></circle>
+        <circle cx="180" cy="180" r="96"></circle>
+        <circle cx="180" cy="180" r="61"></circle>
+        <path d="M40 180H320M180 38V322" stroke-dasharray="2 9"></path>
+      </g>
+      <g class="orb">
+        <circle cx="180" cy="50" r="11" fill="#2b8579"></circle>
+        <circle cx="276" cy="271" r="7" fill="#2b8579"></circle>
+        <circle cx="85" cy="267" r="5" fill="#2b8579"></circle>
+      </g>
+      <g class="orb rev">
+        <circle cx="180" cy="84" r="7" fill="#2b8579"></circle>
+        <circle cx="104" cy="120" r="6" fill="#2b8579"></circle>
+      </g>
+      <circle cx="180" cy="180" r="11" fill="#2b8579"></circle>
+    </svg>
 
-  <section class="section wrap" aria-labelledby="themes-title">
-    <div class="section-label">Research directions</div>
-    <h2 class="section-title" id="themes-title">Questions that connect disciplines.</h2>
-    <div class="card-list">
-      {
-        themes.map((theme) => (
-          <article>
-            <h3 style="font-family: var(--font-display); font-weight: 400; margin: 0 0 0.4rem;">
-              {theme.data.title}
-            </h3>
-            <p class="muted" style="margin: 0;">
-              {theme.data.summary}
-            </p>
-          </article>
-        ))
-      }
+    <div class="hero-copy">
+      <p class="eyebrow">Human–Machine Interaction · IIIT-Delhi</p>
+      <h1 id="hero-title">Intelligence is<br /><em>an interaction.</em></h1>
+      <div class="hero-bottom">
+        <p class="lead">
+          We study how people and intelligent systems perceive, learn from, and adapt to one
+          another—bridging AI, human–computer interaction, robotics, and behavioral science.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href={withBase("research/")}>Explore research</a>
+          <a class="btn btn-ghost" href={withBase("publications/")}>View publications</a>
+        </div>
+      </div>
     </div>
   </section>
+
+  <SelectedResearch />
+  <ResearchThemes themes={themes} />
+  <CommunityPreview />
+  <NewsHighlights items={news} />
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/url";
 
 const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas"))
   .filter((e: CollectionEntry<"research-areas">) => e.data.published)
@@ -16,17 +17,21 @@ const projects: CollectionEntry<"projects">[] = (await getCollection("projects")
 
 <BaseLayout title="Research · HMI Lab">
   <section class="section wrap">
-    <div class="section-label">Research</div>
+    <p class="section-label">Research</p>
     <h1 class="section-title">Themes and selected projects</h1>
-    <p class="muted">Structured from the research-areas and projects content collections.</p>
-    <div class="card-list">
+    <p class="muted" style="max-width: 40rem; margin-top: 1rem;">
+      Structured from the research-areas content collection. Flagship project pages arrive after
+      bibliographic verification.
+    </p>
+    <div class="directions" style="margin-top: 2rem;">
       {
-        themes.map((theme) => (
-          <article>
-            <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.6rem;">
+        themes.map((theme, index) => (
+          <article class="direction">
+            <span class="direction-index">{String(index + 1).padStart(2, "0")}</span>
+            <h2 style="font: 400 1.45rem/1.25 var(--font-display); margin: 0 0 0.7rem;">
               {theme.data.title}
             </h2>
-            <p class="muted">{theme.data.summary}</p>
+            <p>{theme.data.summary}</p>
           </article>
         ))
       }
@@ -34,8 +39,8 @@ const projects: CollectionEntry<"projects">[] = (await getCollection("projects")
     {
       projects.length === 0 && (
         <p class="muted" style="margin-top: 2rem;">
-          No published project pages yet. Flagship showcases arrive after bibliographic verification
-          (M3/M4).
+          No published project pages yet.{" "}
+          <a class="text-link" href={withBase("publications/")}>Publications index</a>
         </p>
       )
     }
