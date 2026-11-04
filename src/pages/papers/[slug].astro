@@ -29,10 +29,10 @@ const bibtex = toBibtex(entry.data);
       {entry.data.award ? ` · ${entry.data.award}` : ""}
     </p>
     <h1 class="paper-title">{entry.data.title}</h1>
-    <p class="muted" style="margin-top: 1rem; max-width: 48rem;">
+    <p class="paper-authors" style="margin-top: 1rem;">
       {entry.data.authors.map((a: { name: string }) => a.name).join(", ")}
     </p>
-    <p class="muted">
+    <p class="paper-venue">
       {entry.data.venue_full}
       {" · "}
       status: {entry.data.status}
@@ -57,7 +57,7 @@ const bibtex = toBibtex(entry.data);
       )
     }
 
-    <div style="margin-top: 2rem;">
+    <div class="paper-prose">
       <Content />
     </div>
 
