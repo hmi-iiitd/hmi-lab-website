@@ -1,277 +1,143 @@
 # M4 planning — Research themes and selected flagship pages
 
-**Status:** Planning only — **do not implement** until explicit faculty approval.  
+**Status:** **M4.0 CONDITIONAL PASS** — planning corrections accepted; **M4.1 only** authorized after this document merges.  
 **Base:** Staging at `96205585` (research positioning + visual design **frozen**).  
-**Out of scope until separately approved:** M5+; institutional production (`hmi.iiitd.edu.in`); homepage/typography/logo/identity revisions.
+**Out of scope until separately authorized:** M4.2+ flagship template/content; M5+; production; visual redesign; homepage/identity copy changes.
+
+**PRD correction:** Three primary themes supersede the PRD’s four-theme M4/RES-01 text. Recorded in `docs/decisions/ADR-005-m4-three-theme-correction.md` and the PRD M4 errata note.
 
 ---
 
 ## 1. PRD reconciliation (four themes → Interactive Intelligence)
 
-The contractual PRD (`HMI_WEBSITE_PRD.md` §10 M4, §8 RES-01, §11) still describes a **four-theme** structure and an exploratory punchline. ADR-003 and the frozen M3.5/M3.5-positioning work supersede that for scientific identity.
-
 | PRD (as written) | Approved / frozen reality | M4 implication |
 |---|---|---|
-| Four research themes (RES-01) | **Three** primary themes: Perception & Understanding · Learning & Coordination · Interaction & Adaptation | Theme index + **three** theme detail pages only |
+| Four research themes (RES-01) | **Three** themes: Perception & Understanding · Learning & Coordination · Interaction & Adaptation | **Three** theme detail pages only |
 | Punchline “Intelligence is an interaction.” | “Intelligence emerges through interaction.” | Do not reintroduce superseded copy |
-| M4: “four theme pages” | Three theme slugs already in `src/content/research-areas/` | `/research/{theme-slug}/` × 3 |
-| Flagship priority list includes HaptiDrag / ExpressEar as early exemplars | Faculty M4 candidates: **ESL, ADHD Sci Rep, CHI 2024 social robotics, MobiTangibles** | Plan and audit these four; HaptiDrag/ExpressEar deferred to M9-style expansion |
-| Homepage featured cards may deep-link to project pages | Homepage featured set and copy **frozen** | M4 may add routes and “View project” links **only** where assets are cleared; do not rewrite hero/themes/pathways/About philosophy |
-| Interactive ESL demo (DEMO-01 / M9) | Optional, scientifically validated later | **Out of M4 MVP** |
-
-**Change-control note:** Implementing three themes instead of four is an explicit ADR-003-aligned correction of the PRD milestone text, not a silent scope change. A short ADR addendum (or PRD errata) should accompany the first M4 implementation PR if approved.
+| M4: “four theme pages” | Theme slugs in `src/content/research-areas/` | `/research/{theme-slug}/` × 3 |
+| Early exemplars HaptiDrag / ExpressEar | **Approved MVP trio** below; MobiTangibles = #4 | Audit #4 in parallel; build after trio |
+| Homepage copy / typography / logo | **Frozen** | Theme deep-links only; no hero/About/pathways rewrite |
 
 ---
 
-## 2. Proposed M4 objectives
+## 2. Approved MVP flagship trio (for later M4.2–M4.4 — not M4.1)
 
-Tell the lab’s scientific story through:
+1. **NeurIPS 2026 — Epistemic Social Learning** (`epistemic-social-learning`) — Learning & Coordination; status **Accepted** (public).  
+2. **Scientific Reports 2026 — ADHD pupil dynamics** (`trial-pupil-dynamics-adhd`) — Perception & Understanding.  
+3. **CHI 2024 — Social robots for autism care** (`social-robots-autism-care-india`) — Interaction & Adaptation (+ Learning & Coordination).  
 
-1. **Three research-theme pages** that list only verified, published publications linked by `research_areas`.
-2. A **reusable flagship-project template** for enhanced showcases (problem → contribution → methodology → evidence → findings → limitations → resources).
-3. **Up to four candidate showcases** (below), gated by evidence/asset clearance.
-4. An **evidence and permissions audit** before any figure, photo, video, or participant-related material is published.
-5. A **minimum viable acceptance gate** of **three** scientific-owner-reviewed showcase pages (PRD M4 gate), with all three theme pages also shipping in the same milestone unless faculty narrows further.
-6. A **test-first** plan that blocks unsupported claims and false resource links.
-
-Frozen and unchanged in M4: homepage copy, typography tokens, original HMI logo, three-theme titles/summaries, Research Philosophy, Application Pathways taxonomy/intro, and punchline.
+**Priority #4 (parallel audit, after trio):** MobiTangibles (`mobitangibles`).
 
 ---
 
-## 3. Theme pages (`/research/{theme-slug}/`)
+## 3. Scientific ownership (proposed — not yet confirmed consent)
 
-### 3.1 Routes and sources
+| Role | Person |
+|---|---|
+| Accountable faculty content approver | **Jainendra Shukla** |
+| ESL paper-specific reviewer (proposed) | Jainendra Shukla / Dhruv Jaiswal |
+| ADHD paper-specific reviewer (proposed) | Saumya Yadav |
+| CHI 2024 paper-specific reviewer (proposed) | B Ashwini |
+| MobiTangibles paper-specific reviewer (proposed) | Abhijeet Mishra |
 
-| Theme id | Title | Existing summary (verbatim — do not rewrite for loop narrative) |
+These assignments are based on authorship, **not** confirmed consent. **Explicit paper-owner acceptance and scientific sign-off are required before any flagship page is published.**
+
+Faculty approval also required for factual claims, experimental limitations, media, and the CHI award statement.
+
+---
+
+## 4. Locked planning corrections (M4.0)
+
+1. **Theme-page listings** use verified **public** publication records via `isPublicPublication` (includes **`published` and `accepted`**). ESL **must** appear under Learning & Coordination as **Accepted**.  
+2. **Text-only project pages** are permitted when media cannot be cleared (high-quality prose; no broken image slots).  
+3. **Do not commit** unapproved participant, clinical, or copyrighted media to the public repository — including as unpublished draft assets under `public/`.  
+4. **Bibliographic facts** on project pages must come from canonical publication records (no divergent title/author/venue/DOI/status).  
+5. **Scientific-owner approval** required for claims, limitations, media, and CHI award before publish.  
+6. **Three-theme PRD correction** recorded (ADR-005 + PRD errata).
+
+---
+
+## 5. Theme pages (`/research/{theme-slug}/`) — M4.1 scope
+
+| Theme id / slug | Title |
+|---|---|
+| `perception-understanding` | Perception & Understanding |
+| `learning-coordination` | Learning & Coordination |
+| `interaction-adaptation` | Interaction & Adaptation |
+
+**M4.1 page content:**
+
+- Canonical title + existing summary (verbatim).  
+- **No new philosophy copy** on theme pages.  
+- Full list of verified public publications for that theme (newest first), including accepted-public records.  
+- Show venue/year and status when useful (e.g. Accepted).  
+- Link each item to `/papers/{slug}/`.  
+- Surface verified resource links from the publication record only (DOI/PDF/code/etc. when non-null).  
+- Explicit empty state if zero public papers.  
+- No fabricated projects, people blocks, or media.
+
+**Navigation (M4.1):**
+
+- Research index → theme detail URLs.  
+- Homepage theme cards → theme detail URLs (copy unchanged).  
+- Keep publications `?theme=` filter links.
+
+---
+
+## 6. Flagship template & showcases (authorized later — not M4.1)
+
+Template sections remain: problem, contribution, methodology, evidence, findings, limitations, resources.  
+Text-only pages allowed when media uncleared.  
+Assets require permission metadata; never commit uncleared participant/clinical/copyrighted files.  
+Bibliography always joined from publication records.
+
+Evidence-audit tables for ESL / ADHD / CHI / MobiTangibles remain as in prior draft (risks unchanged). Shared publish checklist unchanged.
+
+---
+
+## 7. Minimum viable flagship gate (after M4.1)
+
+When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI 2024; MobiTangibles after. Homepage featured card copy/order stays frozen.
+
+---
+
+## 8. Milestones
+
+| Step | Status | Deliverable |
 |---|---|---|
-| `perception-understanding` | Perception & Understanding | Current `research-areas` summary |
-| `learning-coordination` | Learning & Coordination | Current `research-areas` summary |
-| `interaction-adaptation` | Interaction & Adaptation | Current `research-areas` summary |
-
-**Page content (proposed):**
-
-- Theme title + existing one-sentence summary (canonical from content collection).
-- Optional short “organising lens” sentence **only if** faculty re-approves reuse of the Research-page feedback-loop lede locally; default = **no new philosophy copy** on theme pages.
-- Ordered list of **verified public** publications with `research_areas` containing the theme id (same provenance rules as archive).
-- Links to `/papers/{slug}/` and, when a cleared flagship exists, `/projects/{project-slug}/`.
-- Explicit empty-state if a theme temporarily has zero public papers (must not invent fillers).
-- No fabricated “active projects,” people blocks, or methods sections without verified content.
-
-### 3.2 Navigation
-
-- Research index already lists themes → add deep links to theme pages.
-- Homepage theme cards may point to theme pages **without** changing card titles/summaries.
-- Preserve existing publications filter `?theme=` behaviour.
+| **M4.0** | **PASS (conditional)** | This corrected plan + ADR-005 / PRD errata |
+| **M4.1** | **Authorized next** | Three theme detail pages + links + tests; stop at review gate |
+| **M4.2** | Not authorized | Project template + unpublished drafts |
+| **M4.3** | Not authorized | Evidence audit completion for trio |
+| **M4.4** | Not authorized | Publish three showcases |
+| **M4.5** | Not authorized | MobiTangibles showcase |
 
 ---
 
-## 4. Flagship-project template (`/projects/{slug}/`)
+## 9. M4.1 test-first plan
 
-### 4.1 Required sections (PROJ-01 aligned)
-
-| Section | Rule |
-|---|---|
-| Scientific problem / question | Owner-approved wording; not a second slogan |
-| Contribution | Tied to the paper’s actual claims |
-| Methodology | Accurate to the paper; no invented protocols |
-| Evidence | Only cleared figures/tables/photos/video; caption + source + permission state |
-| Findings | Paraphrase only what the paper supports; no clinical overclaim |
-| Limitations / scope | Mandatory; include synthetic/lab/scope boundaries when relevant (e.g. ESL) |
-| Resources | DOI/PDF/code/dataset/video/slides **only if URL verified and public**; never invent |
-
-### 4.2 Template behaviour
-
-- Generated from extended `projects` content + linked `publication_ids` (schema extension required at implementation time).
-- Paper bibliographic facts remain owned by the publication record (CON-01).
-- Distinguish **empirical figure** vs **illustrative schematic** in captions and metadata.
-- Accessible media fallback: text alternative required; video needs captions/transcript when used.
-- No-JS readable core (problem, findings, limitations, resource list as plain links).
-
-### 4.3 Schema extension (proposal — not implemented)
-
-Extend `projectSchema` only after approval, e.g.:
-
-- `problem`, `contribution`, `methodology`, `findings`, `limitations` (markdown or structured fields)
-- `assets[]` with `path`, `caption`, `kind` (`empirical` \| `illustrative`), `permission` (`approved` \| `pending` \| `denied`), `owner`, `source`
-- `resource_overrides` forbidden unless matching verified publication URLs
-- `scientific_owner`, `content_verified_at`, `published` remains false until owner sign-off
-
-Draft projects stay `published: false` (current placeholder pattern).
+- Content: three theme routes; listings only `isPublicPublication` + matching `research_areas`; ESL present on Learning & Coordination with Accepted.  
+- E2E: homepage → theme → paper; Research index → theme; responsive overflow; axe on theme page; no-JS readable list; staging base-path links.  
+- Regressions: frozen identity constants / About hash unchanged.  
 
 ---
 
-## 5. Four candidate showcases — evidence audit (preliminary)
+## 10. Non-goals
 
-Preliminary status from **current** publication records on `main`. All media/permissions rows require paper-owner completion before publish.
-
-### 5.1 NeurIPS 2026 — Epistemic Social Learning (ESL)
-
-| Field | Current known state |
-|---|---|
-| Slug / id | `epistemic-social-learning` / `esl-neurips-2026` |
-| Theme(s) | `learning-coordination` |
-| Status | **Accepted** (not formal proceedings); no DOI |
-| Public URLs | NeurIPS poster listing; PDF/code/dataset/video **null** |
-| Risks | Overclaiming proceedings publication; inventing regret plots or game results; shipping code link before release |
-| Required owner actions | Confirm abstract/highlights/limitations wording; approve any schematic; decide PDF/code release; clear synthetic-scope language |
-| Participant media | None expected (computational / synthetic setting) |
-
-### 5.2 Sci Rep 2026 — Trial-level pupil dynamics (ADHD)
-
-| Field | Current known state |
-|---|---|
-| Slug / id | `trial-pupil-dynamics-adhd` / `trial-pupil-adhd-2026` |
-| Theme(s) | `perception-understanding` |
-| Applications | neurodevelopment, health |
-| Status | Published; DOI verified |
-| Public URLs | DOI; code/dataset/video **null** in content |
-| Risks | Clinical overgeneralization; unauthorized pupil/participant imagery; implying diagnostic product claims |
-| Required owner actions | Approve findings/limitations copy; figure permissions from paper/SI; confirm no identifiable participant imagery without consent documentation |
-| Participant media | **High sensitivity** — default to publisher figures under license or text-only until clearance |
-
-### 5.3 CHI 2024 — Social robots for autism care (Honorable Mention)
-
-| Field | Current known state |
-|---|---|
-| Slug / id | `social-robots-autism-care-india` / `chi-2024-social-robots-india` |
-| Theme(s) | `interaction-adaptation`, `learning-coordination` |
-| Applications | autism, neurodevelopment, health, social-robotics |
-| Status | Published; award recorded |
-| Risks | Photos of educators/children/settings without permission; overgeneralizing qualitative findings |
-| Required owner actions | Asset inventory from CHI paper/author materials; written permission for each photo/figure; findings language reviewed for scope |
-| Participant / field media | **High sensitivity** |
-
-### 5.4 MobiTangibles — IEEE TVCG 2024
-
-| Field | Current known state |
-|---|---|
-| Slug / id | `mobitangibles` / `mobitangibles-2024` |
-| Theme(s) | `interaction-adaptation`, `perception-understanding` |
-| Attribution | collaborative |
-| Status | Published; DOI verified |
-| Public URLs | DOI; code/dataset/video **null** in content |
-| Risks | Technique photography/video without coauthor/venue clearance |
-| Required owner actions | Approve method/limitations copy; clear photos/video; confirm collaborative attribution on project page |
-
-### 5.5 Shared audit checklist (per showcase)
-
-Before `published: true` on a project:
-
-- [ ] Scientific owner named and recorded  
-- [ ] Every claim maps to paper text or an approved paraphrase  
-- [ ] Limitations section present  
-- [ ] Each asset has caption, kind (empirical/illustrative), permission, and source  
-- [ ] No fabricated code/PDF/dataset/video URLs  
-- [ ] Accessibility: alt text / transcript as applicable  
-- [ ] Legal/ethics: participant-related media cleared or omitted  
-
-**Do not fabricate** experimental results, figures, code links, clinical claims, or demonstrations.
-
----
-
-## 6. Minimum viable scope — initial three-page acceptance gate
-
-Aligned with PRD M4 gate (“three exemplary project pages reviewed by scientific owners”):
-
-### MVP-A (recommended)
-
-1. **Three theme pages** live and linked from Research index / homepage theme cards.  
-2. **Reusable project template** implemented and covered by tests.  
-3. **Exactly three** of the four showcases published after owner review — **proposed default trio for gate:**  
-   - ESL (programme-defining AI / multi-agent)  
-   - CHI 2024 social robotics (interaction + application pathway)  
-   - MobiTangibles **or** ADHD Sci Rep (faculty chooses one interactive-systems vs sensing exemplar for the third slot)  
-4. Fourth showcase remains draft until assets clear (still audited in parallel).
-
-### MVP-B (narrower, if media clearance blocks)
-
-- Three theme pages + template + **two** showcases public + one structured empty/draft project page **not** linked from homepage featured cards.
-
-**Homepage freeze:** Featured publication cards already link to paper pages; upgrading a card to a project deep-link is optional and must not change card titles/order/copy.
-
----
-
-## 7. Test-first implementation plan (when approved)
-
-### 7.1 Content / unit (Vitest)
-
-- Exactly three published primary themes; theme page generation for each slug.  
-- Theme page lists only publications whose `research_areas` include that theme and that pass publishability.  
-- Project → publication relation resolves; unknown `publication_ids` fail CI.  
-- `published: true` projects require limitations + verified resources + asset permission ≠ `pending` for any visible media.  
-- No public project may expose `code_url`/`pdf_url`/etc. that are null or non-http(s).  
-- Approved About body hash / positioning constants remain unchanged (regression).  
-
-### 7.2 E2E (Playwright)
-
-- Homepage → theme page → paper page path.  
-- Research index links to each theme.  
-- Flagship page renders required sections; missing media shows accessible fallback, not broken `<img>`.  
-- Responsive media at 320 / 390 / 768 / 1024 / 1440; no horizontal overflow.  
-- axe scan on theme + project templates.  
-- Keyboard reachability of resource links; no-JS readable abstract/findings/limitations.  
-
-### 7.3 Prohibitions enforced in tests
-
-- Fail if project markdown contains placeholder claim tokens (e.g. `TODO_FINDING`, lorem).  
-- Fail if illustrative assets are labeled as empirical (metadata invariant).  
-- Fail if ESL page claims DOI/proceedings publication while publication record has `doi: null` / accepted-only status.  
-
-### 7.4 Evidence for the M4 gate
-
-- Owner sign-off checklist per published showcase.  
-- Screenshots (runtime dir only; do not overwrite historical milestone PNGs).  
-- CI green on the implementation PR; staging smoke after merge.  
-
----
-
-## 8. Proposed milestones (implementation sequencing — gated)
-
-| Step | Deliverable | Exit criteria |
-|---|---|---|
-| **M4.0** | Faculty approval of this plan + MVP trio selection + ADR/PRD errata for three themes | Written approval |
-| **M4.1** | Schema + theme pages + tests (no new flagship copy) | Theme routes green; frozen identity regressions pass |
-| **M4.2** | Project template + one draft showcase (unpublished) | Template tests green; no public project yet |
-| **M4.3** | Evidence audit completion for chosen trio | Owner checklists filed |
-| **M4.4** | Publish three showcases on staging | Scientific owner review; a11y; no unsupported claims |
-| **M4.5** | Optional fourth showcase | Same bar as M4.4 |
-
-Coding starts only at **M4.1** after **M4.0** approval.
-
----
-
-## 9. Risks
-
-| Risk | Mitigation |
-|---|---|
-| PRD still says four themes | Explicit reconciliation in this doc + ADR/PRD errata before coding |
-| Media/permissions delay CHI or ADHD showcases | Choose MVP trio that can clear; keep others draft |
-| Pressure to invent ESL plots/code links | Tests + accepted-only status guards; no demo in M4 |
-| Clinical/HRI overclaim | Mandatory limitations; owner review; omit sensitive media by default |
-| Scope creep into people/news/production | Hard stop after M4.4/M4.5; M5+ and production separately gated |
-| Accidental homepage/identity edits | Regression tests on frozen constants and About hash |
-
----
-
-## 10. Explicit non-goals (M4)
-
-- No homepage, About philosophy, Application Pathways, or typography redesign.  
-- No new slogans or competing punchlines.  
-- No ESL interactive belief demo.  
-- No new application tags.  
-- No production deploy.  
+- No M4.2+ / M5 / production / redesign / new slogans / ESL interactive demo / new application tags.  
 - No fabrication of results, figures, code links, clinical claims, or demonstrations.  
-- No copying historic licensed assets without clearance (LEG-01).  
+- No unapproved media in the repository.
 
 ---
 
-## 11. Approval checklist (faculty)
+## 11. Approval checklist
 
-- [ ] Accept three-theme reconciliation of PRD M4 / RES-01  
-- [ ] Accept flagship template section list  
-- [ ] Select MVP trio among ESL / ADHD Sci Rep / CHI 2024 / MobiTangibles  
-- [ ] Confirm scientific owners for each selected showcase  
-- [ ] Approve evidence-audit process before any media lands in `public/`  
-- [ ] Authorize start of **M4.1** (theme pages only) or full M4.1–M4.4 sequence  
-
-**Stop here until explicit approval.** No M4 coding, no production changes.
+- [x] Three-theme reconciliation of PRD M4 / RES-01  
+- [x] MVP trio = ESL, ADHD Sci Rep, CHI 2024 (MobiTangibles #4)  
+- [x] Ownership model recorded as **proposed** pending explicit consent  
+- [x] Theme listings include accepted-public records  
+- [x] Text-only projects permitted; no uncleared media in repo  
+- [x] Canonical publication bibliography on projects  
+- [x] Authorize **M4.1 only** after this plan merges  
+- [ ] Paper-owner acceptances before any flagship publish (later)  
+- [ ] Authorize M4.2+ separately  
