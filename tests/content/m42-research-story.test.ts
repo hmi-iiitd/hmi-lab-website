@@ -54,6 +54,7 @@ describe("M4.2 HMI Research Story gates", () => {
   it("accepts only approved, locally hosted research images with provenance", () => {
     const artifact = {
       path: "research/verified-figure.webp",
+      type: "image",
       kind: "empirical",
       permission: "approved",
       owner: "Paper owner",
@@ -79,7 +80,9 @@ describe("M4.2 HMI Research Story gates", () => {
   it("keeps publication and About data outside the project draft", () => {
     const story = readFileSync(path.join(root, "src/pages/projects/[slug].astro"), "utf8");
     expect(story).toMatch(/isPublicProject/);
-    expect(story).toMatch(/isPublicPublication/);
+    const helper = readFileSync(path.join(root, "src/lib/projects.ts"), "utf8");
+    expect(story).toMatch(/canonicalPublicationForStory/);
+    expect(helper).toMatch(/isPublicPublication/);
     expect(story).toMatch(/ResearchStory/);
   });
 });

@@ -1,8 +1,8 @@
 # M4 planning — Research themes and selected flagship pages
 
-**Status:** **M4.0 CONDITIONAL PASS** — planning corrections accepted; **M4.1 only** authorized after this document merges.  
+**Status:** **M4.1 MERGED AND DEPLOYED** at `f6beb4b` (CI/Pages green). **M4.2 authorized on 2026-11-04 for a draft-only implementation PR and independent review gate**. M4.3/M4.4 and production remain unauthorized.  
 **Base:** Staging at `96205585` (research positioning + visual design **frozen**).  
-**Out of scope until separately authorized:** M4.2+ flagship template/content; M5+; production; visual redesign; homepage/identity copy changes.
+**Out of scope until separately authorized:** M4.3+ publication evidence audits and public flagship pages; M5+; production; visual redesign; homepage/identity copy changes. M4.2 permits a text-first template and unpublished draft only.
 
 **PRD correction:** Three primary themes supersede the PRD’s four-theme M4/RES-01 text. Recorded in `docs/decisions/ADR-005-m4-three-theme-correction.md` and the PRD M4 errata note.
 
@@ -106,8 +106,8 @@ When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI
 | Step | Status | Deliverable |
 |---|---|---|
 | **M4.0** | **PASS (conditional)** | This corrected plan + ADR-005 / PRD errata |
-| **M4.1** | **Authorized next** | Three theme detail pages + links + tests; stop at review gate |
-| **M4.2** | Not authorized | Project / **HMI Research Story** template (Appendix A; ASPIRE as optional communication reference) + unpublished drafts |
+| **M4.1** | **MERGED; staging verified** | Three theme detail pages + links + tests (`f6beb4b`) |
+| **M4.2** | **Authorized for draft PR; review gate remains** | Project / **HMI Research Story** template (Appendix A; ASPIRE communication reference) + unpublished drafts; no public showcase |
 | **M4.3** | Not authorized | Evidence audit completion for trio |
 | **M4.4** | Not authorized | Publish three showcases |
 | **M4.5** | Not authorized | MobiTangibles showcase |
@@ -140,7 +140,8 @@ When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI
 - [x] Canonical publication bibliography on projects  
 - [x] Authorize **M4.1 only** after this plan merges  
 - [ ] Paper-owner acceptances before any flagship publish (later)  
-- [ ] Authorize M4.2+ separately (including Appendix A template design)  
+- [x] Authorize **M4.2 only** (2026-11-04); draft-only template implementation, no public flagships
+- [ ] Authorize M4.3/M4.4 separately  
 
 ---
 
@@ -149,7 +150,7 @@ When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI
 **Reference:** [NVIDIA GEAR — ASPIRE](https://research.nvidia.com/labs/gear/aspire/) as a **communication** reference for evidence-first scientific storytelling.  
 **Not adopted:** ASPIRE’s visual system, elaborate animations, hover-only demos, large task/skill galleries, autoplay media, backend dependencies, or live AI demos.
 
-**Timing:** Optional **M4.2 template-design input**. Does **not** expand M4.1. Do not implement this template until M4.2 is separately authorized.
+**Timing:** M4.2 template-design input; **M4.2 was separately authorized on 2026-11-04** for an unpublished template implementation PR. Does **not** expand M4.1 or authorize public flagship content.
 
 ### A.1 What to borrow
 
