@@ -24,7 +24,7 @@ const artifact = data.artifact;
   <h1 class="paper-title">{data.title}</h1>
   <p class="paper-venue">
     Based on <a href={withBase(`papers/${paper.slug}/`)}>{paper.title}</a>
-    · {paper.authors.map((author) => author.name).join(", ")}
+    · {paper.authors.map((author: { name: string }) => author.name).join(", ")}
   </p>
 
   <div class="paper-prose">
@@ -69,7 +69,7 @@ const artifact = data.artifact;
     <section aria-labelledby="story-findings" style="margin-top: 2.5rem;">
       <h2 class="section-title" id="story-findings">Principal findings</h2>
       <ul>
-        {data.findings.map((finding) => <li>{finding}</li>)}
+        {data.findings.map((finding: string) => <li>{finding}</li>)}
       </ul>
     </section>
 
