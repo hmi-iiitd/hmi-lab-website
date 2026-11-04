@@ -11,8 +11,15 @@ test.describe("M3.5 official HMI logo", () => {
 
     await expect(headerLogo).toBeVisible();
     await expect(footerLogo).toBeVisible();
-    await expect(headerLogo).toHaveAttribute("alt", /HMI/i);
-    await expect(footerLogo).toHaveAttribute("alt", /HMI/i);
+    // Decorative imgs: accessible name comes from parent brand links.
+    await expect(headerLogo).toHaveAttribute("alt", "");
+    await expect(footerLogo).toHaveAttribute("alt", "");
+    await expect(
+      page.getByRole("link", { name: /HMI\s+Research Group\s*·\s*IIIT-Delhi/i }),
+    ).toHaveCount(1);
+    await expect(
+      page.getByRole("link", { name: /HMI Research Group home/i }),
+    ).toBeVisible();
 
     const headerLoaded = await headerLogo.evaluate((img: HTMLImageElement) => ({
       complete: img.complete,

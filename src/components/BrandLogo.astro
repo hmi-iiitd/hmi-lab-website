@@ -3,10 +3,12 @@ import { withBase } from "../lib/url";
 
 interface Props {
   variant?: "header" | "footer";
+  /** Empty alt when a parent link already supplies the accessible name. */
+  decorative?: boolean;
   class?: string;
 }
 
-const { variant = "header", class: className } = Astro.props;
+const { variant = "header", decorative = true, class: className } = Astro.props;
 
 const src =
   variant === "footer"
@@ -16,6 +18,8 @@ const src =
 const classes = ["brand-logo", `brand-logo--${variant}`, className]
   .filter(Boolean)
   .join(" ");
+
+const alt = decorative ? "" : "HMI Research Group — Human–Machine Interaction";
 ---
 
 <img
@@ -23,7 +27,7 @@ const classes = ["brand-logo", `brand-logo--${variant}`, className]
   src={src}
   width={variant === "footer" ? 227 : 199}
   height={variant === "footer" ? 220 : 176}
-  alt="HMI Research Group — Human–Machine Interaction"
+  alt={alt}
   decoding="async"
   loading={variant === "footer" ? "lazy" : "eager"}
 />
