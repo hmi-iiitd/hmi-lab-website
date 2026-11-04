@@ -379,7 +379,7 @@ Target **WCAG 2.2 AA** for public pages, verified by automated + manual checks; 
 | ID | Priority | Requirement | Verifiable acceptance |
 |---|---|---|---|
 | HOM-01 | P0 | Editorial homepage | H1, research statement, working CTAs, approved featured cards, nav/footer; mobile and keyboard tested |
-| RES-01 | P0 | Four research themes | Each has description, stable URL, related approved papers; no empty theme without explanation |
+| RES-01 | P0 | Three research themes | Each has description, stable URL, related verified public papers (incl. accepted); no empty theme without explanation. **Supersedes earlier “four themes” wording — see ADR-005.** |
 | PUB-01 | P0 | Complete validated archive | Published records render correctly by year, status, venue; no duplicate slugs/DOIs |
 | PUB-02 | P0 | Permanent detail per paper | Every published paper has `/papers/{slug}/` and complete verified required metadata |
 | PUB-03 | P0 | Search/filter | Title/author/topic/year filters are deterministic, keyboard operable, clearable, zero-state tested |
@@ -520,11 +520,13 @@ Reviewer decision: PASS / FAIL / CONDITIONAL
 
 **Objective:** Tell the lab's scientific story through connected work.
 
-- Create four theme pages and enhanced paper template.
-- Initially develop ESL; CHI 2024 social robotics; one interactive-system exemplar (e.g., MobiTangibles or HaptiDrag) before scaling to additional showcases.
-- Add methods, evidence, limitations, figure captions and links with author approval.
+> **Errata (ADR-005 / M4.0):** Create **three** theme pages (not four), aligned with Interactive Intelligence: Perception & Understanding, Learning & Coordination, Interaction & Adaptation. Frozen punchline remains “Intelligence emerges through interaction.”
 
-**Write failing tests first:** theme/paper linkage, permitted resources, empty-state fallback, responsive media, research pages reachable from homepage, no false public code link.
+- Create three theme pages and an enhanced paper/project template (template/flagships gated after M4.1).
+- Approved MVP showcases: ESL (NeurIPS 2026 Accepted); Sci Rep 2026 ADHD pupil dynamics; CHI 2024 social robotics. MobiTangibles is priority #4 after the trio.
+- Add methods, evidence, limitations, figure captions and links with author approval; text-only pages allowed when media cannot be cleared; never commit unapproved participant/clinical/copyrighted media.
+
+**Write failing tests first:** theme/paper linkage (including accepted-public records), permitted resources, empty-state fallback, responsive media, research pages reachable from homepage, no false public code link.
 
 **Gate:** three exemplary project pages reviewed by scientific owners; real/illustrative visuals distinguished; no overclaiming empirical scope.
 
