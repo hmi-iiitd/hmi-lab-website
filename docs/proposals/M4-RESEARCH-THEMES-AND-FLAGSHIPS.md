@@ -124,7 +124,7 @@ When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI
 
 ## 10. Non-goals
 
-- No M4.2+ / M5 / production / redesign / new slogans / ESL interactive demo / new application tags.  
+- No M4.3+ / public flagship pages / M5 / production / redesign / new slogans / ESL interactive demo / new application tags. M4.2 remains an unpublished template/draft milestone.  
 - No fabrication of results, figures, code links, clinical claims, or demonstrations.  
 - No unapproved media in the repository.
 
