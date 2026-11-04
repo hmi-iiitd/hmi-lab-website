@@ -74,9 +74,14 @@ function papersForTheme(themeId: string, limit = 3): PubEntry[] {
                     ))}
                   </ul>
                 )}
-                <a class="text-link" href={withBase(`publications/?theme=${theme.data.id}`)}>
-                  Publications in this theme <span aria-hidden="true">↗</span>
-                </a>
+                <p class="theme-index-actions">
+                  <a class="text-link" href={withBase(`research/${theme.data.slug}/`)}>
+                    View theme <span aria-hidden="true">↗</span>
+                  </a>
+                  <a class="text-link" href={withBase(`publications/?theme=${theme.data.id}`)}>
+                    Publications in this theme <span aria-hidden="true">↗</span>
+                  </a>
+                </p>
               </article>
             );
           })

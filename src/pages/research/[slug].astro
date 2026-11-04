@@ -1,0 +1,105 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { LAB_NAME, PRIMARY_THEME_IDS, RESEARCH_IDENTITY } from "../../lib/identity";
+import {
+  isPublicPublication,
+  publicationResourceLinks,
+  publicationsForTheme,
+  type PubEntry,
+} from "../../lib/publications";
+import { withBase } from "../../lib/url";
+
+export async function getStaticPaths() {
+  const themes = await getCollection("research-areas");
+  return themes
+    .filter(
+      (theme: CollectionEntry<"research-areas">) =>
+        theme.data.published &&
+        PRIMARY_THEME_IDS.includes(theme.data.id as (typeof PRIMARY_THEME_IDS)[number]),
+    )
+    .map((theme: CollectionEntry<"research-areas">) => ({
+      params: { slug: theme.data.slug },
+      props: { theme },
+    }));
+}
+
+interface Props {
+  theme: CollectionEntry<"research-areas">;
+}
+
+const { theme } = Astro.props as Props;
+const pubs: PubEntry[] = publicationsForTheme(
+  (await getCollection("publications")).filter(isPublicPublication),
+  theme.data.id,
+);
+---
+
+<BaseLayout
+  title={`${theme.data.title} · Research · ${LAB_NAME}`}
+  description={`${theme.data.title} — ${RESEARCH_IDENTITY} research theme at ${LAB_NAME}.`}
+>
+  <article class="section wrap theme-page">
+    <p class="section-label">
+      <a href={withBase("research/")}>Research</a>
+      {" · "}
+      Theme
+    </p>
+    <h1 class="section-title">{theme.data.title}</h1>
+    <p class="theme-summary muted">{theme.data.summary}</p>
+
+    <section id="theme-publications" aria-labelledby="theme-publications-title">
+      <h2 class="section-title" id="theme-publications-title">Verified publications</h2>
+      {
+        pubs.length === 0 ? (
+          <p class="muted theme-empty">
+            No verified public publications are currently listed for this theme. See the{" "}
+            <a class="text-link" href={withBase("publications/")}>publications archive</a>
+            {" "}for all verified records.
+          </p>
+        ) : (
+          <ul class="theme-pub-list">
+            {pubs.map((pub) => {
+              const resources = publicationResourceLinks(pub.data);
+              return (
+                <li class="theme-pub">
+                  <p class="theme-pub-meta">
+                    {pub.data.venue_short || pub.data.venue_full}
+                    {" · "}
+                    {pub.data.publication_year}
+                    {pub.data.status === "accepted" ? " · Accepted" : ""}
+                    {pub.data.award ? ` · ${pub.data.award}` : ""}
+                  </p>
+                  <h3 class="theme-pub-title">
+                    <a href={withBase(`papers/${pub.data.slug}/`)}>{pub.data.title}</a>
+                  </h3>
+                  <p class="theme-pub-authors muted">
+                    {pub.data.authors.map((a: { name: string }) => a.name).join(", ")}
+                  </p>
+                  {
+                    resources.length > 0 && (
+                      <p class="theme-pub-resources">
+                        {resources.map((link) => (
+                          <a href={link.href}>{link.label}</a>
+                        ))}
+                      </p>
+                    )
+                  }
+                </li>
+              );
+            })}
+          </ul>
+        )
+      }
+    </section>
+
+    <p class="theme-page-actions">
+      <a class="text-link" href={withBase(`publications/?theme=${encodeURIComponent(theme.data.id)}`)}>
+        Filter publications archive <span aria-hidden="true">↗</span>
+      </a>
+      <a class="text-link" href={withBase("research/")}>
+        All research themes <span aria-hidden="true">↗</span>
+      </a>
+    </p>
+  </article>
+</BaseLayout>
