@@ -14,6 +14,7 @@ const themes: CollectionEntry<"research-areas">[] = (await getCollection("resear
       a.data.order - b.data.order,
   );
 
+const publications: CollectionEntry<"publications">[] = await getCollection("publications");
 const news: CollectionEntry<"news">[] = await getCollection("news");
 ---
 
@@ -62,7 +63,7 @@ const news: CollectionEntry<"news">[] = await getCollection("news");
     </div>
   </section>
 
-  <SelectedResearch />
+  <SelectedResearch publications={publications} />
   <ResearchThemes themes={themes} />
   <CommunityPreview />
   <NewsHighlights items={news} />

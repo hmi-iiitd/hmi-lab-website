@@ -1,6 +1,8 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import {
+  applicationTagSchema,
+  identityDocumentSchema,
   newsSchema,
   personSchema,
   projectSchema,
@@ -26,6 +28,22 @@ const researchAreas = defineCollection({
   schema: researchThemeSchema,
 });
 
+const applicationTags = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx,yml,yaml}",
+    base: "./src/content/application-tags",
+  }),
+  schema: applicationTagSchema,
+});
+
+const identity = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx,yml,yaml}",
+    base: "./src/content/identity",
+  }),
+  schema: identityDocumentSchema,
+});
+
 const projects = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx,yml,yaml}", base: "./src/content/projects" }),
   schema: projectSchema,
@@ -40,6 +58,8 @@ export const collections = {
   publications,
   people,
   "research-areas": researchAreas,
+  "application-tags": applicationTags,
+  identity,
   projects,
   news,
 };

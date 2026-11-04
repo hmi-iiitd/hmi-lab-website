@@ -64,26 +64,26 @@ test.describe("M2 homepage structure", () => {
     }
   });
 
-  test("selected research and news placeholders are explicitly non-production", async ({
-    page,
-  }) => {
+  test("selected research uses verified papers; news stays honestly empty", async ({ page }) => {
     await page.goto("./");
     const selected = page.locator("#selected-research");
-    await expect(selected.getByText(/development placeholder/i).first()).toBeVisible();
-    await expect(selected.getByText(/not a verified publication/i).first()).toBeVisible();
+    await expect(selected.getByText(/development placeholder/i)).toHaveCount(0);
+    await expect(selected.getByRole("link", { name: /paper page/i })).toBeVisible();
+    await expect(selected.getByText(/ExpressEar|MobiTangibles|social robots|replace me/i).first()).toBeVisible();
 
     const news = page.locator("#news-highlights");
-    await expect(news.getByText(/development placeholder|no verified highlights/i).first()).toBeVisible();
+    await expect(
+      news.getByText(/development placeholder|no verified highlights/i).first(),
+    ).toBeVisible();
   });
 
-  test("four research themes render with questions", async ({ page }) => {
+  test("three research themes render with questions", async ({ page }) => {
     await page.goto("./");
     const themes = page.locator("#research-themes article");
-    await expect(themes).toHaveCount(4);
-    await expect(page.getByRole("heading", { name: /adaptive/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /novel interaction/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /behavioral intelligence/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /well-being|wellbeing/i })).toBeVisible();
+    await expect(themes).toHaveCount(3);
+    await expect(page.getByRole("heading", { name: /Perception & Understanding/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Learning & Coordination/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Interaction & Adaptation/i })).toBeVisible();
   });
 
   test("footer includes institute affiliation and verified lab email", async ({ page }) => {
@@ -189,7 +189,7 @@ test.describe("M2 no-JS resilience", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByRole("link", { name: "Explore research", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: "View publications", exact: true })).toBeVisible();
-    await expect(page.locator("#research-themes article")).toHaveCount(4);
+    await expect(page.locator("#research-themes article")).toHaveCount(3);
     await expect(page.getByRole("navigation", { name: /main/i }).getByRole("link", { name: "Research" })).toBeVisible();
   });
 });

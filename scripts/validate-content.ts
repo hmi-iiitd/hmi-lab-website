@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import type {
+  ApplicationTag,
   NewsItem,
   Person,
   Project,
@@ -63,6 +64,7 @@ const bundle: ContentBundle = {
   publications: loadCollection<PublicationDraft>("publications"),
   people: loadCollection<Person>("people"),
   themes: loadCollection<ResearchTheme>("research-areas"),
+  applicationTags: loadCollection<ApplicationTag>("application-tags"),
   projects: loadCollection<Project>("projects"),
   news: loadCollection<NewsItem>("news"),
 };
@@ -78,5 +80,5 @@ if (issues.length) {
 
 assertDistExcludesDrafts();
 console.log(
-  `Content OK: ${bundle.publications.length} pubs, ${bundle.people.length} people, ${bundle.themes.length} themes, ${bundle.projects.length} projects, ${bundle.news.length} news`,
+  `Content OK: ${bundle.publications.length} pubs, ${bundle.people.length} people, ${bundle.themes.length} themes, ${bundle.applicationTags?.length ?? 0} application-tags, ${bundle.projects.length} projects, ${bundle.news.length} news`,
 );
