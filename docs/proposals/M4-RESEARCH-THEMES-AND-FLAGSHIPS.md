@@ -107,7 +107,7 @@ When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI
 |---|---|---|
 | **M4.0** | **PASS (conditional)** | This corrected plan + ADR-005 / PRD errata |
 | **M4.1** | **Authorized next** | Three theme detail pages + links + tests; stop at review gate |
-| **M4.2** | Not authorized | Project template + unpublished drafts |
+| **M4.2** | Not authorized | Project / **HMI Research Story** template (Appendix A; ASPIRE as optional communication reference) + unpublished drafts |
 | **M4.3** | Not authorized | Evidence audit completion for trio |
 | **M4.4** | Not authorized | Publish three showcases |
 | **M4.5** | Not authorized | MobiTangibles showcase |
@@ -140,4 +140,41 @@ When later authorized: three owner-reviewed showcases = ESL + ADHD Sci Rep + CHI
 - [x] Canonical publication bibliography on projects  
 - [x] Authorize **M4.1 only** after this plan merges  
 - [ ] Paper-owner acceptances before any flagship publish (later)  
-- [ ] Authorize M4.2+ separately  
+- [ ] Authorize M4.2+ separately (including Appendix A template design)  
+
+---
+
+## Appendix A — HMI Research Story template (ASPIRE-inspired; M4.2 design input only)
+
+**Reference:** [NVIDIA GEAR — ASPIRE](https://research.nvidia.com/labs/gear/aspire/) as a **communication** reference for evidence-first scientific storytelling.  
+**Not adopted:** ASPIRE’s visual system, elaborate animations, hover-only demos, large task/skill galleries, autoplay media, backend dependencies, or live AI demos.
+
+**Timing:** Optional **M4.2 template-design input**. Does **not** expand M4.1. Do not implement this template until M4.2 is separately authorized.
+
+### A.1 What to borrow
+
+ASPIRE’s useful pattern is a clear arc: problem → method with one strong verified artifact → findings → limitations → resources/citation. HMI flagship pages should follow that scientific clarity inside the **frozen** HMI typography, colour tokens, Astro components, and GitHub Pages staging stack.
+
+### A.2 Minimal reusable “HMI Research Story” sections
+
+Each flagship `/projects/{slug}/` page should present:
+
+1. **Scientific question and contribution** — owner-approved; not a second homepage slogan.  
+2. **One strong, verified research artifact** — a single figure, methodology diagram, plot, or authorized short video (optional if media cannot be cleared).  
+3. **Accessible method explanation** — plain-language description readable without JavaScript.  
+4. **One or two principal findings** — grounded only in the publication; no clinical or empirical overclaim.  
+5. **Explicit limitations and experimental scope** — mandatory (e.g. accepted-only status, synthetic settings, qualitative scope).  
+6. **Verified resources and citation** — paper/DOI/PDF/code/data links and BibTeX **only** from the canonical publication record.  
+7. **Interactive Intelligence interpretation** — a brief note on how the work relates to the programme’s themes/question, **clearly labeled as programme framing**, distinct from the paper’s empirical claims.
+
+### A.3 MVP presentation constraints
+
+- Prefer quiet, readable pages over spectacle.  
+- **Avoid:** autoplay-heavy media, hover-only interactions, backend services, live AI demos, fabricated figures, and large galleries.  
+- **Allow fully text-based pages** when research media cannot be cleared.  
+- Every visual requires: scientific-owner approval, provenance, caption, permission state, and accessibility support (alt text; captions/transcript for video).  
+- Do not commit unapproved participant, clinical, or copyrighted media to the public repository (including draft assets).  
+
+### A.4 Relation to M4.1
+
+M4.1 remains theme detail pages and publication listings only. Appendix A informs a future M4.2 template PR after explicit authorization; it does not change frozen homepage copy, About philosophy, Application Pathways, logo, or typography.
