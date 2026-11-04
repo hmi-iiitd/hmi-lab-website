@@ -1,8 +1,14 @@
-import { expect, test } from "@playwright/test";
-import path from "node:path";
+import { expect, test, type Page } from "@playwright/test";
 import { MINSKY_SOCIETY_OF_MIND, PUNCHLINE } from "../../src/lib/identity";
+import { runtimeScreenshotPath } from "./screenshot-path";
 
-const evidence = path.resolve("docs/milestone-evidence");
+async function assertNoHorizontalOverflow(page: Page) {
+  const overflow = await page.evaluate(() => {
+    const doc = document.documentElement;
+    return { scrollWidth: doc.scrollWidth, clientWidth: doc.clientWidth };
+  });
+  expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.clientWidth + 1);
+}
 
 function px(value: string): number {
   return Number.parseFloat(value);
@@ -108,7 +114,7 @@ test.describe("M3.5 readability and editorial gate", () => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(route);
       await page.screenshot({
-        path: path.join(evidence, `m35-readability-${slug}-desktop.png`),
+        path: runtimeScreenshotPath(`runtime-readability-${slug}-desktop.png`),
         fullPage: true,
       });
       if (slug === "homepage" || slug === "about" || slug === "publications") {
@@ -116,17 +122,67 @@ test.describe("M3.5 readability and editorial gate", () => {
           slug === "homepage" ? "#hero" : slug === "about" ? ".about-prose" : ".pub-list",
         );
         await crop.first().screenshot({
-          path: path.join(evidence, `m35-readability-${slug}-desktop-crop.png`),
+          path: runtimeScreenshotPath(`runtime-readability-${slug}-desktop-crop.png`),
         });
       }
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(route);
       await page.screenshot({
-        path: path.join(evidence, `m35-readability-${slug}-mobile.png`),
+        path: runtimeScreenshotPath(`runtime-readability-${slug}-mobile.png`),
         fullPage: true,
       });
     }
 
     await expect(page.getByRole("heading", { name: PUNCHLINE }).or(page.locator("h1"))).toBeVisible();
+  });
+
+  test("320px reflow keeps primary content usable without overflow", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 720 });
+    for (const route of ["./", "./about/", "./publications/", "./papers/epistemic-social-learning/"]) {
+      await page.goto(route);
+      await assertNoHorizontalOverflow(page);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      const clipped = await page.evaluate(() => {
+        const candidates = Array.from(
+          document.querySelectorAll("h1, .lead, .about-prose p, .pub h2, .nav-toggle"),
+        );
+        return candidates.some((el) => {
+          const style = getComputedStyle(el);
+          return style.overflow === "hidden" && el.scrollWidth > el.clientWidth + 2;
+        });
+      });
+      expect(clipped).toBe(false);
+    }
+  });
+
+  test("200% text enlargement keeps layout readable without overlap", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("./");
+    await page.addStyleTag({
+      content: "html { font-size: 200% !important; }",
+    });
+    await assertNoHorizontalOverflow(page);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.locator("header .brand-logo")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Explore research", exact: true })).toBeVisible();
+
+    const overlap = await page.evaluate(() => {
+      const brand = document.querySelector("header .brand")?.getBoundingClientRect();
+      const toggle = document.querySelector(".nav-toggle")?.getBoundingClientRect();
+      if (!brand || !toggle || getComputedStyle(document.querySelector(".nav-toggle")!).display === "none") {
+        return false;
+      }
+      const overlapX = Math.min(brand.right, toggle.right) - Math.max(brand.left, toggle.left);
+      const overlapY = Math.min(brand.bottom, toggle.bottom) - Math.max(brand.top, toggle.top);
+      return overlapX > 4 && overlapY > 4;
+    });
+    expect(overlap).toBe(false);
+
+    await page.goto("./about/");
+    await page.addStyleTag({
+      content: "html { font-size: 200% !important; }",
+    });
+    await assertNoHorizontalOverflow(page);
+    await expect(page.getByText(MINSKY_SOCIETY_OF_MIND.text, { exact: true })).toBeVisible();
   });
 });

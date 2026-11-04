@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import path from "node:path";
+import { runtimeScreenshotPath } from "./screenshot-path";
 
 test.describe("M3 publications archive", () => {
   test("lists verified publications and excludes draft markers", async ({ page }) => {
@@ -59,13 +59,13 @@ test.describe("M3 publications archive", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("./publications/");
     await page.screenshot({
-      path: path.resolve("docs/milestone-evidence/m3-publications-desktop.png"),
+      path: runtimeScreenshotPath("runtime-publications-desktop.png"),
       fullPage: true,
     });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("./publications/");
     await page.screenshot({
-      path: path.resolve("docs/milestone-evidence/m3-publications-mobile.png"),
+      path: runtimeScreenshotPath("runtime-publications-mobile.png"),
       fullPage: true,
     });
   });

@@ -1,7 +1,5 @@
 import { expect, test } from "@playwright/test";
-import path from "node:path";
-
-const evidenceDir = path.resolve("docs/milestone-evidence");
+import { runtimeScreenshotPath } from "./screenshot-path";
 
 test.describe("M3.5 official HMI logo", () => {
   test("header and footer logos load with accessible names", async ({ page }) => {
@@ -99,22 +97,22 @@ test.describe("M3.5 official HMI logo", () => {
     await page.goto("./");
     await page.locator("header .brand-logo").waitFor({ state: "visible" });
     await page.screenshot({
-      path: path.join(evidenceDir, "m35-logo-desktop.png"),
+      path: runtimeScreenshotPath("runtime-logo-desktop.png"),
       fullPage: false,
     });
     await page.locator("header").screenshot({
-      path: path.join(evidenceDir, "m35-logo-header-desktop.png"),
+      path: runtimeScreenshotPath("runtime-logo-header-desktop.png"),
     });
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("./");
     await page.locator("header .brand-logo").waitFor({ state: "visible" });
     await page.screenshot({
-      path: path.join(evidenceDir, "m35-logo-mobile.png"),
+      path: runtimeScreenshotPath("runtime-logo-mobile.png"),
       fullPage: false,
     });
     await page.locator("header").screenshot({
-      path: path.join(evidenceDir, "m35-logo-header-mobile.png"),
+      path: runtimeScreenshotPath("runtime-logo-header-mobile.png"),
     });
   });
 });

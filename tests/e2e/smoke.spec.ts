@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import path from "node:path";
+import { runtimeScreenshotPath } from "./screenshot-path";
 
 test.describe("staging smoke", () => {
   test("homepage loads with brand, skip link, and noindex on staging", async ({
@@ -34,8 +34,9 @@ test.describe("staging smoke", () => {
   test("captures baseline screenshot for design review", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("./");
-    const out = path.resolve("docs/milestone-evidence/m2-smoke-desktop.png");
-    await page.screenshot({ path: out, fullPage: true });
+    await page.screenshot({
+      path: runtimeScreenshotPath("runtime-smoke-desktop.png"),
+      fullPage: true,
+    });
   });
 });
-

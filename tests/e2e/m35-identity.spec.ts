@@ -1,13 +1,11 @@
 import { expect, test } from "@playwright/test";
-import path from "node:path";
 import {
   HERO_INTRODUCTION,
   MINSKY_SOCIETY_OF_MIND,
   PRIMARY_THEME_TITLES,
   PUNCHLINE,
 } from "../../src/lib/identity";
-
-const evidence = path.resolve("docs/milestone-evidence");
+import { runtimeScreenshotPath } from "./screenshot-path";
 
 test.describe("M3.5 Interactive Intelligence identity", () => {
   test("homepage hero punchline and introduction match approved text exactly", async ({
@@ -133,13 +131,13 @@ test.describe("M3.5 Interactive Intelligence identity", () => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(route);
       await page.screenshot({
-        path: path.join(evidence, `m35-identity-${slug}-desktop.png`),
+        path: runtimeScreenshotPath(`runtime-identity-${slug}-desktop.png`),
         fullPage: true,
       });
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(route);
       await page.screenshot({
-        path: path.join(evidence, `m35-identity-${slug}-mobile.png`),
+        path: runtimeScreenshotPath(`runtime-identity-${slug}-mobile.png`),
         fullPage: true,
       });
     }

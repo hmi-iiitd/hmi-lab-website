@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import fs from "node:fs";
-import path from "node:path";
+import { historicalEvidencePath, runtimeScreenshotPath } from "./screenshot-path";
 
 const VIEWPORTS = [
   { name: "320", width: 320, height: 720 },
@@ -153,32 +153,24 @@ test.describe("M2 responsive layout", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("./");
     await page.screenshot({
-      path: path.resolve("docs/milestone-evidence/m2-homepage-desktop.png"),
+      path: runtimeScreenshotPath("runtime-homepage-desktop.png"),
       fullPage: true,
     });
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("./");
     await page.screenshot({
-      path: path.resolve("docs/milestone-evidence/m2-homepage-mobile.png"),
+      path: runtimeScreenshotPath("runtime-homepage-mobile.png"),
       fullPage: true,
     });
   });
 
-  test("visual evidence baselines exist for main layouts", async ({ page }) => {
-    // Cross-OS pixel snapshots are brittle (font rendering). We commit review PNGs
-    // under docs/milestone-evidence and assert they are produced as non-trivial artifacts.
-    const desktop = path.resolve("docs/milestone-evidence/m2-homepage-desktop.png");
-    const mobile = path.resolve("docs/milestone-evidence/m2-homepage-mobile.png");
-
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("./");
-    await page.screenshot({ path: desktop, fullPage: true });
-
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("./");
-    await page.screenshot({ path: mobile, fullPage: true });
-
+  test("historical M2 evidence baselines remain intact and non-trivial", async () => {
+    // Frozen milestone PNGs must not be overwritten by Playwright runs.
+    const desktop = historicalEvidencePath("m2-homepage-desktop.png");
+    const mobile = historicalEvidencePath("m2-homepage-mobile.png");
+    expect(fs.existsSync(desktop)).toBe(true);
+    expect(fs.existsSync(mobile)).toBe(true);
     expect(fs.statSync(desktop).size).toBeGreaterThan(20_000);
     expect(fs.statSync(mobile).size).toBeGreaterThan(10_000);
   });

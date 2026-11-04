@@ -34,6 +34,13 @@ Defined in `src/styles/tokens.css` (`--text-display` … `--text-footer`). Criti
 
 ## Evidence
 
-- `m35-readability-*-desktop.png` / `*-mobile.png`
-- `m35-readability-{homepage,about,publications}-desktop-crop.png` (100%-scale text crops)
+- Committed gate shots: `m35-readability-*-desktop.png` / `*-mobile.png` and `*-crop.png`
+- Historical M2 / M3 / M3.5-logo PNGs restored from `main` and frozen (Playwright writes only to `test-results/screenshots/`)
 - Tests: `tests/content/m35-editorial.test.ts`, `tests/unit/typography-tokens.test.ts`, `tests/e2e/m35-readability.spec.ts`
+
+## Final accessibility checks (no visual redesign)
+
+| Check | Result |
+|---|---|
+| 320px reflow (home, about, publications, ESL paper) | No horizontal overflow; H1 visible; no clipped primary text |
+| 200% root font-size enlargement (home + about) | No horizontal overflow; brand/logo/CTA remain visible; no brand/menu overlap |
