@@ -1,0 +1,116 @@
+{
+  "approved_source": {
+    "historic_path": "images/logo/logo_new.jpg",
+    "historic_repo": "hmi-iiitd/hmi-iiitd.github.io",
+    "sha256": "cea249fa1cad0a26a25f406922d42a847137a3b32fc527173341065d32ed00f4",
+    "pixels": [
+      3873,
+      3411
+    ],
+    "role": "Official approved HMI logo (canonical master)"
+  },
+  "inspected_alternate": {
+    "historic_path": "images/logo/logo.png",
+    "sha256": "f3d829243a57f2445a5776d38a381002f4a457828ad6671010ba6cf6ef4db793",
+    "pixels": [
+      1042,
+      690
+    ],
+    "role": "Alternate monochrome mark \u2014 different artwork treatment; NOT used as site brand (not a higher-quality source of logo_new)"
+  },
+  "derivatives": {
+    "apple-touch-icon.png": {
+      "sha256": "c6242ad51c877255f96b9dda5d81b0f2df6ae8fdfff45eadd13181d10d619935",
+      "bytes": 19361,
+      "pixels": [
+        180,
+        180
+      ]
+    },
+    "favicon-16.png": {
+      "sha256": "9d505756389639d4e2761b5d41c4485a018dfe21563553fd5bef2b338f0a13b7",
+      "bytes": 680,
+      "pixels": [
+        16,
+        16
+      ]
+    },
+    "favicon-32.png": {
+      "sha256": "1da85c3e660b630a1c4030fe9328f6af8ba1bf8dd2ff7448519cd82f44e7176c",
+      "bytes": 1907,
+      "pixels": [
+        32,
+        32
+      ]
+    },
+    "favicon-48.png": {
+      "sha256": "6cee39ff0c45cca7ca46853b886bd0230ba039bf16b201365c4a668d1294cc4c",
+      "bytes": 3918,
+      "pixels": [
+        48,
+        48
+      ]
+    },
+    "icon-192.png": {
+      "sha256": "844107f66848bdd1d62daed57527e420ec6d25eb326ab1139927f87b124e6234",
+      "bytes": 20880,
+      "pixels": [
+        192,
+        192
+      ]
+    },
+    "icon-512.png": {
+      "sha256": "99d270d32e7515ad7f82fc25b0bf5b713ed4818c9c0c692308fda1bdec218eab",
+      "bytes": 71221,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    "logo-footer.png": {
+      "sha256": "bcc8c47d8dd65b560be57868411761bc4127edfe131403b0f931989d6eb08ba5",
+      "bytes": 39953,
+      "pixels": [
+        249,
+        220
+      ]
+    },
+    "logo-header.png": {
+      "sha256": "d3da7333793123cfc4c500760715d56d8f3a1402468e318f80a64b2f30885873",
+      "bytes": 29600,
+      "pixels": [
+        199,
+        176
+      ]
+    },
+    "logo-master.jpg": {
+      "sha256": "cea249fa1cad0a26a25f406922d42a847137a3b32fc527173341065d32ed00f4",
+      "bytes": 263430,
+      "pixels": [
+        3873,
+        3411
+      ]
+    },
+    "logo.png": {
+      "sha256": "4af440fb90e9d67caaed843e39c3e9acd744ec3622f937a7fbf7ba95a375873d",
+      "bytes": 337332,
+      "pixels": [
+        1200,
+        1062
+      ]
+    },
+    "og-image.png": {
+      "sha256": "88d18b6311e8187b16a3a6d60d306181c3b16e73946f04d35eedf6c77f100c59",
+      "bytes": 81431,
+      "pixels": [
+        1200,
+        630
+      ]
+    }
+  },
+  "notes": [
+    "Site brand uses logo_new.jpg derivatives only.",
+    "Favicon/app icons use a faithful emblem crop (Devanagari + figures) excluding the wordmark band for legibility at tiny sizes.",
+    "Aspect ratio of the full lockup is preserved in header/footer/og assets; no stretching."
+  ]
+}

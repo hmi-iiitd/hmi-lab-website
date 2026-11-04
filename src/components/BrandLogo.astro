@@ -1,0 +1,29 @@
+---
+import { withBase } from "../lib/url";
+
+interface Props {
+  variant?: "header" | "footer";
+  class?: string;
+}
+
+const { variant = "header", class: className } = Astro.props;
+
+const src =
+  variant === "footer"
+    ? withBase("brand/logo-footer.png")
+    : withBase("brand/logo-header.png");
+
+const classes = ["brand-logo", `brand-logo--${variant}`, className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<img
+  class={classes}
+  src={src}
+  width={variant === "footer" ? 227 : 199}
+  height={variant === "footer" ? 220 : 176}
+  alt="HMI Research Group — Human–Machine Interaction"
+  decoding="async"
+  loading={variant === "footer" ? "lazy" : "eager"}
+/>
