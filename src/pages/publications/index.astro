@@ -110,7 +110,7 @@ const applicationTags = Array.from(tagSet).sort();
               <h2>
                 <a href={withBase(`papers/${pub.data.slug}/`)}>{pub.data.title}</a>
               </h2>
-              <p class="muted">{pub.data.authors.map((a: { name: string }) => a.name).join(", ")}</p>
+              <p class="authors">{pub.data.authors.map((a: { name: string }) => a.name).join(", ")}</p>
               <p class="venue">{pub.data.venue_short || pub.data.venue_full}</p>
               <p class="pub-links">
                 {pub.data.doi && <a href={`https://doi.org/${pub.data.doi}`}>DOI</a>}

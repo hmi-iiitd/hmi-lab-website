@@ -40,6 +40,10 @@ describe("M3.5 typography and contrast tokens", () => {
       "--text-label",
       "--text-control",
       "--text-footer",
+      "--text-app-title",
+      "--text-app-body",
+      "--text-app-lead",
+      "--text-about",
     ]) {
       expect(tokens).toContain(token);
     }
