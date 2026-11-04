@@ -246,6 +246,31 @@ export function validateContentBundle(bundle: ContentBundle): ValidationIssue[] 
     }
   }
 
+  const publicPubIds = new Set(
+    bundle.publications
+      .filter(
+        (p) =>
+          p.published &&
+          p.metadata_verified &&
+          p.verification_status === "verified" &&
+          (p.status === "published" || p.status === "accepted"),
+      )
+      .map((p) => p.id),
+  );
+  for (const project of bundle.projects) {
+    if (project.published) {
+      for (const pubId of project.publication_ids) {
+        if (!publicPubIds.has(pubId)) {
+          issues.push({
+            collection: "projects",
+            id: project.id,
+            message: `Published story requires a verified public publication: ${pubId}`,
+          });
+        }
+      }
+    }
+  }
+
   for (const project of bundle.projects) {
     for (const area of project.research_areas) {
       if (!themeIds.has(area)) {

@@ -70,6 +70,22 @@ const bundle: ContentBundle = {
 };
 
 const issues = validateContentBundle(bundle);
+
+// Evidence media must be approved and present locally before a public story ships.
+// This also prevents broken figures and transcripts from appearing on GitHub Pages.
+for (const project of bundle.projects) {
+  if (!project.published || !project.artifact) continue;
+  for (const rel of [project.artifact.path, project.artifact.transcript_path]) {
+    if (!rel) continue;
+    if (!fs.existsSync(path.resolve("public", rel))) {
+      issues.push({
+        collection: "projects",
+        id: project.id,
+        message: `Approved media file missing from public/: ${rel}`,
+      });
+    }
+  }
+}
 if (issues.length) {
   console.error("Content validation failed:");
   for (const issue of issues) {

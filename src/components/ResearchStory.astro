@@ -1,0 +1,108 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { publicationResourceLinks } from "../lib/publications";
+import { toBibtex } from "../lib/bibtex";
+import { withBase } from "../lib/url";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  publication: CollectionEntry<"publications">;
+}
+
+const { project, publication } = Astro.props as Props;
+const { data } = project;
+const paper = publication.data;
+const resources = publicationResourceLinks(paper);
+const artifact = data.artifact;
+---
+
+<article class="section wrap paper-page research-story">
+  <p class="section-label">
+    Research Story · {paper.venue_short ?? paper.venue_full} · {paper.publication_year}
+    {paper.status === "accepted" ? " · Accepted" : ""}
+  </p>
+  <h1 class="paper-title">{data.title}</h1>
+  <p class="paper-venue">
+    Based on <a href={withBase(`papers/${paper.slug}/`)}>{paper.title}</a>
+    · {paper.authors.map((author) => author.name).join(", ")}
+  </p>
+
+  <div class="paper-prose">
+    <section aria-labelledby="story-question">
+      <h2 class="section-title" id="story-question">Scientific question</h2>
+      <p>{data.problem}</p>
+    </section>
+
+    <section aria-labelledby="story-contribution" style="margin-top: 2.5rem;">
+      <h2 class="section-title" id="story-contribution">Contribution</h2>
+      <p>{data.contribution}</p>
+    </section>
+
+    {artifact && (
+      <figure style="margin: 2.5rem 0 0;">
+        {artifact.type === "image" ? (
+          <img src={withBase(artifact.path)} alt={artifact.alt} loading="lazy" />
+        ) : (
+          <video controls preload="none" aria-label={artifact.alt}>
+            <source
+              src={withBase(artifact.path)}
+              type={artifact.path.endsWith(".webm") ? "video/webm" : "video/mp4"}
+            />
+            <a href={withBase(artifact.path)}>Download research video</a>
+          </video>
+        )}
+        <figcaption>
+          {artifact.caption} · {artifact.kind === "illustrative" ? "Illustrative" : "Empirical"} artifact.
+          Source: {artifact.source}.
+          {artifact.type === "video" && artifact.transcript_path && (
+            <a href={withBase(artifact.transcript_path)}>Read transcript</a>
+          )}
+        </figcaption>
+      </figure>
+    )}
+
+    <section aria-labelledby="story-method" style="margin-top: 2.5rem;">
+      <h2 class="section-title" id="story-method">Method</h2>
+      <p>{data.methodology}</p>
+    </section>
+
+    <section aria-labelledby="story-findings" style="margin-top: 2.5rem;">
+      <h2 class="section-title" id="story-findings">Principal findings</h2>
+      <ul>
+        {data.findings.map((finding) => <li>{finding}</li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="story-limitations" style="margin-top: 2.5rem;">
+      <h2 class="section-title" id="story-limitations">Limitations and scope</h2>
+      <p>{data.limitations}</p>
+    </section>
+
+    <section aria-labelledby="story-interpretation" style="margin-top: 2.5rem;">
+      <p class="section-label">Programme interpretation · Not a separate empirical finding</p>
+      <h2 class="section-title" id="story-interpretation">
+        What this contributes to Interactive Intelligence
+      </h2>
+      <p>{data.programme_interpretation}</p>
+    </section>
+
+    <section aria-labelledby="story-resources" style="margin-top: 2.5rem;">
+      <h2 class="section-title" id="story-resources">Research resources and citation</h2>
+      <p>
+        <a class="text-link" href={withBase(`papers/${paper.slug}/`)}>Verified paper record</a>
+      </p>
+      {resources.length > 0 && (
+        <ul>
+          {resources.map((resource) => (
+            <li><a href={resource.href}>{resource.label}</a></li>
+          ))}
+        </ul>
+      )}
+      <p class="muted">
+        {paper.venue_full}, {paper.publication_year}.
+        {paper.status === "accepted" ? " Accepted; proceedings publication not yet verified." : ""}
+      </p>
+      <pre class="bibtex"><code>{toBibtex(paper)}</code></pre>
+    </section>
+  </div>
+</article>
