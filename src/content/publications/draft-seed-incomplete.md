@@ -11,7 +11,11 @@ project_ids: []
 featured: false
 published: false
 metadata_verified: false
+verification_status: incomplete
+lab_attribution: unknown
 evidence_note: "Intentionally incomplete fixture. Must never appear in dist."
+unresolved_notes:
+  - "Synthetic CI fixture"
 ---
 
 This markdown body is draft-only scaffolding. It must not appear in the static build listings.
