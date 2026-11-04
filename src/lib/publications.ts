@@ -24,6 +24,29 @@ export function featuredPublications(entries: PubEntry[]): PubEntry[] {
     .sort((a, b) => (a.data.featured_rank ?? 99) - (b.data.featured_rank ?? 99));
 }
 
+/** Verified public publications for a primary theme (includes accepted). */
+export function publicationsForTheme(entries: PubEntry[], themeId: string): PubEntry[] {
+  return entries
+    .filter(
+      (entry) =>
+        isPublicPublication(entry) && (entry.data.research_areas ?? []).includes(themeId),
+    )
+    .sort(sortPubsNewestFirst);
+}
+
+export function publicationResourceLinks(data: PubEntry["data"]): { label: string; href: string }[] {
+  const links: { label: string; href: string }[] = [];
+  if (data.doi) links.push({ label: "DOI", href: `https://doi.org/${data.doi}` });
+  if (data.paper_url) links.push({ label: "Publisher", href: data.paper_url });
+  if (data.pdf_url) links.push({ label: "PDF", href: data.pdf_url });
+  if (data.code_url) links.push({ label: "Code", href: data.code_url });
+  if (data.dataset_url) links.push({ label: "Dataset", href: data.dataset_url });
+  if (data.video_url) links.push({ label: "Video", href: data.video_url });
+  if (data.slides_url) links.push({ label: "Slides", href: data.slides_url });
+  if (data.project_url) links.push({ label: "Project", href: data.project_url });
+  return links;
+}
+
 export function doiUrl(doi?: string | null): string | null {
   if (!doi) return null;
   return `https://doi.org/${doi}`;
