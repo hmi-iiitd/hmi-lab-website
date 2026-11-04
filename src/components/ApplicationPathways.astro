@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import SectionHeader from "./SectionHeader.astro";
+import { APPLICATION_PATHWAYS_INTRO } from "../lib/identity";
 import { withBase } from "../lib/url";
 
 interface Props {
@@ -24,7 +25,7 @@ const ordered = [...tags].sort(
   <SectionHeader
     label={compact ? "Applications" : "03 / Application pathways"}
     title="Where interactive intelligence meets people."
-    intro="Cross-cutting topics spanning the three scientific themes. AI for neurodevelopment remains a visible focus alongside autism, ADHD, health, accessibility, and related areas."
+    intro={APPLICATION_PATHWAYS_INTRO}
     titleId="application-pathways-title"
   />
   <ul class="application-list">

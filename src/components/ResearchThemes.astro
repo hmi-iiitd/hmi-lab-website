@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import SectionHeader from "./SectionHeader.astro";
+import { HOMEPAGE_THEMES_INTRO } from "../lib/identity";
 import { withBase } from "../lib/url";
 
 interface Props {
@@ -14,7 +15,7 @@ const { themes } = Astro.props;
   <SectionHeader
     label="02 / Research directions"
     title="Three themes of Interactive Intelligence."
-    intro="Perception & Understanding, Learning & Coordination, and Interaction & Adaptation organise the scientific portfolio. Application topics such as neurodevelopment cut across these themes."
+    intro={HOMEPAGE_THEMES_INTRO}
     titleId="themes-title"
   />
   <div class="directions">

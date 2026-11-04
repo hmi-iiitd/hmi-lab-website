@@ -62,7 +62,7 @@ describe("M3 Interactive Intelligence architecture (ADR-003)", () => {
   it("exposes approved punchline and hero introduction constants for M3.5", () => {
     expect(PUNCHLINE).toBe("Intelligence emerges through interaction.");
     expect(HERO_INTRODUCTION).toBe(
-      "We study interactive intelligence: how intelligent systems perceive and understand people and other agents, learn and reason through interaction, and adapt their behaviour in response.",
+      "We study interactive intelligence: how intelligent systems perceive and understand people, other agents, and the physical world; learn and reason through interaction; and adapt their behaviour as interaction unfolds.",
     );
     expect(RESEARCH_IDENTITY).toBe("Interactive Intelligence");
   });

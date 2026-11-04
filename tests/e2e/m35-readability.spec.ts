@@ -119,7 +119,11 @@ test.describe("M3.5 readability and editorial gate", () => {
       });
       if (slug === "homepage" || slug === "about" || slug === "publications") {
         const crop = page.locator(
-          slug === "homepage" ? "#hero" : slug === "about" ? ".about-prose" : ".pub-list",
+          slug === "homepage"
+            ? "#hero"
+            : slug === "about"
+              ? "#about-approved-description"
+              : ".pub-list",
         );
         await crop.first().screenshot({
           path: runtimeScreenshotPath(`runtime-readability-${slug}-desktop-crop.png`),

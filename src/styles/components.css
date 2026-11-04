@@ -735,6 +735,22 @@
   text-align: start;
 }
 
+.about-philosophy {
+  max-width: var(--measure-prose);
+  margin: 2.75rem 0 0;
+  padding: 1.75rem 0 0;
+  border-top: 1px solid var(--color-line);
+  text-align: start;
+}
+
+.about-philosophy .section-title {
+  margin-top: 0.55rem;
+}
+
+.about-philosophy-prose {
+  margin-top: 1.15rem;
+}
+
 .about-quote {
   max-width: var(--measure-prose);
   margin: 2.75rem 0 0;
