@@ -72,17 +72,19 @@ test.describe("M3.5 typography alignment refinement", () => {
   test("About body paragraphs meet desktop and mobile floors", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("./about/");
-    const desktop = await fontSize(page, ".about-prose p");
+    const desktop = await fontSize(page, "#about-approved-description p");
     expect(desktop).toBeGreaterThanOrEqual(18.5);
     expect(desktop).toBeLessThanOrEqual(20.5);
 
-    const measure = await page.locator(".about-prose").evaluate((el) => getComputedStyle(el).maxWidth);
+    const measure = await page
+      .locator("#about-approved-description")
+      .evaluate((el) => getComputedStyle(el).maxWidth);
     expect(px(measure)).toBeGreaterThanOrEqual(44 * 16 - 1);
     expect(px(measure)).toBeLessThanOrEqual(46 * 16 + 1);
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("./about/");
-    expect(await fontSize(page, ".about-prose p")).toBeGreaterThanOrEqual(17.5);
+    expect(await fontSize(page, "#about-approved-description p")).toBeGreaterThanOrEqual(17.5);
   });
 
   test("research and publication secondary text stays at least 16px", async ({ page }) => {
@@ -144,7 +146,7 @@ test.describe("M3.5 typography alignment refinement", () => {
     });
 
     await page.goto("./about/");
-    await page.locator(".about-prose").screenshot({
+    await page.locator("#about-approved-description").screenshot({
       path: runtimeScreenshotPath("m35-type-refine-about-desktop.png"),
     });
 
@@ -159,7 +161,7 @@ test.describe("M3.5 typography alignment refinement", () => {
       path: runtimeScreenshotPath("m35-type-refine-applications-mobile.png"),
     });
     await page.goto("./about/");
-    await page.locator(".about-prose").screenshot({
+    await page.locator("#about-approved-description").screenshot({
       path: runtimeScreenshotPath("m35-type-refine-about-mobile.png"),
     });
     await page.goto("./publications/");

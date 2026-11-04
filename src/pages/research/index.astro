@@ -7,6 +7,7 @@ import {
   LAB_NAME,
   PRIMARY_THEME_IDS,
   RESEARCH_IDENTITY,
+  RESEARCH_PAGE_THEMES_LEDE,
 } from "../../lib/identity";
 import {
   isPublicPublication,
@@ -47,11 +48,7 @@ function papersForTheme(themeId: string, limit = 3): PubEntry[] {
   <section class="section wrap">
     <p class="section-label">Research</p>
     <h1 class="section-title">Themes under Interactive Intelligence</h1>
-    <p class="muted research-lede">
-      The lab’s scientific portfolio is organised around three primary themes. Application
-      areas such as neurodevelopment cut across themes and remain separately navigable.
-      Project pages stay clearly provisional until verified.
-    </p>
+    <p class="muted research-lede">{RESEARCH_PAGE_THEMES_LEDE}</p>
 
     <div class="directions" id="research-themes" style="margin-top: 2rem;">
       {

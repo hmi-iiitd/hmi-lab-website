@@ -1,10 +1,10 @@
 # Proposal — Research positioning: How does interaction shape intelligence?
 
-**Status:** Direction **accepted** with editorial refinements (faculty review of PR #5).  
-**This PR (#5):** Documentation only — **no site copy, layout, or visual changes**.  
-**Out of scope here and until a later content PR:** M4; institutional production; typography / visual redesign (frozen after PR #4).
+**Status:** **APPROVED** — all §A and §B decisions resolved.  
+**PR #5:** Documentation merged (`b48b13d`); this file records the final §B resolutions.  
+**Implementation:** Content-only PR `feat/research-positioning-content` — stop at review gate before merge. Typography / visual design remain frozen (PR #4). M4 and production remain gated.
 
-**Preserves:** Lab name, Interactive Intelligence identity, homepage punchline, three scientific themes, approved five-paragraph About description (verbatim), Minsky §16.1 quotation as a historical intellectual reference.
+**Preserves:** Lab name, Interactive Intelligence identity, homepage punchline, three scientific themes (titles + existing summaries verbatim), approved five-paragraph About description (verbatim), Minsky §16.1 quotation as a historical intellectual reference.
 
 ---
 
@@ -18,7 +18,7 @@ Intelligent agents do not merely receive observations and respond: their actions
 
 ---
 
-## A. Accepted wording (locked for a future content-only PR)
+## A. Accepted wording
 
 ### A1. Fixed identity (no change)
 
@@ -29,75 +29,74 @@ Intelligent agents do not merely receive observations and respond: their actions
 | Punchline | Intelligence emerges through interaction. |
 | Themes | Perception & Understanding · Learning & Coordination · Interaction & Adaptation |
 | About body | `src/content/identity/approved-description.md` — **five paragraphs, verbatim** |
-| Minsky quotation | §16.1, p.163 — remains after the new philosophy section |
+| Minsky quotation | §16.1, p.163 — remains after the Research Philosophy section |
 
-**Branding note:** `Interactive Intelligence` is already present in the homepage eyebrow and Research heading. **No** additional uppercase/bold branding, new H1, competing slogan, or visual redesign.
+**Branding note:** No additional uppercase/bold branding, new H1, competing slogan, or visual redesign.
 
 ### A2. Homepage introduction (replace `HERO_INTRODUCTION` only)
 
-**Accepted sentence:**
-
 > We study interactive intelligence: how intelligent systems perceive and understand people, other agents, and the physical world; learn and reason through interaction; and adapt their behaviour as interaction unfolds.
 
-Homepage-only; one short paragraph; does not replace or paraphrase the approved About description.
+### A3. About — Research Philosophy
 
-### A3. About — Research Philosophy (placement + copy)
+**Placement:** After the five approved About paragraphs, **before** the Minsky quotation.
 
-**Placement (accepted):** After the five approved About paragraphs, **before** the Minsky quotation.
+**Heading hierarchy (B3):**
 
-**Heading structure (accepted):**
+- Small section label: `Research Philosophy` (same pattern as other `.section-label` labels)
+- `h2`: How does interaction shape intelligence?
 
-- Section label / heading: Research Philosophy  
-- Question as section title (not a second homepage slogan): How does interaction shape intelligence?
-
-**Accepted body (two paragraphs):**
+**Body (two paragraphs):**
 
 Interactive Intelligence treats interaction as more than a channel for observations and responses. When an agent acts, its actions may change other agents’ responses, physical settings, and the information available for later learning and coordination. Intelligence, in this view, is shaped inside that ongoing loop—not only by what is sensed at a single moment.
 
 We therefore ask how systems can perceive and understand people, other agents, and situations under changing conditions; how they can learn and coordinate when behaviours continually reshape one another; and how interfaces, robots, and assistive systems should adapt so interaction remains usable and trustworthy. Our three research themes name connected aspects of this ongoing feedback loop while preserving each theme’s individual scientific scope.
 
-### A4. Themes as a feedback loop (organising lens)
+### A4. Themes feedback-loop introduction
 
-**Accepted shared lede** (homepage themes module and/or Research page intro — refine existing lede; do not replace theme titles or invent new theme ids):
+**Accepted longer lede (Research page only — B4):**
 
 > Perception & Understanding, Learning & Coordination, and Interaction & Adaptation are connected aspects of an ongoing feedback loop: how systems see and interpret the world of interaction, how they learn and coordinate within it, and how they adapt their behaviour as that world changes.
 
-**Accepted guardrails:**
+**Homepage themes introduction:** retain the existing concise homepage copy (unchanged).
 
-- The loop is an **organising lens** for the programme, not a claim that the feedback-loop perspective is itself a novel algorithm.
-- Do **not** imply that every historical HMI paper experimentally demonstrates the entire loop.
-- Preserve each theme’s existing scientific scope and contribution language; do not overwrite theme blurbs with generic loop-only prose.
+**Guardrails:**
 
-### A5. Cross-cutting application areas (visibility)
+- Organising lens only — not a novel-algorithm claim.
+- Do not imply every historical HMI paper experimentally demonstrates the entire loop.
+- Theme titles and existing per-theme summaries remain verbatim (B1).
 
-Keep **neurodevelopment, ADHD, autism, health, accessibility**, and **embodied interaction** visible as cross-cutting application areas (alongside existing pathways such as social robotics, education, and pervasive computing). Application pathways remain a separate dimension from the three primary themes.
+### A5. Application Pathways introduction (B2)
 
----
+Retain existing application cards and taxonomy. **Do not** create a new application tag without verified publication/project coverage.
 
-## B. Remaining faculty decisions
+**Approved introductory wording:**
 
-Items still open before implementation; not blocked for proposal acceptance, but should be settled in content review:
-
-1. **Theme card blurbs** — Keep current per-theme questions/paragraphs as-is, or lightly edit each so the loop role is explicit **without** diluting individual scientific scope? (Default if undecided: keep current blurbs; change shared lede only.)
-2. **Embodied interaction** — Surface as (a) wording in the Application Pathways section intro only, (b) a new published application tag, or (c) mapping onto an existing tag (e.g. pervasive computing / social robotics) with clearer label copy?
-3. **Research Philosophy heading level** — Prefer `h2` “Research Philosophy” with the question as `h3`, or the question as the sole visible `h2` under a small section label?
-4. **Research index lede** — Apply the accepted themes-loop sentence on Research only, homepage only, or both?
+> Our research applications span neurodevelopment, health, accessibility, social robotics, education, and embodied interaction with the physical world. These areas cut across our three scientific themes.
 
 ---
 
-## C. Deferred implementation
+## B. Faculty decisions — resolved
 
-**Do not implement in PR #5.** After final content approval of any remaining decisions in §B:
+| ID | Decision | Resolution |
+|---|---|---|
+| **B1** | Theme descriptions | **Retain** existing three research-theme summaries **verbatim**. Do not rewrite them to force a feedback-loop narrative. |
+| **B2** | Embodied interaction | **Mention in Application Pathways introduction** with the approved wording above. Retain cards/taxonomy; **no new application tag**. |
+| **B3** | About heading hierarchy | Small **Research Philosophy** section label + `h2` **How does interaction shape intelligence?** After approved prose, before Minsky. |
+| **B4** | Feedback-loop introduction | Apply the accepted **longer** loop introduction on the **Research page only**. Keep the existing concise **homepage** themes introduction. |
 
-1. Open a **separate content-only PR** (no typography, colour, logo, or layout redesign).
-2. Update only: `HERO_INTRODUCTION`; About page markup for Research Philosophy (placement A3); themes shared lede (and any faculty-approved blurb edits); application-pathway visibility for embodied interaction as decided in §B.
-3. Add **regression tests** for:
-   - approved five-paragraph About text unchanged;
-   - accepted homepage introduction exact match;
-   - Research Philosophy present after approved prose and before Minsky (text + attribution);
-   - existing primary navigation and key internal links;
-   - responsive layout / no horizontal overflow at established viewports (no visual-system changes).
-4. **Still gated:** M4 rich theme/project pages; production (`hmi.iiitd.edu.in`) deployment.
+---
+
+## C. Implementation plan (separate content-only PR)
+
+1. Update `HERO_INTRODUCTION` to A2.
+2. Add About Research Philosophy block (A3 / B3).
+3. Replace Application Pathways `intro` with A5 / B2 (cards unchanged).
+4. Replace Research page lede with A4 loop sentence; leave homepage `ResearchThemes` intro unchanged; leave theme summaries untouched (B1 / B4).
+5. Regression tests: text fidelity, heading hierarchy, section ordering, application visibility, links, responsive accessibility.
+6. **Still gated:** M4; production deploy; typography / visual redesign.
+
+After the content implementation is verified and merged, treat HMI research positioning as **frozen** unless a substantive scientific reason emerges to revise it.
 
 ---
 
@@ -109,12 +108,13 @@ Items still open before implementation; not blocked for proposal acceptance, but
 - No invented quotations; Minsky remains historical reference only.
 - No rewriting of publication abstracts or bibliographic fields.
 - No implication that the feedback-loop framing is a novel algorithm or that every archive paper demonstrates the full loop.
+- No new application tag without verified coverage.
 
 ---
 
 ## Acceptance checklist
 
-### Locked (this revision)
+### §A — locked
 
 - [x] Central question: How does interaction shape intelligence?
 - [x] Retain lab name, Interactive Intelligence, punchline, three themes
@@ -122,17 +122,18 @@ Items still open before implementation; not blocked for proposal acceptance, but
 - [x] Research Philosophy two-paragraph copy (A3)
 - [x] Placement: after five approved paragraphs, before Minsky
 - [x] Themes feedback-loop lede + guardrails (A4)
-- [x] Application areas remain visible, including embodied interaction (A5)
-- [x] PR #5 stays documentation-only
+- [x] Application areas visibility via pathways intro (A5)
+- [x] PR #5 documentation-only
 
-### Still open (§B)
+### §B — resolved
 
-- [ ] Theme card blurbs: keep vs light edit
-- [ ] Embodied interaction: intro wording vs new tag vs remap
-- [ ] Philosophy heading hierarchy
-- [ ] Where to apply themes-loop lede (home / research / both)
+- [x] **B1** Theme card summaries retained verbatim
+- [x] **B2** Embodied interaction in Application Pathways intro; no new tag
+- [x] **B3** Section label + `h2` question hierarchy
+- [x] **B4** Longer loop lede on Research only; homepage themes intro unchanged
 
-### After final content approval
+### Implementation (follow-on PR)
 
-- [ ] Separate content-only implementation PR + regression tests
-- [ ] No M4 / no production / no typography changes
+- [x] Separate content-only implementation PR + regression tests (opened for review)
+- [x] No M4 / no production / no typography changes in that PR
+- [ ] Positioning frozen after content PR is verified and merged

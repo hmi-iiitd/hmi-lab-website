@@ -5,6 +5,9 @@ import {
   LAB_NAME,
   MINSKY_SOCIETY_OF_MIND,
   RESEARCH_IDENTITY,
+  RESEARCH_PHILOSOPHY_LABEL,
+  RESEARCH_PHILOSOPHY_PARAGRAPHS,
+  RESEARCH_PHILOSOPHY_QUESTION,
 } from "../../lib/identity";
 
 const entry = await getEntry("identity", "approved-description");
@@ -20,9 +23,17 @@ const { Content } = await render(entry);
 >
   <article class="section wrap about-page">
     <p class="section-label">About</p>
-    <div class="about-prose">
+    <div class="about-prose" id="about-approved-description">
       <Content />
     </div>
+
+    <section class="about-philosophy" aria-labelledby="research-philosophy-title">
+      <p class="section-label">{RESEARCH_PHILOSOPHY_LABEL}</p>
+      <h2 class="section-title" id="research-philosophy-title">{RESEARCH_PHILOSOPHY_QUESTION}</h2>
+      <div class="about-prose about-philosophy-prose">
+        {RESEARCH_PHILOSOPHY_PARAGRAPHS.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
 
     <figure class="about-quote">
       <blockquote>
