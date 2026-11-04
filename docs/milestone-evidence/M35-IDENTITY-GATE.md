@@ -9,7 +9,9 @@
 - Punchline: `Intelligence emerges through interaction.`
 - Hero introduction: `src/lib/identity.ts` → `HERO_INTRODUCTION`
 - About body: `src/content/identity/approved-description.md` (verbatim)
-- Minsky: *The Society of Mind* §30.8, p. 308
+- Minsky: *The Society of Mind* §16.1, p. 163 (faculty-supplied emotion/intelligence quotation)
+- Featured: ESL (Accepted), CHI 2024 HM, Sci Rep ADHD pupil dynamics, MobiTangibles
+- Typography: semantic tokens in `tokens.css`; readability suite `tests/e2e/m35-readability.spec.ts`
 
 ## Evidence
 

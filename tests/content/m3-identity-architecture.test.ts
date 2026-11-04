@@ -123,16 +123,15 @@ describe("M3.5 identity page contracts", () => {
     expect(parsed.content.replace(/\r\n/g, "\n").trim()).toBe(APPROVED_BODY.trim());
   });
 
-  it("About page exists and embeds approved punchline plus Minsky §30.8", () => {
+  it("About page exists and embeds approved punchline plus Minsky §16.1", () => {
     const about = readFileSync(path.join(root, "src/pages/about/index.astro"), "utf8");
     const identity = readFileSync(path.join(root, "src/lib/identity.ts"), "utf8");
     expect(about).toMatch(/approved-description|getEntry\(["']identity["']/);
     expect(about).toMatch(/MINSKY_SOCIETY_OF_MIND/);
     expect(about).toMatch(/MINSKY_SOCIETY_OF_MIND\.section/);
-    expect(identity).toMatch(/section:\s*"30\.8"/);
-    expect(identity).toMatch(/page:\s*308/);
-    expect(about).not.toMatch(/16\.1/);
-    expect(identity).not.toMatch(/16\.1/);
+    expect(identity).toMatch(/section:\s*"16\.1"/);
+    expect(identity).toMatch(/page:\s*163/);
+    expect(identity).not.toMatch(/30\.8/);
   });
 
   it("homepage consumes identity constants rather than retired slogan", () => {

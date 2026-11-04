@@ -22,11 +22,13 @@ const bibtex = toBibtex(entry.data);
 ---
 
 <BaseLayout title={`${entry.data.title} · HMI Lab`}>
-  <article class="section wrap">
+  <article class="section wrap paper-page">
     <p class="section-label">
       {entry.data.venue_short ?? entry.data.kind} · {entry.data.publication_year}
+      {entry.data.status === "accepted" ? " · Accepted" : ""}
+      {entry.data.award ? ` · ${entry.data.award}` : ""}
     </p>
-    <h1 class="section-title">{entry.data.title}</h1>
+    <h1 class="paper-title">{entry.data.title}</h1>
     <p class="muted" style="margin-top: 1rem; max-width: 48rem;">
       {entry.data.authors.map((a: { name: string }) => a.name).join(", ")}
     </p>

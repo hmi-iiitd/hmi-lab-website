@@ -66,9 +66,9 @@ test.describe("M3.5 Interactive Intelligence identity", () => {
     await expect(page.getByText(MINSKY_SOCIETY_OF_MIND.text, { exact: true })).toBeVisible();
     await expect(page.getByText(/Marvin Minsky/i)).toBeVisible();
     await expect(page.getByText(/Society of Mind/i)).toBeVisible();
-    await expect(page.getByText(/§\s*30\.8/)).toBeVisible();
-    await expect(page.getByText(/p\.\s*308/i)).toBeVisible();
-    await expect(page.getByText(/§\s*16\.1/)).toHaveCount(0);
+    await expect(page.getByText(/§\s*16\.1/)).toBeVisible();
+    await expect(page.getByText(/p\.\s*163/i)).toBeVisible();
+    await expect(page.getByText(/§\s*30\.8/)).toHaveCount(0);
   });
 
   test("About is in primary navigation and resolves", async ({ page }) => {

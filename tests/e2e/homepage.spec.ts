@@ -71,7 +71,9 @@ test.describe("M2 homepage structure", () => {
     const selected = page.locator("#selected-research");
     await expect(selected.getByText(/development placeholder/i)).toHaveCount(0);
     await expect(selected.getByRole("link", { name: /paper page/i })).toBeVisible();
-    await expect(selected.getByText(/ExpressEar|MobiTangibles|social robots|replace me/i).first()).toBeVisible();
+    await expect(
+      selected.getByText(/Epistemic Social Learning|MobiTangibles|social robots|pupil dynamics/i).first(),
+    ).toBeVisible();
 
     const news = page.locator("#news-highlights");
     await expect(

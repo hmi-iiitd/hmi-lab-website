@@ -32,12 +32,13 @@ test.describe("M3.5 official HMI logo", () => {
     expect(headerLoaded.naturalHeight).toBeGreaterThan(0);
     expect(headerLoaded.currentSrc).toMatch(/\/brand\/logo-header\.png/);
 
-    const footerLoaded = await footerLogo.evaluate((img: HTMLImageElement) => ({
-      naturalWidth: img.naturalWidth,
-      currentSrc: img.currentSrc,
-    }));
-    expect(footerLoaded.naturalWidth).toBeGreaterThan(0);
-    expect(footerLoaded.currentSrc).toMatch(/\/brand\/logo-footer\.png/);
+    await footerLogo.scrollIntoViewIfNeeded();
+    await expect
+      .poll(async () =>
+        footerLogo.evaluate((img: HTMLImageElement) => img.naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    await expect(footerLogo).toHaveAttribute("src", /\/brand\/logo-footer\.png/);
   });
 
   test("logo layout keeps aspect ratio on desktop and mobile", async ({ page }) => {

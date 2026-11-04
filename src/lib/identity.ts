@@ -45,15 +45,14 @@ export const APPROVED_DESCRIPTION_PATH =
   "src/content/identity/approved-description.md";
 
 /**
- * Marvin Minsky quotation for About (M3.5).
- * Verified wording appears in *The Society of Mind* §30.8 (“Intelligence and Resourcefulness”),
- * commonly paginated p. 308 (1986/1988 editions). Live pages cite this locator only.
+ * Marvin Minsky quotation for About (M3.5) — faculty-supplied emotion/intelligence passage.
+ * *The Society of Mind* §16.1 (“Emotion”), commonly paginated p. 163 (1986 edition).
  */
 export const MINSKY_SOCIETY_OF_MIND = {
-  text: "What magical trick makes us intelligent? The trick is that there is no trick. The power of intelligence stems from our vast diversity, not from any single, perfect principle.",
+  text: "The question is not whether intelligent machines can have any emotions, but whether machines can be intelligent without any emotions.",
   work: "The Society of Mind",
   year: 1986,
-  section: "30.8",
-  page: 308,
+  section: "16.1",
+  page: 163,
   author: "Marvin Minsky",
 } as const;
