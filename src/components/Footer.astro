@@ -1,6 +1,7 @@
 ---
 import BrandLogo from "./BrandLogo.astro";
 import { withBase } from "../lib/url";
+import { LAB_NAME, PUNCHLINE } from "../lib/identity";
 ---
 
 <footer class="site-footer">
@@ -10,8 +11,8 @@ import { withBase } from "../lib/url";
         <a class="footer-brand" href={withBase("/")} aria-label="HMI Research Group home">
           <BrandLogo variant="footer" decorative />
         </a>
-        <p class="section-label">Human–Machine Interaction Research Group</p>
-        <p class="footer-title">Better intelligence begins with better interaction.</p>
+        <p class="section-label">{LAB_NAME}</p>
+        <p class="footer-title">{PUNCHLINE}</p>
         <a class="text-link" href="mailto:hmi@iiitd.ac.in">Contact the lab <span aria-hidden="true">↗</span></a>
       </div>
       <div>

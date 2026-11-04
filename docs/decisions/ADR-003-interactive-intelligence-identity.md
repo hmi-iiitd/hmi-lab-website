@@ -57,7 +57,8 @@ Across these directions, our broader goal is to build intelligent systems that c
 
 ### Minsky quotation (About, M3.5 only)
 
-Brief cited *The Society of Mind* §16.1 p.163. Independent check places the “no trick / diversity” passage at **§30.8 ≈ p.308**. Reconcile locator in M3.5 before publishing.
+Faculty-supplied emotion/intelligence quotation from *The Society of Mind* **§16.1 p.163**:  
+“The question is not whether intelligent machines can have any emotions, but whether machines can be intelligent without any emotions.”
 
 ## Migration from four themes
 

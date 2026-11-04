@@ -3,9 +3,17 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SelectedResearch from "../components/SelectedResearch.astro";
 import ResearchThemes from "../components/ResearchThemes.astro";
+import ApplicationPathways from "../components/ApplicationPathways.astro";
 import CommunityPreview from "../components/CommunityPreview.astro";
 import NewsHighlights from "../components/NewsHighlights.astro";
 import { withBase } from "../lib/url";
+import {
+  HERO_INTRODUCTION,
+  LAB_NAME,
+  PRIMARY_THEME_IDS,
+  PUNCHLINE,
+  RESEARCH_IDENTITY,
+} from "../lib/identity";
 
 const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas"))
   .filter((entry: CollectionEntry<"research-areas">) => entry.data.published)
@@ -14,13 +22,18 @@ const themes: CollectionEntry<"research-areas">[] = (await getCollection("resear
       a.data.order - b.data.order,
   );
 
+const applicationTags: CollectionEntry<"application-tags">[] = (
+  await getCollection("application-tags")
+).filter((entry: CollectionEntry<"application-tags">) => entry.data.published);
+
 const publications: CollectionEntry<"publications">[] = await getCollection("publications");
 const news: CollectionEntry<"news">[] = await getCollection("news");
+
 ---
 
 <BaseLayout
-  title="HMI Research Group · IIIT-Delhi"
-  description="Human–Machine Interaction Research Group at IIIT-Delhi — research at the intersection of AI, HCI, robotics, and behavioral science."
+  title={`${LAB_NAME} · IIIT-Delhi`}
+  description={`${LAB_NAME} at IIIT-Delhi — ${RESEARCH_IDENTITY}. ${PUNCHLINE}`}
 >
   <section class="hero wrap" id="hero" aria-labelledby="hero-title">
     <svg
@@ -48,23 +61,22 @@ const news: CollectionEntry<"news">[] = await getCollection("news");
     </svg>
 
     <div class="hero-copy">
-      <p class="eyebrow">Human–Machine Interaction · IIIT-Delhi</p>
-      <h1 id="hero-title">Intelligence is<br /><em>an interaction.</em></h1>
+      <p class="eyebrow">Interactive Intelligence · IIIT-Delhi</p>
+      <h1 id="hero-title">Intelligence emerges <em>through interaction.</em></h1>
       <div class="hero-bottom">
-        <p class="lead">
-          We study how people and intelligent systems perceive, learn from, and adapt to one
-          another—bridging AI, human–computer interaction, robotics, and behavioral science.
-        </p>
+        <p class="lead">{HERO_INTRODUCTION}</p>
         <div class="hero-actions">
           <a class="btn" href={withBase("research/")}>Explore research</a>
           <a class="btn btn-ghost" href={withBase("publications/")}>View publications</a>
+          <a class="btn btn-ghost" href={withBase("about/")}>About the lab</a>
         </div>
       </div>
     </div>
   </section>
 
   <SelectedResearch publications={publications} />
-  <ResearchThemes themes={themes} />
+  <ResearchThemes themes={themes.filter((t) => PRIMARY_THEME_IDS.includes(t.data.id as (typeof PRIMARY_THEME_IDS)[number]))} />
+  <ApplicationPathways tags={applicationTags} />
   <CommunityPreview />
   <NewsHighlights items={news} />
 </BaseLayout>
