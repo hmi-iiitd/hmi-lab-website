@@ -1,0 +1,33 @@
+---
+import { withBase } from "../lib/url";
+
+interface Props {
+  variant?: "header" | "footer";
+  /** Empty alt when a parent link already supplies the accessible name. */
+  decorative?: boolean;
+  class?: string;
+}
+
+const { variant = "header", decorative = true, class: className } = Astro.props;
+
+const src =
+  variant === "footer"
+    ? withBase("brand/logo-footer.png")
+    : withBase("brand/logo-header.png");
+
+const classes = ["brand-logo", `brand-logo--${variant}`, className]
+  .filter(Boolean)
+  .join(" ");
+
+const alt = decorative ? "" : "HMI Research Group — Human–Machine Interaction";
+---
+
+<img
+  class={classes}
+  src={src}
+  width={variant === "footer" ? 227 : 199}
+  height={variant === "footer" ? 220 : 176}
+  alt={alt}
+  decoding="async"
+  loading={variant === "footer" ? "lazy" : "eager"}
+/>

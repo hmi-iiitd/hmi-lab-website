@@ -1,4 +1,5 @@
 ---
+import BrandLogo from "./BrandLogo.astro";
 import { withBase } from "../lib/url";
 ---
 
@@ -6,6 +7,9 @@ import { withBase } from "../lib/url";
   <div class="wrap">
     <div class="footer-inner">
       <div>
+        <a class="footer-brand" href={withBase("/")} aria-label="HMI Research Group home">
+          <BrandLogo variant="footer" decorative />
+        </a>
         <p class="section-label">Human–Machine Interaction Research Group</p>
         <p class="footer-title">Better intelligence begins with better interaction.</p>
         <a class="text-link" href="mailto:hmi@iiitd.ac.in">Contact the lab <span aria-hidden="true">↗</span></a>

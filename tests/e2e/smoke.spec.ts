@@ -8,6 +8,7 @@ test.describe("staging smoke", () => {
     await page.goto("./");
     await expect(page.getByRole("link", { name: /skip to content/i })).toBeAttached();
     await expect(page.getByRole("banner")).toContainText(/HMI/i);
+    await expect(page.locator("header .brand-logo")).toBeVisible();
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       "content",
       /noindex/i,

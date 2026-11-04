@@ -1,4 +1,5 @@
 ---
+import BrandLogo from "./BrandLogo.astro";
 import { withBase } from "../lib/url";
 
 const links = [
@@ -11,8 +12,11 @@ const links = [
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header wrap">
   <a class="brand" href={withBase("/")}>
-    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span>HMI <small>Research Group · IIIT-Delhi</small></span>
+    <BrandLogo variant="header" decorative />
+    <span class="brand-text">
+      HMI
+      <small>Research Group · IIIT-Delhi</small>
+    </span>
   </a>
   <button
     type="button"
