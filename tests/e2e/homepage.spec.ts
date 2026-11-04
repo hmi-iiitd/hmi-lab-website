@@ -36,7 +36,9 @@ test.describe("M2 homepage structure", () => {
     await expect(page.locator("#community")).toBeVisible();
     await expect(page.locator("#news-highlights")).toBeVisible();
 
-    await expect(page.getByRole("heading", { name: /intelligence is/i })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Intelligence emerges through interaction/i }),
+    ).toBeVisible();
     await expect(page.getByRole("link", { name: "Explore research", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: "View publications", exact: true })).toBeVisible();
   });
@@ -48,11 +50,11 @@ test.describe("M2 homepage structure", () => {
     const normalized = labels.map((l) => l.trim().toLowerCase());
 
     expect(normalized).toEqual(
-      expect.arrayContaining(["research", "publications", "people"]),
+      expect.arrayContaining(["research", "publications", "people", "about"]),
     );
-    expect(normalized.join(" ")).not.toMatch(/\babout\b|\bprojects\b|\bnews\b|\bopportunit/i);
+    expect(normalized.join(" ")).not.toMatch(/\bprojects\b|\bnews\b|\bopportunit/i);
 
-    for (const name of ["Research", "Publications", "People"]) {
+    for (const name of ["Research", "Publications", "People", "About"]) {
       const link = nav.getByRole("link", { name, exact: true });
       const responsePromise = page.waitForResponse(
         (res) => res.request().resourceType() === "document" && res.ok(),

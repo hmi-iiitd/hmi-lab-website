@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionHeader from "./SectionHeader.astro";
+import { withBase } from "../lib/url";
+
+interface Props {
+  tags: CollectionEntry<"application-tags">[];
+  headingLevel?: "h2" | "h3";
+  compact?: boolean;
+}
+
+const { tags, compact = false } = Astro.props;
+
+const ordered = [...tags].sort(
+  (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title),
+);
+---
+
+<section
+  class:list={["section", "wrap", compact && "section-compact"]}
+  id="application-pathways"
+  aria-labelledby="application-pathways-title"
+>
+  <SectionHeader
+    label={compact ? "Applications" : "03 / Application pathways"}
+    title="Where interactive intelligence meets people."
+    intro="Cross-cutting topics spanning the three scientific themes. AI for neurodevelopment remains a visible focus alongside autism, ADHD, health, accessibility, and related areas."
+    titleId="application-pathways-title"
+  />
+  <ul class="application-list">
+    {
+      ordered.map((tag) => (
+        <li>
+          <a
+            class:list={[
+              "application-chip",
+              tag.data.id === "neurodevelopment" && "application-chip--priority",
+            ]}
+            href={withBase(`publications/?tag=${encodeURIComponent(tag.data.id)}`)}
+          >
+            <span class="application-chip-title">{tag.data.title}</span>
+            <span class="application-chip-summary">{tag.data.summary}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

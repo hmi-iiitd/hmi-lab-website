@@ -116,20 +116,29 @@ describe("M3 Interactive Intelligence architecture (ADR-003)", () => {
   });
 });
 
-/**
- * M3.5 UI contract — written first (RED), skipped until the M3.5 PR implements surfaces.
- * Unskip in feat/m3.5-identity; do not implement homepage/About/logo redesign in M3.
- */
-describe.skip("M3.5 identity UI contract (deferred)", () => {
-  it("homepage hero uses approved punchline exactly", () => {
-    expect(PUNCHLINE).toBe("Intelligence emerges through interaction.");
+describe("M3.5 identity page contracts", () => {
+  it("About page source file remains verbatim approved body", () => {
+    const file = path.join(root, "src/content/identity/approved-description.md");
+    const parsed = matter(readFileSync(file, "utf8"));
+    expect(parsed.content.replace(/\r\n/g, "\n").trim()).toBe(APPROVED_BODY.trim());
   });
 
-  it("About page will render approved description body faithfully", () => {
-    expect(APPROVED_BODY).toContain("## Intelligence emerges through interaction.");
+  it("About page exists and embeds approved punchline plus Minsky §30.8", () => {
+    const about = readFileSync(path.join(root, "src/pages/about/index.astro"), "utf8");
+    const identity = readFileSync(path.join(root, "src/lib/identity.ts"), "utf8");
+    expect(about).toMatch(/approved-description|getEntry\(["']identity["']/);
+    expect(about).toMatch(/MINSKY_SOCIETY_OF_MIND/);
+    expect(about).toMatch(/MINSKY_SOCIETY_OF_MIND\.section/);
+    expect(identity).toMatch(/section:\s*"30\.8"/);
+    expect(identity).toMatch(/page:\s*308/);
+    expect(about).not.toMatch(/16\.1/);
+    expect(identity).not.toMatch(/16\.1/);
   });
 
-  it("will display exactly three primary research theme cards", () => {
-    expect(PRIMARY_THEME_IDS).toHaveLength(3);
+  it("homepage consumes identity constants rather than retired slogan", () => {
+    const homepage = readFileSync(path.join(root, "src/pages/index.astro"), "utf8");
+    expect(homepage).toMatch(/PUNCHLINE|HERO_INTRODUCTION/);
+    expect(homepage).not.toMatch(/Intelligence is<br/);
+    expect(homepage).toMatch(/application-pathways|ApplicationPathways/);
   });
 });

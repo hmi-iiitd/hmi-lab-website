@@ -46,4 +46,22 @@
     qInput.addEventListener("input", apply);
     qInput.addEventListener("search", apply);
   }
+
+  // Deep-link support: /publications/?tag=neurodevelopment&theme=...
+  const params = new URLSearchParams(window.location.search);
+  const map = [
+    ["q", "pub-q"],
+    ["year", "pub-year"],
+    ["kind", "pub-kind"],
+    ["theme", "pub-theme"],
+    ["tag", "pub-tag"],
+  ];
+  for (const [param, id] of map) {
+    const value = params.get(param);
+    const el = document.getElementById(id);
+    if (value && el && "value" in el) {
+      el.value = value;
+    }
+  }
+  apply();
 })();

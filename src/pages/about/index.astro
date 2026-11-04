@@ -1,0 +1,38 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  LAB_NAME,
+  MINSKY_SOCIETY_OF_MIND,
+  RESEARCH_IDENTITY,
+} from "../../lib/identity";
+
+const entry = await getEntry("identity", "approved-description");
+if (!entry) {
+  throw new Error("Missing canonical identity document: approved-description");
+}
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={`About · ${LAB_NAME}`}
+  description={`${LAB_NAME} at IIIT-Delhi studies ${RESEARCH_IDENTITY}: intelligence that emerges through interaction.`}
+>
+  <article class="section wrap about-page">
+    <p class="section-label">About</p>
+    <div class="about-prose">
+      <Content />
+    </div>
+
+    <figure class="about-quote">
+      <blockquote>
+        <p>{MINSKY_SOCIETY_OF_MIND.text}</p>
+      </blockquote>
+      <figcaption>
+        — {MINSKY_SOCIETY_OF_MIND.author},
+        <cite>{MINSKY_SOCIETY_OF_MIND.work}</cite>
+        ({MINSKY_SOCIETY_OF_MIND.year}), §{MINSKY_SOCIETY_OF_MIND.section}, p.&nbsp;{MINSKY_SOCIETY_OF_MIND.page}.
+      </figcaption>
+    </figure>
+  </article>
+</BaseLayout>
