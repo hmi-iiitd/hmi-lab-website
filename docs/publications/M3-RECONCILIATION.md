@@ -30,10 +30,12 @@ Patents: [`M3-PATENTS.md`](./M3-PATENTS.md)
 |---|---:|---|
 | **Distinct public papers on site** | **32** | **31** `status: published` + **1** `status: accepted` (ESL) |
 | Incomplete ISS candidates (on disk, not public) | **2** | No DOI yet |
-| Unique research works after removing duplicate-key pairs | **59** | From **63** non-patent research keys minus **4** pairs (see below) |
+| Deduplicated **candidate** research works in the intake | **59** | Bibliography candidates only — **not** 59 verified published papers |
 | Patents / applications | **5** | Not refereed publications |
 
-**Why not “~57”:** Earlier prose estimated ~57 unique research works. The exact arithmetic is:
+**Of those 59 candidates, only 32 are currently public verified/accepted site records.** The rest remain incomplete, unresolved, or excluded drafts.
+
+**Why not “~57”:** Earlier prose estimated ~57. Exact arithmetic for intake candidates:
 
 - 68 raw keys − 5 patents = **63** research-oriented keys  
 - Minus **4** duplicate-key pairs that refer to the same work:
@@ -41,9 +43,9 @@ Patents: [`M3-PATENTS.md`](./M3-PATENTS.md)
   2. `yadav2023engageme` ↔ `Saumya` (same EngageMe 2023 paper; both unresolved)
   3. `ashwini2021responsiveness` ↔ `Ashwini` (same RO-MAN paper; unresolved + excluded draft)
   4. `rana2021effect` ↔ `Rahul` (same polite-triggers paper; unresolved + excluded draft)  
-- → **63 − 4 = 59** unique research works represented in the intake.
+- → **63 − 4 = 59** candidate works represented in the author bibliography (not a verified-published count).
 
-Cross-check public set: 32 public + 2 incomplete + (22 unresolved keys − 1 EngageMe dup) + (6 excluded − 2 draft dups of unresolved) = 32 + 2 + 21 + 4 = **59**.
+Cross-check: 32 public + 2 incomplete + (22 unresolved keys − 1 EngageMe dup) + (6 excluded − 2 draft dups of unresolved) = 32 + 2 + 21 + 4 = **59 candidates**.
 
 ## Distinct public papers (32)
 

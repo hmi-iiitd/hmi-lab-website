@@ -11,7 +11,7 @@ Identity prep on this PR (ADR-003): canonical approved description + three-theme
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Publication inventory + reconciliation | `docs/publications/M3-RECONCILIATION.md` — **68** keys; **32** public papers (31 published + 1 accepted); **2** incomplete; **6** excluded; **5** patents; **22** unresolved; **59** unique research works after 4 dup pairs |
+| 1 | Publication inventory + reconciliation | `docs/publications/M3-RECONCILIATION.md` — **68** keys; **32** public papers (31 published + 1 accepted); **2** incomplete; **6** excluded; **5** patents; **22** unresolved; **59** bibliography **candidates** after dedup (not 59 verified papers) |
 | 2 | Provenance / verification decisions | Per-record YAML + reconciliation; raw bib private |
 | 3 | Publications archive + paper pages | Labeled as verified records currently available |
 | 4 | Homepage featured verified research | CHI 2024 (HM evidenced), ExpressEar, MobiTangibles |
