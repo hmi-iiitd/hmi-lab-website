@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { PRIMARY_THEME_IDS, PUNCHLINE } from "../../src/lib/identity";
 
 test.describe("M4.2 research story remains unpublished", () => {
   test("Research index has no links to draft projects", async ({ page }) => {
@@ -17,5 +18,15 @@ test.describe("M4.2 research story remains unpublished", () => {
   test("unpublished project has no generated page in staging", async ({ request }) => {
     const response = await request.get("./projects/esl-research-story/");
     expect(response.status()).toBe(404);
+  });
+
+  test("M4.1 theme routes and frozen homepage punchline remain intact", async ({ page }) => {
+    await page.goto("./");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
+    for (const id of PRIMARY_THEME_IDS) {
+      await page.goto(`./research/${id}/`);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expect(page.locator("#theme-publications")).toBeVisible();
+    }
   });
 });

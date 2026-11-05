@@ -85,4 +85,46 @@ describe("M4.2 HMI Research Story gates", () => {
     expect(helper).toMatch(/isPublicPublication/);
     expect(story).toMatch(/ResearchStory/);
   });
+
+  it("rejects placeholder claims on a published research story", () => {
+    expect(
+      projectSchema.safeParse({
+        ...publishable,
+        findings: ["TODO_FINDING: invent a result"],
+      }).success,
+    ).toBe(false);
+    expect(
+      projectSchema.safeParse({
+        ...publishable,
+        methodology: "Lorem ipsum dolor sit amet.",
+      }).success,
+    ).toBe(false);
+  });
+
+  it("implements Appendix A section landmarks in the Research Story template", () => {
+    const template = readFileSync(path.join(root, "src/components/ResearchStory.astro"), "utf8");
+    for (const marker of [
+      "Scientific question",
+      "Contribution",
+      "Method",
+      "Principal findings",
+      "Limitations and scope",
+      "Programme interpretation · Not a separate empirical finding",
+      "What this contributes to Interactive Intelligence",
+      "Research resources and citation",
+      'paper.status === "accepted"',
+      "publicationResourceLinks",
+      "toBibtex",
+      "controls",
+      'preload="none"',
+    ]) {
+      expect(template).toContain(marker);
+    }
+  });
+
+  it("blocks unreferenced public/research media via the content validator", () => {
+    const validator = readFileSync(path.join(root, "scripts/validate-content.ts"), "utf8");
+    expect(validator).toMatch(/Unreferenced research media/);
+    expect(validator).toMatch(/allowedResearchMedia/);
+  });
 });

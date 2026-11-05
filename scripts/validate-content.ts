@@ -73,10 +73,12 @@ const issues = validateContentBundle(bundle);
 
 // Evidence media must be approved and present locally before a public story ships.
 // This also prevents broken figures and transcripts from appearing on GitHub Pages.
+const allowedResearchMedia = new Set<string>();
 for (const project of bundle.projects) {
   if (!project.published || !project.artifact) continue;
   for (const rel of [project.artifact.path, project.artifact.transcript_path]) {
     if (!rel) continue;
+    allowedResearchMedia.add(rel);
     if (!fs.existsSync(path.resolve("public", rel))) {
       issues.push({
         collection: "projects",
@@ -85,6 +87,29 @@ for (const project of bundle.projects) {
       });
     }
   }
+}
+
+// Unapproved research media must not sit in public/research even as “draft assets”.
+const researchMediaRoot = path.resolve("public/research");
+if (fs.existsSync(researchMediaRoot)) {
+  const walkResearch = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walkResearch(full);
+        continue;
+      }
+      const rel = path.relative(path.resolve("public"), full).split(path.sep).join("/");
+      if (!allowedResearchMedia.has(rel)) {
+        issues.push({
+          collection: "projects",
+          id: "public/research",
+          message: `Unreferenced research media in public/ (commit only owner-approved, published artifacts): ${rel}`,
+        });
+      }
+    }
+  };
+  walkResearch(researchMediaRoot);
 }
 if (issues.length) {
   console.error("Content validation failed:");
