@@ -2,7 +2,7 @@
 
 **PR:** #10 (`feat/m42-research-story-template`)  
 **Prior audited head:** `8ba1d8d` (CONDITIONAL PASS — rendered-template gap)  
-**Fixture-closure head:** _(filled after push; see §8)_  
+**Fixture-closure head:** `cd9d12da4789fd3369e5b6be0c1392aee7567f84`  
 **Recommendation:** **PASS** for merging the **template + draft-only + isolated fixture tests** M4.2 PR after faculty acknowledgment of residual human gates in §3. **Do not** publish flagships or start M4.3/M4.4 from this PR alone. **Stop before merging until faculty sign-off.**
 
 ## 1. File-level change summary
@@ -103,13 +103,14 @@ After `npm run build:staging` + `npm run validate:content`:
 2. Scientific claim truthfulness remains owner-reviewed.  
 3. Fixture content lives in the repo as marked `test_fixture` source; it must never be promoted without removing `test_fixture` and completing human gates.
 
-## 8. CI evidence (fill after push)
+## 8. CI evidence
 
 | Item | Value |
 |---|---|
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/10 |
-| Head SHA | `_pending_push_` |
-| CI run | `_pending_ci_` |
+| Head SHA (fixture closure) | `cd9d12da4789fd3369e5b6be0c1392aee7567f84` |
+| CI run (success) | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42211693654 |
+| Quality job | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42211693654/job/127871620095 |
 
 ## 9. Recommendation
 
