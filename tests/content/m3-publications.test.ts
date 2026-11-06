@@ -37,6 +37,7 @@ const baseVerified: PublicationDraft = {
   evidence_note: "Verified against Crossref DOI 10.1145/3478085 on 2026-11-03.",
   verified_at: "2026-11-03",
   unresolved_notes: [],
+  test_fixture: false,
 };
 
 describe("M3 publication integrity", () => {

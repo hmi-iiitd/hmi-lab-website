@@ -79,11 +79,41 @@ describe("M4.2 HMI Research Story gates", () => {
 
   it("keeps publication and About data outside the project draft", () => {
     const story = readFileSync(path.join(root, "src/pages/projects/[slug].astro"), "utf8");
-    expect(story).toMatch(/isPublicProject/);
+    expect(story).toMatch(/isRenderableProject/);
     const helper = readFileSync(path.join(root, "src/lib/projects.ts"), "utf8");
     expect(story).toMatch(/canonicalPublicationForStory/);
     expect(helper).toMatch(/isPublicPublication/);
+    expect(helper).toMatch(/isPublicProject/);
+    expect(helper).toMatch(/includeTestFixtures/);
     expect(story).toMatch(/ResearchStory/);
+  });
+
+  it("ships an isolated fictional fixture that stays out of public helpers", () => {
+    const storyText = readFileSync(
+      path.join(root, "src/content/projects/test-fixture-research-story.md"),
+      "utf8",
+    );
+    const pubText = readFileSync(
+      path.join(root, "src/content/publications/test-fixture-synthetic-interaction.md"),
+      "utf8",
+    );
+    const story = matter(storyText).data;
+    const pub = matter(pubText).data;
+    expect(story.published).toBe(true);
+    expect(story.test_fixture).toBe(true);
+    expect(story.artifact).toBeUndefined();
+    expect(story.findings).toHaveLength(2);
+    expect(pub.published).toBe(true);
+    expect(pub.test_fixture).toBe(true);
+    expect(pub.status).toBe("accepted");
+    expect(projectSchema.safeParse(story).success).toBe(true);
+    expect(String(story.scientific_owner)).toMatch(/not consent/i);
+
+    const pubsHelper = readFileSync(path.join(root, "src/lib/publications.ts"), "utf8");
+    expect(pubsHelper).toMatch(/isRenderablePublication/);
+    expect(pubsHelper).toMatch(/!entry\.data\.test_fixture/);
+    const researchIndex = readFileSync(path.join(root, "src/pages/research/index.astro"), "utf8");
+    expect(researchIndex).toMatch(/isPublicProject/);
   });
 
   it("rejects placeholder claims on a published research story", () => {

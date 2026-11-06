@@ -37,7 +37,14 @@ function assertDistExcludesDrafts(): void {
     return;
   }
 
-  const banned = ["DRAFT_ONLY_DO_NOT_PUBLISH", "draft-seed-incomplete-authors"];
+  // Staging/production dist only — never scan dist-e2e (fixture preview artifact).
+  const banned = [
+    "DRAFT_ONLY_DO_NOT_PUBLISH",
+    "draft-seed-incomplete-authors",
+    "TEST_ONLY_FICTIONAL",
+    "test-fixture-research-story",
+    "test-fixture-synthetic-interaction",
+  ];
   const hits: string[] = [];
 
   const walk = (dir: string) => {
@@ -55,7 +62,7 @@ function assertDistExcludesDrafts(): void {
 
   for (const dist of distRoots) walk(dist);
   if (hits.length) {
-    console.error("Draft markers found in dist:\n" + hits.join("\n"));
+    console.error("Draft/test-fixture markers found in staging dist:\n" + hits.join("\n"));
     process.exit(1);
   }
 }
@@ -76,6 +83,15 @@ const issues = validateContentBundle(bundle);
 const allowedResearchMedia = new Set<string>();
 for (const project of bundle.projects) {
   if (!project.published || !project.artifact) continue;
+  // Test fixtures must remain text-only in the repo; they cannot authorize public/research media.
+  if (project.test_fixture) {
+    issues.push({
+      collection: "projects",
+      id: project.id,
+      message: "test_fixture research stories must not include artifacts (keep fixtures text-only)",
+    });
+    continue;
+  }
   for (const rel of [project.artifact.path, project.artifact.transcript_path]) {
     if (!rel) continue;
     allowedResearchMedia.add(rel);

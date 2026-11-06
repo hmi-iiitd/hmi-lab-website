@@ -12,10 +12,11 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   webServer: {
-    command: "npm run preview -- --host 127.0.0.1 --port 4321",
+    // Isolated fixture build (dist-e2e) so official staging dist/ never contains test stories.
+    command: "npm run build:staging:e2e && npm run preview:e2e",
     url: baseURL,
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 180_000,
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
 });

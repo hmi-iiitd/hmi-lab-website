@@ -2,10 +2,10 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ResearchStory from "../../components/ResearchStory.astro";
-import { canonicalPublicationForStory, isPublicProject } from "../../lib/projects";
+import { canonicalPublicationForStory, isRenderableProject } from "../../lib/projects";
 
 export async function getStaticPaths() {
-  const projects = (await getCollection("projects")).filter(isPublicProject);
+  const projects = (await getCollection("projects")).filter(isRenderableProject);
   const publications = await getCollection("publications");
 
   return projects.map((project: CollectionEntry<"projects">) => {

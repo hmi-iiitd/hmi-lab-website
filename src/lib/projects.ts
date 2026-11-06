@@ -1,21 +1,34 @@
 import type { CollectionEntry } from "astro:content";
-import { isPublicPublication, type PubEntry } from "./publications";
+import { isPublicPublication, isRenderablePublication, type PubEntry } from "./publications";
+import { includeTestFixtures } from "./test-fixtures";
 
 export type ProjectEntry = CollectionEntry<"projects">;
 
-/** A draft project is never a public route or a visible project card. */
+/** A draft or engineering fixture is never a public route or visible project card. */
 export function isPublicProject(entry: ProjectEntry): boolean {
-  return entry.data.published;
+  return entry.data.published && !entry.data.test_fixture;
 }
 
-/** A public project inherits its bibliographic identity from one verified paper. */
+/** Static paths may include fixtures only when INCLUDE_TEST_FIXTURES=1. */
+export function isRenderableProject(entry: ProjectEntry): boolean {
+  if (!entry.data.published) return false;
+  if (entry.data.test_fixture) return includeTestFixtures();
+  return true;
+}
+
+/** A public/fixture project inherits its bibliographic identity from one verified paper. */
 export function canonicalPublicationForStory(
   project: ProjectEntry,
   publications: PubEntry[],
 ): PubEntry | undefined {
   const ids = project.data.publication_ids;
-  if (!isPublicProject(project) || ids.length !== 1) return undefined;
-  return publications.find(
-    (entry) => entry.data.id === ids[0] && isPublicPublication(entry),
-  );
+  if (!project.data.published || ids.length !== 1) return undefined;
+  const publication = publications.find((entry) => entry.data.id === ids[0]);
+  if (!publication) return undefined;
+  if (project.data.test_fixture) {
+    return publication.data.test_fixture && isRenderablePublication(publication)
+      ? publication
+      : undefined;
+  }
+  return isPublicPublication(publication) ? publication : undefined;
 }

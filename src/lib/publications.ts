@@ -1,14 +1,27 @@
 import type { CollectionEntry } from "astro:content";
+import { includeTestFixtures } from "./test-fixtures";
 
 export type PubEntry = CollectionEntry<"publications">;
 
-export function isPublicPublication(entry: PubEntry): boolean {
+function isVerifiedPublicRecord(entry: PubEntry): boolean {
   return (
     entry.data.published &&
     entry.data.metadata_verified &&
     entry.data.verification_status === "verified" &&
     (entry.data.status === "published" || entry.data.status === "accepted")
   );
+}
+
+/** Public site listings and production/staging builds — excludes engineering fixtures. */
+export function isPublicPublication(entry: PubEntry): boolean {
+  return isVerifiedPublicRecord(entry) && !entry.data.test_fixture;
+}
+
+/** Static paths may include fixtures only when INCLUDE_TEST_FIXTURES=1. */
+export function isRenderablePublication(entry: PubEntry): boolean {
+  if (!isVerifiedPublicRecord(entry)) return false;
+  if (entry.data.test_fixture) return includeTestFixtures();
+  return true;
 }
 
 export function sortPubsNewestFirst(a: PubEntry, b: PubEntry): number {

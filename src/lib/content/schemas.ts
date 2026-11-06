@@ -52,6 +52,8 @@ export const publicationDraftSchema = z.object({
   evidence_note: z.string().optional(),
   verified_at: z.string().optional().nullable(),
   unresolved_notes: z.array(z.string()).default([]),
+  /** Isolated engineering fixture — never public on staging/production builds. */
+  test_fixture: z.boolean().default(false),
 });
 
 /** Publishability: stricter than draft. Incomplete records must fail. */
@@ -202,6 +204,8 @@ export const projectSchema = z
     scientific_owner: z.string().trim().min(1).optional(),
     scientific_owner_approved_at: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     artifact: researchArtifactSchema.optional(),
+    /** Isolated engineering fixture — never public on staging/production builds. */
+    test_fixture: z.boolean().default(false),
   })
   .superRefine((project, ctx) => {
     if (!project.published) return;

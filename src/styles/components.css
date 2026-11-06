@@ -544,12 +544,16 @@
 }
 
 .bibtex {
+  max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   background: #eef3ef;
   border: 1px solid var(--color-line);
   padding: 1rem;
   font-size: var(--text-meta);
   line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .paper-page h1,
@@ -558,6 +562,7 @@
   letter-spacing: -0.035em;
   max-width: 22ch;
   text-align: start;
+  overflow-wrap: anywhere;
 }
 
 .paper-page .paper-authors,
