@@ -37,7 +37,14 @@ function assertDistExcludesDrafts(): void {
     return;
   }
 
-  const banned = ["DRAFT_ONLY_DO_NOT_PUBLISH", "draft-seed-incomplete-authors"];
+  // Staging/production dist only — never scan dist-e2e (fixture preview artifact).
+  const banned = [
+    "DRAFT_ONLY_DO_NOT_PUBLISH",
+    "draft-seed-incomplete-authors",
+    "TEST_ONLY_FICTIONAL",
+    "test-fixture-research-story",
+    "test-fixture-synthetic-interaction",
+  ];
   const hits: string[] = [];
 
   const walk = (dir: string) => {
@@ -55,7 +62,7 @@ function assertDistExcludesDrafts(): void {
 
   for (const dist of distRoots) walk(dist);
   if (hits.length) {
-    console.error("Draft markers found in dist:\n" + hits.join("\n"));
+    console.error("Draft/test-fixture markers found in staging dist:\n" + hits.join("\n"));
     process.exit(1);
   }
 }
@@ -70,6 +77,56 @@ const bundle: ContentBundle = {
 };
 
 const issues = validateContentBundle(bundle);
+
+// Evidence media must be approved and present locally before a public story ships.
+// This also prevents broken figures and transcripts from appearing on GitHub Pages.
+const allowedResearchMedia = new Set<string>();
+for (const project of bundle.projects) {
+  if (!project.published || !project.artifact) continue;
+  // Test fixtures must remain text-only in the repo; they cannot authorize public/research media.
+  if (project.test_fixture) {
+    issues.push({
+      collection: "projects",
+      id: project.id,
+      message: "test_fixture research stories must not include artifacts (keep fixtures text-only)",
+    });
+    continue;
+  }
+  for (const rel of [project.artifact.path, project.artifact.transcript_path]) {
+    if (!rel) continue;
+    allowedResearchMedia.add(rel);
+    if (!fs.existsSync(path.resolve("public", rel))) {
+      issues.push({
+        collection: "projects",
+        id: project.id,
+        message: `Approved media file missing from public/: ${rel}`,
+      });
+    }
+  }
+}
+
+// Unapproved research media must not sit in public/research even as “draft assets”.
+const researchMediaRoot = path.resolve("public/research");
+if (fs.existsSync(researchMediaRoot)) {
+  const walkResearch = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walkResearch(full);
+        continue;
+      }
+      const rel = path.relative(path.resolve("public"), full).split(path.sep).join("/");
+      if (!allowedResearchMedia.has(rel)) {
+        issues.push({
+          collection: "projects",
+          id: "public/research",
+          message: `Unreferenced research media in public/ (commit only owner-approved, published artifacts): ${rel}`,
+        });
+      }
+    }
+  };
+  walkResearch(researchMediaRoot);
+}
 if (issues.length) {
   console.error("Content validation failed:");
   for (const issue of issues) {

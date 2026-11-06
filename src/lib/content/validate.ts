@@ -246,6 +246,38 @@ export function validateContentBundle(bundle: ContentBundle): ValidationIssue[] 
     }
   }
 
+  const verifiedPubs = bundle.publications.filter(
+    (p) =>
+      p.published &&
+      p.metadata_verified &&
+      p.verification_status === "verified" &&
+      (p.status === "published" || p.status === "accepted"),
+  );
+  const publicPubIds = new Set(verifiedPubs.filter((p) => !p.test_fixture).map((p) => p.id));
+  const fixturePubIds = new Set(verifiedPubs.filter((p) => p.test_fixture).map((p) => p.id));
+  for (const project of bundle.projects) {
+    if (!project.published) continue;
+    for (const pubId of project.publication_ids) {
+      if (project.test_fixture) {
+        if (!fixturePubIds.has(pubId)) {
+          issues.push({
+            collection: "projects",
+            id: project.id,
+            message: `Test-fixture story must link a test_fixture publication: ${pubId}`,
+          });
+        }
+        continue;
+      }
+      if (!publicPubIds.has(pubId)) {
+        issues.push({
+          collection: "projects",
+          id: project.id,
+          message: `Published story requires a verified public publication: ${pubId}`,
+        });
+      }
+    }
+  }
+
   for (const project of bundle.projects) {
     for (const area of project.research_areas) {
       if (!themeIds.has(area)) {

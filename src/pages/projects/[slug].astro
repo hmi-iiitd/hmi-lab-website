@@ -1,0 +1,36 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ResearchStory from "../../components/ResearchStory.astro";
+import { canonicalPublicationForStory, isRenderableProject } from "../../lib/projects";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).filter(isRenderableProject);
+  const publications = await getCollection("publications");
+
+  return projects.map((project: CollectionEntry<"projects">) => {
+    const publication = canonicalPublicationForStory(project, publications);
+    if (!publication) {
+      throw new Error(`Published project ${project.data.id} lacks one verified public publication`);
+    }
+    return {
+      params: { slug: project.data.slug },
+      props: { project, publication },
+    };
+  });
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  publication: CollectionEntry<"publications">;
+}
+
+const { project, publication } = Astro.props as Props;
+---
+
+<BaseLayout
+  title={`${project.data.title} · HMI Research Story`}
+  description={project.data.summary}
+>
+  <ResearchStory project={project} publication={publication} />
+</BaseLayout>

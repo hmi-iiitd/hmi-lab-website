@@ -52,6 +52,8 @@ export const publicationDraftSchema = z.object({
   evidence_note: z.string().optional(),
   verified_at: z.string().optional().nullable(),
   unresolved_notes: z.array(z.string()).default([]),
+  /** Isolated engineering fixture — never public on staging/production builds. */
+  test_fixture: z.boolean().default(false),
 });
 
 /** Publishability: stricter than draft. Incomplete records must fail. */
@@ -147,16 +149,112 @@ export const identityDocumentSchema = z.object({
   published: z.boolean().default(false),
 });
 
-export const projectSchema = z.object({
-  id: z.string().min(1),
-  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  title: z.string().min(1),
-  summary: z.string().min(1),
-  published: z.boolean().default(false),
-  research_areas: z.array(z.string().min(1)).default([]),
-  publication_ids: z.array(z.string().min(1)).default([]),
-  featured: z.boolean().default(false),
-});
+/**
+ * Only owner-cleared, repository-local media may appear on a research story.
+ * Unapproved material must not be committed even on draft branches.
+ */
+export const researchArtifactSchema = z
+  .object({
+    path: z.string().regex(/^research\/[a-z0-9][a-z0-9/_-]*\.(png|jpg|jpeg|webp|mp4|webm)$/),
+    type: z.enum(["image", "video"]),
+    kind: z.enum(["empirical", "illustrative"]),
+    permission: z.literal("approved"),
+    owner: z.string().trim().min(1),
+    source: z.string().trim().min(1),
+    caption: z.string().trim().min(1),
+    alt: z.string().trim().min(1),
+    transcript_path: z.string().regex(/^research\/[a-z0-9][a-z0-9/_-]*\.txt$/).optional(),
+  })
+  .strict()
+  .superRefine((artifact, ctx) => {
+    const isVideoFile = /\.(mp4|webm)$/.test(artifact.path);
+    if ((artifact.type === "video") !== isVideoFile) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["path"],
+        message: "Artifact type must match file format",
+      });
+    }
+    if (artifact.type === "video" && !artifact.transcript_path) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["transcript_path"],
+        message: "Approved research videos require a transcript",
+      });
+    }
+  });
+
+/** Draft-first schema: publication is forbidden until scientific owner sign-off. */
+export const projectSchema = z
+  .object({
+    id: z.string().min(1),
+    slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    title: z.string().min(1),
+    summary: z.string().min(1),
+    published: z.boolean().default(false),
+    research_areas: z.array(z.string().min(1)).default([]),
+    publication_ids: z.array(z.string().min(1)).default([]),
+    featured: z.boolean().default(false),
+    problem: z.string().trim().min(1).optional(),
+    contribution: z.string().trim().min(1).optional(),
+    methodology: z.string().trim().min(1).optional(),
+    findings: z.array(z.string().trim().min(1)).max(2).default([]),
+    limitations: z.string().trim().min(1).optional(),
+    programme_interpretation: z.string().trim().min(1).optional(),
+    scientific_owner: z.string().trim().min(1).optional(),
+    scientific_owner_approved_at: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    artifact: researchArtifactSchema.optional(),
+    /** Isolated engineering fixture — never public on staging/production builds. */
+    test_fixture: z.boolean().default(false),
+  })
+  .superRefine((project, ctx) => {
+    if (!project.published) return;
+    if (project.publication_ids.length !== 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["publication_ids"],
+        message: "A published research story must link exactly one canonical publication",
+      });
+    }
+    for (const field of [
+      "problem",
+      "contribution",
+      "methodology",
+      "limitations",
+      "programme_interpretation",
+      "scientific_owner",
+      "scientific_owner_approved_at",
+    ] as const) {
+      if (!project[field]) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [field],
+          message: "Required for an owner-approved public research story",
+        });
+      }
+    }
+    if (project.findings.length < 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["findings"],
+        message: "At least one source-supported finding is required",
+      });
+    }
+    const claims = [
+      project.problem,
+      project.contribution,
+      project.methodology,
+      ...project.findings,
+      project.limitations,
+      project.programme_interpretation,
+    ];
+    if (claims.some((claim) => /TODO_|lorem ipsum|\bTBD\b/i.test(claim ?? ""))) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Placeholder claims must not be published",
+      });
+    }
+  });
 
 export const newsSchema = z.object({
   id: z.string().min(1),

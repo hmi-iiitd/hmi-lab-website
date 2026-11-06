@@ -1,12 +1,12 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { isPublicPublication } from "../../lib/publications";
+import { isRenderablePublication } from "../../lib/publications";
 import { toBibtex } from "../../lib/bibtex";
 
 export async function getStaticPaths() {
   const pubs = await getCollection("publications");
-  return pubs.filter(isPublicPublication).map((entry: CollectionEntry<"publications">) => ({
+  return pubs.filter(isRenderablePublication).map((entry: CollectionEntry<"publications">) => ({
     params: { slug: entry.data.slug },
     props: { entry },
   }));
