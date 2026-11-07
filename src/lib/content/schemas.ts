@@ -12,7 +12,7 @@ export const sourceRefSchema = z.object({
   note: z.string().optional(),
 });
 
-export const publicationDraftSchema = z.object({
+const publicationBaseSchema = z.object({
   id: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   title: z.string().min(1),
@@ -54,10 +54,66 @@ export const publicationDraftSchema = z.object({
   unresolved_notes: z.array(z.string()).default([]),
   /** Isolated engineering fixture — never public on staging/production builds. */
   test_fixture: z.boolean().default(false),
+  /** Optional plain-language summary — public only when owner_approved + evidence. */
+  plain_language_tldr: z.string().optional(),
+  tldr_status: z
+    .enum(["missing", "editorial_draft", "ai_assisted_draft", "owner_approved"])
+    .default("missing"),
+  tldr_drafted_by: z.string().optional(),
+  tldr_reviewed_by: z.string().optional(),
+  tldr_approved_at: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  tldr_source_note: z.string().optional(),
+  /** Traceable review pointer (PR discussion URL, ticket id). Not proof of consent alone. */
+  tldr_review_evidence: z.string().optional(),
 });
 
+function refineOwnerApprovedTldr(
+  value: z.infer<typeof publicationBaseSchema>,
+  ctx: z.RefinementCtx,
+): void {
+  if (value.tldr_status !== "owner_approved") return;
+  const text = value.plain_language_tldr?.trim() ?? "";
+  if (!text) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["plain_language_tldr"],
+      message: "owner_approved TL;DR requires a nonempty plain_language_tldr",
+    });
+  }
+  if (!value.tldr_reviewed_by?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["tldr_reviewed_by"],
+      message: "owner_approved TL;DR requires tldr_reviewed_by",
+    });
+  }
+  if (!value.tldr_approved_at) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["tldr_approved_at"],
+      message: "owner_approved TL;DR requires tldr_approved_at (YYYY-MM-DD)",
+    });
+  }
+  if (!value.tldr_source_note?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["tldr_source_note"],
+      message: "owner_approved TL;DR requires tldr_source_note",
+    });
+  }
+  if (!value.tldr_review_evidence?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["tldr_review_evidence"],
+      message: "owner_approved TL;DR requires tldr_review_evidence",
+    });
+  }
+}
+
+export const publicationDraftSchema = publicationBaseSchema.superRefine(refineOwnerApprovedTldr);
+
 /** Publishability: stricter than draft. Incomplete records must fail. */
-export const publicationPublishableSchema = publicationDraftSchema
+export const publicationPublishableSchema = publicationBaseSchema
   .extend({
     published: z.literal(true),
     verification_status: z.literal("verified"),
@@ -70,6 +126,7 @@ export const publicationPublishableSchema = publicationDraftSchema
     sources: z.array(sourceRefSchema).min(1),
   })
   .superRefine((value, ctx) => {
+    refineOwnerApprovedTldr(value, ctx);
     if (value.authors.some((a) => !a.name.trim())) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

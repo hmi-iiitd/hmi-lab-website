@@ -4,28 +4,29 @@ import { PUNCHLINE } from "../../src/lib/identity";
 const FIXTURE_MARKER = "TEST_ONLY_FICTIONAL summary:";
 const FIXTURE_PAPER = "./papers/test-fixture-synthetic-interaction/";
 
-test.describe("I1/T-A public surfaces stay TL;DR-equivalent without approved summaries", () => {
-  test("homepage Selected Research has no TL;DR chrome for current featured set", async ({
+test.describe("I1/T-A real publications stay without TL;DR chrome", () => {
+  test("homepage punchline and real featured cards have no approved TL;DR text", async ({
     page,
   }) => {
     await page.goto("./");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
     await expect(page.locator("#selected-research")).toBeVisible();
+    // Real featured papers have no owner_approved TL;DR; heading only appears on paper pages.
     await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
-    await expect(page.getByText(FIXTURE_MARKER)).toHaveCount(0);
+    await expect(page.getByText(/ExpressEar/i).first()).toHaveCount(0);
   });
 
-  test("publications archive has no empty TL;DR blocks and remains readable without JS", async ({
+  test("publications archive remains readable without JS and omits TL;DR on real rows", async ({
     browser,
   }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto("./publications/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Verified research archive");
-    await expect(page.locator(".pub").first()).toBeVisible();
+    const express = page.locator("article.pub", { hasText: /ExpressEar/i });
+    await expect(express).toBeVisible();
+    await expect(express.locator(".plain-language-tldr")).toHaveCount(0);
     await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
-    await expect(page.getByText(FIXTURE_MARKER)).toHaveCount(0);
-    await expect(page.locator('a[href*="test-fixture-synthetic-interaction"]')).toHaveCount(0);
     await context.close();
   });
 
@@ -33,6 +34,7 @@ test.describe("I1/T-A public surfaces stay TL;DR-equivalent without approved sum
     await page.goto("./papers/express-ear/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("ExpressEar");
     await expect(page.getByRole("heading", { name: "TL;DR — In plain language" })).toHaveCount(0);
+    await expect(page.getByText(FIXTURE_MARKER)).toHaveCount(0);
   });
 });
 

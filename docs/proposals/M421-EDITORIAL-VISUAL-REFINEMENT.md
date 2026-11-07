@@ -363,7 +363,7 @@ PI instruction: “approve §12 and merge PR #11.” Closed as follows:
 - [x] PI explicitly defers D5 (additional external epigraphs)  
 - [x] PI explicitly keeps D9 gated pending separate CHI Honorable Mention confirmation  
 - [x] PI explicitly authorizes merging **documentation PR #11 only** (after CI pass)  
-- [ ] PI separately authorizes **I1** implementation PR when ready (not implied by merging #11)  
+- [x] PI separately authorizes **I1** implementation PR when ready (authorized 2026-11-07; implementation PR opened — **not merged**)  
 
 ### 12.3 Planning-PR merge record
 
@@ -377,7 +377,6 @@ PI instruction: “approve §12 and merge PR #11.” Closed as follows:
 
 ## Stop conditions (post-merge planning)
 
-- Merging PR #11 closes the **documentation** milestone only.  
-- **Do not implement** website changes, schema, featured ranks, or TL;DR body copy without separate PI authorization of workstream **I1**.  
-- No M4.3 / M4.4 / production changes from this approval.  
-- Next authorized engineering step (when PI requests): **I1 / T-A only**.
+- Merging PR #11 closed the **documentation** milestone only.  
+- **I1 / T-A** implementation is in a separate PR (see `docs/milestone-evidence/I1-TA-PLAIN-LANGUAGE-TLDR.md`) — **awaiting faculty review; do not treat as complete until merged by explicit PI instruction.**  
+- **Do not** start I2–I4, T-B/T-C/T-D, M4.3/M4.4, or production from I1 alone.

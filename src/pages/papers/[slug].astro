@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { isRenderablePublication } from "../../lib/publications";
+import { getApprovedPlainLanguageTldr } from "../../lib/plain-language-tldr";
 import { toBibtex } from "../../lib/bibtex";
 
 export async function getStaticPaths() {
@@ -19,6 +20,7 @@ interface Props {
 const { entry } = Astro.props as Props;
 const { Content } = await render(entry);
 const bibtex = toBibtex(entry.data);
+const plainLanguageTldr = getApprovedPlainLanguageTldr(entry.data);
 ---
 
 <BaseLayout title={`${entry.data.title} · HMI Lab`}>
@@ -54,6 +56,17 @@ const bibtex = toBibtex(entry.data);
         <p style="margin-top: 1rem;">
           <strong>Distinction:</strong> {entry.data.award}
         </p>
+      )
+    }
+
+    {
+      plainLanguageTldr && (
+        <section style="margin-top: 2rem;" aria-labelledby="plain-language-tldr-title">
+          <h2 class="section-title" id="plain-language-tldr-title" style="font-size: 1.5rem;">
+            TL;DR — In plain language
+          </h2>
+          <p class="plain-language-tldr">{plainLanguageTldr}</p>
+        </section>
       )
     }
 

@@ -24,7 +24,7 @@ describe("M3.5 editorial corrections", () => {
       .map((f) => matter(readFileSync(path.join(dir, f), "utf8")).data);
 
     const featured = pubs
-      .filter((p) => p.featured)
+      .filter((p) => p.featured && !p.test_fixture)
       .sort((a, b) => (a.featured_rank ?? 99) - (b.featured_rank ?? 99));
 
     expect(featured.map((p) => p.slug)).toEqual([

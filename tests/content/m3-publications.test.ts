@@ -38,6 +38,7 @@ const baseVerified: PublicationDraft = {
   verified_at: "2026-11-03",
   unresolved_notes: [],
   test_fixture: false,
+  tldr_status: "missing",
 };
 
 describe("M3 publication integrity", () => {

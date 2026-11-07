@@ -3,13 +3,14 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { withBase } from "../../lib/url";
 import {
-  isPublicPublication,
+  isListablePublication,
   sortPubsNewestFirst,
   type PubEntry,
 } from "../../lib/publications";
+import { getApprovedPlainLanguageTldr } from "../../lib/plain-language-tldr";
 
 const all: PubEntry[] = await getCollection("publications");
-const pubs: PubEntry[] = all.filter(isPublicPublication).sort(sortPubsNewestFirst);
+const pubs: PubEntry[] = all.filter(isListablePublication).sort(sortPubsNewestFirst);
 const themes: CollectionEntry<"research-areas">[] = (await getCollection("research-areas")).filter(
   (t: CollectionEntry<"research-areas">) => t.data.published,
 );
@@ -86,7 +87,9 @@ const applicationTags = Array.from(tagSet).sort();
 
     <div class="pub-list" id="pub-list">
       {
-        pubs.map((pub) => (
+        pubs.map((pub) => {
+          const tldr = getApprovedPlainLanguageTldr(pub.data);
+          return (
           <article
             class="pub"
             data-title={pub.data.title.toLowerCase()}
@@ -112,6 +115,7 @@ const applicationTags = Array.from(tagSet).sort();
               </h2>
               <p class="authors">{pub.data.authors.map((a: { name: string }) => a.name).join(", ")}</p>
               <p class="venue">{pub.data.venue_short || pub.data.venue_full}</p>
+              {tldr && <p class="plain-language-tldr">{tldr}</p>}
               <p class="pub-links">
                 {pub.data.doi && <a href={`https://doi.org/${pub.data.doi}`}>DOI</a>}
                 {pub.data.paper_url &&
@@ -125,7 +129,8 @@ const applicationTags = Array.from(tagSet).sort();
               </p>
             </div>
           </article>
-        ))
+          );
+        })
       }
     </div>
   </section>
