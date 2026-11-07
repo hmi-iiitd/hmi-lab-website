@@ -30,11 +30,15 @@ test.describe("I1/T-A real publications stay without TL;DR chrome", () => {
     await context.close();
   });
 
-  test("real paper page has no TL;DR section when summary is missing", async ({ page }) => {
+  test("real paper page omits TL;DR chrome even when an ai_assisted_draft exists", async ({
+    page,
+  }) => {
     await page.goto("./papers/express-ear/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("ExpressEar");
     await expect(page.getByRole("heading", { name: "TL;DR — In plain language" })).toHaveCount(0);
     await expect(page.getByText(FIXTURE_MARKER)).toHaveCount(0);
+    // T-B draft body must stay off public HTML until owner_approved.
+    await expect(page.getByText("limiting free-living claims")).toHaveCount(0);
   });
 });
 

@@ -40,6 +40,17 @@ sources:
 evidence_note: "Verified against Crossref DOI 10.1109/tai.2024.3439288 on 2026-11-03."
 verified_at: '2026-11-03'
 unresolved_notes: []
+plain_language_tldr: >-
+  Can acoustic and linguistic cues from child conversations support more objective
+  autism identification across languages? Models trained on English and Hindi dyadic
+  speech report strong classification on the study cohorts, with language-specific
+  informative features. Findings are research results on limited samples, not a
+  clinical diagnostic product.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B scientific-review draft)
+tldr_source_note: >-
+  Grounded in IEEE TAI abstract (DOI 10.1109/tai.2024.3439288); draft only —
+  not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

@@ -60,6 +60,17 @@ verified_at: "2026-11-03"
 unresolved_notes:
   - "Source key ashwini_chi lists authors as Ashwini; Ghosal; Veni; Suri; Shukla — Crossref/ACM order and spellings used instead (Ghoshal; Suri; Krishnaveni Achary)."
   - "CHI 2024 Honorable Mention: evidence recorded from first-author site + HMI materials (+ SIGCHI program corroboration); faculty confirmation requested to close award gate."
+plain_language_tldr: >-
+  How do special educators in India perceive social robots for autism care?
+  Mixed-methods work with twenty-five educators finds perceived usefulness alongside
+  fears of replacement and resource constraints in the Global South. The study
+  informs context-aware design and policy needs rather than claiming clinical
+  outcome gains from robots.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B scientific-review draft)
+tldr_source_note: >-
+  Grounded in CHI 2024 abstract (DOI 10.1145/3613904.3642836); draft only —
+  not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

@@ -50,6 +50,17 @@ evidence_note: >-
 verified_at: "2026-11-03"
 unresolved_notes:
   - "Formal proceedings DOI / camera-ready publisher URL pending; public listing is acceptance-only."
+plain_language_tldr: >-
+  How can agents learn about others when their own actions shape observed data?
+  Epistemic Social Learning couples fast Bayesian beliefs with slower prototype
+  updates under endogenous interaction, cutting post-switch regret about 26% in
+  repeated games. Accurate latent identification alone need not yield adaptive
+  performance when dynamics change.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B scientific-review draft)
+tldr_source_note: >-
+  Grounded in NeurIPS 2026 poster abstract (neurips.cc/virtual/2026/poster/150541);
+  draft only — not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

@@ -45,6 +45,14 @@ function assertDistExcludesDrafts(): void {
     "TEST_ONLY_FICTIONAL summary:",
     "test-fixture-research-story",
     "test-fixture-synthetic-interaction",
+    // T-B ai_assisted_draft phrases — must stay off staging HTML until owner_approved.
+    "cutting post-switch regret about 26%",
+    "not a clinical diagnostic product",
+    "cannot be read as purely cognitive drug effects",
+    "claiming clinical outcome gains from robots",
+    "lower dominance than flat-screen play",
+    "do not claim universal or clinical emotion sensing",
+    "limiting free-living claims",
   ];
   const hits: string[] = [];
 
