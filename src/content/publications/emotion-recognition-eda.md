@@ -39,6 +39,16 @@ evidence_note: "Verified against Crossref DOI 10.1109/taffc.2019.2901673 on 2026
 verified_at: '2026-11-03'
 unresolved_notes:
   - "Display year uses Crossref issued year 2021; confirm preferred citation year with authors if needed."
+plain_language_tldr: >-
+  Can changes in skin electrical activity help computers recognize emotions?
+  Researchers compared 40 ways of analysing these signals. Some methods worked
+  better than others, especially when trained separately for each participant.
+  Recognizing emotions in people not used for training proved more difficult.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_source_note: >-
+  Lay draft after PR #13 scientific review; grounded in IEEE TAC abstract
+  (DOI 10.1109/taffc.2019.2901673). Not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

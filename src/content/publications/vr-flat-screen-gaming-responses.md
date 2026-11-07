@@ -40,6 +40,17 @@ sources:
 evidence_note: "Verified against Crossref DOI 10.1109/taffc.2024.3368703 on 2026-11-03."
 verified_at: '2026-11-03'
 unresolved_notes: []
+plain_language_tldr: >-
+  Researchers compared how 33 participants responded while playing selected games
+  in virtual reality and on flat screens. In this study, virtual reality produced
+  stronger emotions, greater mental effort, and more physiological stress-related
+  responses. The results may not generalize beyond the games and laboratory
+  conditions studied.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_source_note: >-
+  Lay draft after PR #13 scientific review; grounded in IEEE TAC / arXiv abstract
+  (DOI 10.1109/taffc.2024.3368703). Not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

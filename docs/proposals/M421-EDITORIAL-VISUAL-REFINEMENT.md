@@ -300,7 +300,7 @@ These share letter labels historically but are **different tracks**. Do not trea
 | Phase | Scope | Gate |
 |---|---|---|
 | **T-A** | Schema + helpers exist; all records default `missing` | Ships with I1 |
-| **T-B** | Draft + **content-approve** TL;DRs for the seven Selected papers | Per-summary evidence; no bulk silent publish |
+| **T-B** | Draft + **content-approve** TL;DRs for the seven Selected papers | Per-summary evidence; no bulk silent publish. **Drafting authorized 2026-11-07** (`ai_assisted_draft` only; public release still gated) |
 | **T-C** | Remaining 25 verified public papers | Batch scientific review |
 | **T-D** | After T-C: require `owner_approved` (+ evidence) for newly promoted/published records | Policy gate; still non-breaking for legacy `missing` until backfilled |
 

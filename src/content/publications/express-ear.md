@@ -39,6 +39,17 @@ sources:
 evidence_note: "Verified against Crossref DOI 10.1145/3478085 (title/subtitle) on 2026-11-03."
 verified_at: '2026-11-03'
 unresolved_notes: []
+plain_language_tldr: >-
+  Could a small motion sensor worn at the ear recognize facial movements without a
+  camera? In a study with 12 participants, ExpressEar distinguished many individual
+  facial movements under controlled conditions. Performance and the range of
+  recognizable movements were more limited during walking and train travel.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_source_note: >-
+  Lay draft after PR #13 scientific review; grounded in IMWUT abstract
+  (DOI 10.1145/3478085) and HMI project description. Not owner-approved for public
+  display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

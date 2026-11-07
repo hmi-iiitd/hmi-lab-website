@@ -60,6 +60,16 @@ verified_at: "2026-11-03"
 unresolved_notes:
   - "Source key ashwini_chi lists authors as Ashwini; Ghosal; Veni; Suri; Shukla — Crossref/ACM order and spellings used instead (Ghoshal; Suri; Krishnaveni Achary)."
   - "CHI 2024 Honorable Mention: evidence recorded from first-author site + HMI materials (+ SIGCHI program corroboration); faculty confirmation requested to close award gate."
+plain_language_tldr: >-
+  Interviews and workshops with 25 special educators in India explored the use of
+  social robots in autism care. Educators saw possible benefits but worried about
+  being replaced and about limited resources. The study reports professional
+  perspectives; it does not establish that robots improve clinical outcomes.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_source_note: >-
+  Lay draft after PR #13 scientific review; grounded in CHI 2024 abstract
+  (DOI 10.1145/3613904.3642836). Not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.
