@@ -1,31 +1,31 @@
 # M4.2.1 — Editorial and visual refinement (planning proposal)
 
-**Status:** **CONDITIONAL PASS** — planning package; §12 slate recommended for PI approval (see below). Documentation only.  
+**Status:** **APPROVED** — planning package. PI approved §12 on 2026-11-07 and authorized merge of documentation PR #11.  
 **Baseline:** `main` @ `7006a76ea05dbb083753b84cbba6f85ac840db1b`  
 **Staging reference:** https://hmi-iiitd.github.io/hmi-lab-website/  
 **Preserves:** Interactive Intelligence programme, three research themes, approved fonts/colours/logo, institutional branding, genuine Minsky §16.1 quotation, **all seven selected-paper content records and the canonical bibliography unchanged** (no silent substitution or deletion).
 
 **Out of scope for this PR:** site code, schema, featured ranks, publication markdown edits, media uploads, Research Story publication, M4.3/M4.4, production.
 
-**Merge / implementation:** Merging PR #11 requires **separate explicit PI authorization** after the §12 slate is approved. Approving §12 decisions is not automatic merge permission. Implementation workstreams still need their own PI authorization.
+**Implementation:** Merging this documentation PR does **not** authorize website implementation. Workstream **I1** (optional TL;DR schema + helpers + tests only) still requires a separate PI-authorized implementation PR.
 
 ---
 
 ## Recommendation (executive)
 
-| Topic | §12-recommended standing (see §12) |
+| Topic | PI-approved standing (§12, 2026-11-07) |
 |---|---|
-| Overall | **CONDITIONAL PASS** as planning package; merge docs PR only after explicit PI approval + green CI |
-| Homepage identity | **Interactive Intelligence** as H1; punchline as secondary deck (**Approve** D1–D2) |
-| Composition | **W1** — refined left-aligned editorial (**Approve** D3) |
-| Selected Research layout | **Option A** — one feature + six compact cards (**Approve** D7) |
-| Feature paper / seven set | Exact seven in §6; **ESL** feature; elevated ASD + ADHD (**Approve** D6) |
-| HMI proposition | About **Research Philosophy prose**, not a second epigraph (**Approve** D4) |
-| External epigraphs (Simon/Brooks/Suchman) | **Defer** (**D5**) |
-| AIIMS wording | Precise **co-authorship / author affiliation** only (**Approve** D8) |
-| CHI award promo | **Keep gated** until separately confirmed (**D9**) |
-| TL;DR / sequencing / MobiTangibles | **Approve** D10–D12 |
-| First implementation PR (when authorized) | Optional TL;DR schema + verified-only display helper + missing fallbacks + tests **only** — no unreviewed summary text published |
+| Overall | Planning package **APPROVED**; docs PR #11 merge authorized |
+| Homepage identity | **Interactive Intelligence** as H1; punchline as secondary deck (**D1–D2**) |
+| Composition | **W1** — refined left-aligned editorial (**D3**) |
+| Selected Research layout | **Option A** — one feature + six compact cards (**D7**) |
+| Feature paper / seven set | Exact seven in §6; **ESL** feature; elevated ASD + ADHD (**D6**) |
+| HMI proposition | About **Research Philosophy prose**, not a second epigraph (**D4**) |
+| External epigraphs (Simon/Brooks/Suchman) | **Deferred** (**D5**) |
+| AIIMS wording | Precise **co-authorship / author affiliation** only (**D8**) |
+| CHI award promo | **Gated** until separately confirmed (**D9**) |
+| TL;DR / sequencing / MobiTangibles | **Approved** D10–D12 |
+| First implementation PR (when separately authorized) | Optional TL;DR schema + verified-only display helper + missing fallbacks + tests **only** — no unreviewed summary text published |
 
 ---
 
@@ -338,48 +338,46 @@ Homepage layout, selected seven cards, and approved TL;DR **content** each keep 
 
 ## 12. Faculty / PI decision slate
 
-### 12.1 Recommended PI approvals (awaiting explicit PI confirmation)
+### 12.1 PI-approved decisions (2026-11-07)
 
-Faculty recommendation (2026-11-07): approve the §12 decisions as proposed below. **Until the PI explicitly confirms this slate, items remain recommendations — not closed gates.** Approving the slate still does **not** by itself merge PR #11; merge needs a separate explicit instruction once CI is green.
+PI instruction: “approve §12 and merge PR #11.” Closed as follows:
 
 | ID | Topic | Decision | Status |
 |---|---|---|---|
-| D1 | Homepage H1 | **Interactive Intelligence** as H1 | **Recommend APPROVE** |
-| D2 | Punchline | Retain as **secondary deck** | **Recommend APPROVE** |
-| D3 | Whitespace | **W1** left-aligned tighten | **Recommend APPROVE** |
-| D4 | HMI proposition | Text as **Research Philosophy prose**; not an additional epigraph; never as Minsky quote | **Recommend APPROVE** |
-| D5 | External epigraphs | Defer Simon/Brooks/Suchman (and similar); Minsky remains the only About epigraph | **Recommend DEFER** |
-| D6 | Selected seven | Exact seven in §6; ESL as feature; bibliography/records unchanged | **Recommend APPROVE** |
-| D7 | Layout | **Option A** | **Recommend APPROVE** |
-| D8 | ASD / AIIMS wording | **Co-authorship / author affiliation** accuracy only; no unsupported formal partnership claim | **Recommend APPROVE** |
-| D9 | CHI award | No promotional use until **separately** confirmed | **Recommend KEEP GATED** |
-| D10 | TL;DR schema | Approve **Phase T-A / workstream I1** shape (optional fields) | **Recommend APPROVE** |
-| D11 | Sequencing | Staged **I1→I4** and **T-A→T-D**; not blanket build permission | **Recommend APPROVE** |
-| D12 | MobiTangibles | Leave **archive / bibliography**; not homepage Selected seven | **Recommend APPROVE** |
+| D1 | Homepage H1 | **Interactive Intelligence** as H1 | **APPROVED** |
+| D2 | Punchline | Retain as **secondary deck** | **APPROVED** |
+| D3 | Whitespace | **W1** left-aligned tighten | **APPROVED** |
+| D4 | HMI proposition | Text as **Research Philosophy prose**; not an additional epigraph; never as Minsky quote | **APPROVED** |
+| D5 | External epigraphs | Defer Simon/Brooks/Suchman (and similar); Minsky remains the only About epigraph | **DEFERRED** |
+| D6 | Selected seven | Exact seven in §6; ESL as feature; bibliography/records unchanged | **APPROVED** |
+| D7 | Layout | **Option A** | **APPROVED** |
+| D8 | ASD / AIIMS wording | **Co-authorship / author affiliation** accuracy only; no unsupported formal partnership claim | **APPROVED** |
+| D9 | CHI award | No promotional use until **separately** confirmed | **GATED** |
+| D10 | TL;DR schema | Approve **Phase T-A / workstream I1** shape (optional fields) | **APPROVED** |
+| D11 | Sequencing | Staged **I1→I4** and **T-A→T-D**; not blanket build permission | **APPROVED** |
+| D12 | MobiTangibles | Leave **archive / bibliography**; not homepage Selected seven | **APPROVED** |
 
 ### 12.2 PI confirmation checklist
 
-- [ ] PI explicitly approves D1–D4, D6–D8, D10–D12 as written  
-- [ ] PI explicitly defers D5 (additional external epigraphs)  
-- [ ] PI explicitly keeps D9 gated pending separate CHI Honorable Mention confirmation  
-- [ ] PI explicitly authorizes merging **documentation PR #11 only** (after CI pass)  
+- [x] PI explicitly approves D1–D4, D6–D8, D10–D12 as written  
+- [x] PI explicitly defers D5 (additional external epigraphs)  
+- [x] PI explicitly keeps D9 gated pending separate CHI Honorable Mention confirmation  
+- [x] PI explicitly authorizes merging **documentation PR #11 only** (after CI pass)  
 - [ ] PI separately authorizes **I1** implementation PR when ready (not implied by merging #11)  
 
-### 12.3 Planning-PR merge readiness (when PI authorizes)
+### 12.3 Planning-PR merge record
 
-| Check | Current |
+| Check | Value |
 |---|---|
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/11 |
-| Head (at last docs update) | see latest PR head after this commit |
-| CI `quality` | Must be **success** on the merge head |
 | Scope | Documentation only — no site implementation |
+| CI | Must be **success** on the merge head before merge |
 
 ---
 
-## Stop conditions (reaffirmed)
+## Stop conditions (post-merge planning)
 
-- This update records the recommended §12 approve / defer / gated split only.  
-- **Do not merge** PR #11 until the PI gives an **explicit merge authorization** (in addition to approving §12).  
-- **Do not implement** website changes, schema, featured ranks, or TL;DR body copy without separate PI authorization.  
-- No M4.3 / M4.4 / production changes.  
-- After planning closes: first code PR = **I1 / T-A only**.
+- Merging PR #11 closes the **documentation** milestone only.  
+- **Do not implement** website changes, schema, featured ranks, or TL;DR body copy without separate PI authorization of workstream **I1**.  
+- No M4.3 / M4.4 / production changes from this approval.  
+- Next authorized engineering step (when PI requests): **I1 / T-A only**.
