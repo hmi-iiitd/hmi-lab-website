@@ -24,6 +24,14 @@ export function isRenderablePublication(entry: PubEntry): boolean {
   return true;
 }
 
+/**
+ * Archive / Selected listing membership.
+ * Fixtures appear only in INCLUDE_TEST_FIXTURES builds (Playwright dist-e2e).
+ */
+export function isListablePublication(entry: PubEntry): boolean {
+  return isPublicPublication(entry) || isRenderablePublication(entry);
+}
+
 export function sortPubsNewestFirst(a: PubEntry, b: PubEntry): number {
   if (b.data.publication_year !== a.data.publication_year) {
     return b.data.publication_year - a.data.publication_year;
@@ -33,7 +41,7 @@ export function sortPubsNewestFirst(a: PubEntry, b: PubEntry): number {
 
 export function featuredPublications(entries: PubEntry[]): PubEntry[] {
   return entries
-    .filter((entry) => isPublicPublication(entry) && entry.data.featured)
+    .filter((entry) => isListablePublication(entry) && entry.data.featured)
     .sort((a, b) => (a.data.featured_rank ?? 99) - (b.data.featured_rank ?? 99));
 }
 

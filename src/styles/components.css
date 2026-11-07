@@ -556,6 +556,24 @@
   overflow-wrap: anywhere;
 }
 
+.plain-language-tldr {
+  margin: 0.75rem 0 0;
+  max-width: var(--measure-prose);
+  color: var(--color-muted);
+  font-size: var(--text-secondary);
+  line-height: var(--leading-prose);
+  overflow-wrap: anywhere;
+}
+
+.mini-card .plain-language-tldr,
+.feature-body .plain-language-tldr {
+  margin-top: 0.65rem;
+}
+
+.pub .plain-language-tldr {
+  margin-top: 0.5rem;
+}
+
 .paper-page h1,
 .paper-title {
   font: 400 var(--text-h1) / var(--leading-tight) var(--font-display);

@@ -13,7 +13,10 @@ research_areas:
   - learning-coordination
 application_tags: []
 project_ids: []
-featured: false
+featured: true
+# Test-only rank: sits among the four Selected Research slots in INCLUDE_TEST_FIXTURES builds only.
+# Staging/production exclude this fixture via isPublicPublication, so real homepage cardinality is unchanged.
+featured_rank: 2
 published: true
 metadata_verified: true
 verification_status: verified
@@ -35,11 +38,21 @@ sources:
     url: "https://example.com/test-only-fictional-acceptance"
     note: Entirely fictional engineering fixture; not a real scholarly record
 evidence_note: >-
-  TEST_ONLY_FICTIONAL fixture used solely to exercise the Research Story template in
-  isolated Playwright builds (INCLUDE_TEST_FIXTURES=1). Not a real publication.
+  TEST_ONLY_FICTIONAL fixture used solely to exercise Research Story and I1 TL;DR
+  rendering in isolated Playwright builds (INCLUDE_TEST_FIXTURES=1). Not a real publication.
 verified_at: "2026-11-06"
 unresolved_notes: []
 test_fixture: true
+plain_language_tldr: >-
+  TEST_ONLY_FICTIONAL summary: this study asks how interaction protocols can be validated
+  without live demos, contributes a text-first template check in evaluated fixture settings,
+  and does not claim empirical scientific findings.
+tldr_status: owner_approved
+tldr_drafted_by: I1 test harness
+tldr_reviewed_by: Template Validation Owner (FICTIONAL — not consent evidence)
+tldr_approved_at: "2026-11-07"
+tldr_source_note: Fictional fixture abstract for engineering validation only
+tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/0#discussion_r-i1-tldr-fixture"
 ---
 
 TEST_ONLY_FICTIONAL bibliographic body. This record must never appear in staging or
