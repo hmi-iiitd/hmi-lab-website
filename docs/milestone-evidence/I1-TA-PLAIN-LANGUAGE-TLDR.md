@@ -3,7 +3,10 @@
 **Status:** Implemented on PR — **awaiting faculty review; not merged.**  
 **Baseline:** `main` @ `c0fce4f2d5fbb3470192d0d3cf6e1e923d8d9063`  
 **Plan:** `docs/proposals/M421-EDITORIAL-VISUAL-REFINEMENT.md` (PR #11)  
-**Authorization:** I1 / T-A only (2026-11-07)
+**Authorization:** I1 / T-A only (2026-11-07)  
+**PR:** https://github.com/hmi-iiitd/hmi-lab-website/pull/12  
+**Head SHA:** `f751c67953c0671668f7147ac9242880a0fb1882`  
+**CI:** https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42377775477 (success)
 
 ## Scope delivered
 
@@ -20,10 +23,21 @@
 
 ## RED → GREEN
 
-| Commit role | Purpose |
+| Commit | Role |
 |---|---|
-| RED | Failing schema/helper/UI tests + e2e stubs |
-| GREEN | Schema, helper, UI fallbacks, fixture metadata, tests green |
+| `9ae2a69` | RED — failing schema/helper/UI tests + e2e stubs |
+| `f751c67` | GREEN — schema, helper, UI fallbacks, fixture metadata, tests green |
+
+## File-level summary
+
+| Path | Change |
+|---|---|
+| `src/lib/content/schemas.ts` | Optional TL;DR fields + `owner_approved` refinement |
+| `src/lib/plain-language-tldr.ts` | `getApprovedPlainLanguageTldr` |
+| `src/lib/publications.ts` | `isListablePublication` for fixture-enabled listings |
+| `SelectedResearch.astro` / `publications/index.astro` / `papers/[slug].astro` | Approved-only conditional render |
+| `test-fixture-synthetic-interaction.md` | Fictional approved TL;DR for e2e only |
+| `tests/content/i1-plain-language-tldr.test.ts` / `tests/e2e/i1-plain-language-tldr.spec.ts` | Gates + three-surface fixture coverage |
 
 ## Invariants
 
