@@ -38,7 +38,9 @@ test.describe("I1/T-A real publications stay without TL;DR chrome", () => {
     await expect(page.getByRole("heading", { name: "TL;DR — In plain language" })).toHaveCount(0);
     await expect(page.getByText(FIXTURE_MARKER)).toHaveCount(0);
     // T-B draft body must stay off public HTML until owner_approved.
-    await expect(page.getByText("limiting free-living claims")).toHaveCount(0);
+    await expect(
+      page.getByText("recognizable movements were more limited during walking"),
+    ).toHaveCount(0);
   });
 });
 

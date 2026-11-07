@@ -10,6 +10,7 @@ import type {
   ResearchTheme,
 } from "../src/lib/content/schemas";
 import { validateContentBundle, type ContentBundle } from "../src/lib/content/validate";
+import { collectDraftTldrLeakMarkers } from "../src/lib/tldr-draft-leak";
 
 const root = path.resolve("src/content");
 
@@ -28,7 +29,7 @@ function loadCollection<T>(dirName: string): T[] {
     });
 }
 
-function assertDistExcludesDrafts(): void {
+function assertDistExcludesDrafts(publications: PublicationDraft[]): void {
   const distRoots = [path.resolve("dist"), path.resolve("dist/hmi-lab-website")].filter((p) =>
     fs.existsSync(p),
   );
@@ -45,14 +46,8 @@ function assertDistExcludesDrafts(): void {
     "TEST_ONLY_FICTIONAL summary:",
     "test-fixture-research-story",
     "test-fixture-synthetic-interaction",
-    // T-B ai_assisted_draft phrases — must stay off staging HTML until owner_approved.
-    "cutting post-switch regret about 26%",
-    "not a clinical diagnostic product",
-    "cannot be read as purely cognitive drug effects",
-    "claiming clinical outcome gains from robots",
-    "lower dominance than flat-screen play",
-    "do not claim universal or clinical emotion sensing",
-    "limiting free-living claims",
+    // Derived from every editorial_draft / ai_assisted_draft TL;DR (no manual phrase list).
+    ...collectDraftTldrLeakMarkers(publications),
   ];
   const hits: string[] = [];
 
@@ -144,7 +139,7 @@ if (issues.length) {
   process.exit(1);
 }
 
-assertDistExcludesDrafts();
+assertDistExcludesDrafts(bundle.publications);
 console.log(
   `Content OK: ${bundle.publications.length} pubs, ${bundle.people.length} people, ${bundle.themes.length} themes, ${bundle.applicationTags?.length ?? 0} application-tags, ${bundle.projects.length} projects, ${bundle.news.length} news`,
 );

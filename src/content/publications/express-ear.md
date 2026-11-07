@@ -40,15 +40,16 @@ evidence_note: "Verified against Crossref DOI 10.1145/3478085 (title/subtitle) o
 verified_at: '2026-11-03'
 unresolved_notes: []
 plain_language_tldr: >-
-  Can ear-worn IMUs sense fine-grained facial action without a front-facing camera?
-  ExpressEar maps Facial Action Coding System units from earable motion and reports
-  high average per-user accuracy for thirty-two action units in a twelve-person lab
-  study. Mobile conditions reduced coverage and accuracy, limiting free-living claims.
+  Could a small motion sensor worn at the ear recognize facial movements without a
+  camera? In a study with 12 participants, ExpressEar distinguished many individual
+  facial movements under controlled conditions. Performance and the range of
+  recognizable movements were more limited during walking and train travel.
 tldr_status: ai_assisted_draft
-tldr_drafted_by: Cursor agent (T-B scientific-review draft)
+tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
 tldr_source_note: >-
-  Grounded in IMWUT abstract (DOI 10.1145/3478085); draft only — not
-  owner-approved for public display.
+  Lay draft after PR #13 scientific review; grounded in IMWUT abstract
+  (DOI 10.1145/3478085) and HMI project description. Not owner-approved for public
+  display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

@@ -43,16 +43,17 @@ evidence_note: Verified against Crossref DOI 10.1038/s41598-026-68871-2 on 2026-
 verified_at: '2026-11-03'
 unresolved_notes: []
 plain_language_tldr: >-
-  Do trial-level pupil dynamics reflect attention-related variability in ADHD during
-  working memory? In fifty children, off-medication ADHD showed higher inter-trial
-  pupil variance, while medication sessions differed; those differences cannot be
-  read as purely cognitive drug effects. Pupil signals remain an indirect,
-  non-specific measure of attention-related processing.
+  Researchers analysed pupil measurements from 50 children during a memory task.
+  Patterns across repeated trials were related to task performance and medication
+  conditions, although some group comparisons were uncertain after statistical
+  correction. Pupil changes are not a direct measure of attention or medication
+  effectiveness.
 tldr_status: ai_assisted_draft
-tldr_drafted_by: Cursor agent (T-B scientific-review draft)
+tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
 tldr_source_note: >-
-  Grounded in Scientific Reports abstract (DOI 10.1038/s41598-026-68871-2); draft
-  only — not owner-approved for public display.
+  Lay draft after PR #13 scientific review; grounded in Scientific Reports abstract
+  (DOI 10.1038/s41598-026-68871-2). Preserves post-correction uncertainty and
+  medication-limitation caveats. Not owner-approved for public display.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

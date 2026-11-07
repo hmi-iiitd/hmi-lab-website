@@ -5,6 +5,10 @@ import matter from "gray-matter";
 import { describe, expect, it } from "vitest";
 import { publicationDraftSchema } from "../../src/lib/content/schemas";
 import { getApprovedPlainLanguageTldr } from "../../src/lib/plain-language-tldr";
+import {
+  collectDraftTldrLeakMarkers,
+  leakWindowsFromText,
+} from "../../src/lib/tldr-draft-leak";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const pubDir = path.join(root, "src/content/publications");
@@ -57,4 +61,32 @@ describe("T-B seven Selected TL;DR drafts (review-only)", () => {
     }
   });
 
+  it("derives staging leak markers from current draft TL;DR text (no hard-coded phrases)", () => {
+    const pubs = TB_SLUGS.map((slug) => loadPub(slug));
+    const markers = collectDraftTldrLeakMarkers(pubs);
+    expect(markers.length).toBeGreaterThanOrEqual(TB_SLUGS.length);
+
+    for (const pub of pubs) {
+      const windows = leakWindowsFromText(pub.plain_language_tldr!);
+      expect(windows.length).toBeGreaterThan(0);
+      for (const window of windows) {
+        expect(markers, window).toContain(window);
+      }
+    }
+
+    // Rewriting a draft must change the derived marker set.
+    const rewritten = collectDraftTldrLeakMarkers([
+      {
+        ...pubs[0],
+        plain_language_tldr:
+          "REVISED_DRAFT_ONLY unique wording used solely to prove leak markers track rewrites.",
+      },
+    ]);
+    expect(rewritten.some((m) => m.includes("REVISED_DRAFT_ONLY"))).toBe(true);
+    expect(markers).not.toEqual(rewritten);
+
+    const validateSrc = readFileSync(path.join(root, "scripts/validate-content.ts"), "utf8");
+    expect(validateSrc).toMatch(/collectDraftTldrLeakMarkers/);
+    expect(validateSrc).not.toMatch(/cutting post-switch regret about 26%/);
+  });
 });
