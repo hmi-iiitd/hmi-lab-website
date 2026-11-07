@@ -45,8 +45,9 @@ Faculty scientific/editorial review: https://github.com/hmi-iiitd/hmi-lab-websit
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/13 |
 | Prior head (pre-revision) | `78375773e78bbb4b70772554849bb09ee6dc8430` |
 | Prior CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42380322948 (success) |
-| Head SHA (lay revision) | _(filled after push)_ |
-| CI (lay revision) | _(filled after green run)_ |
+| Head SHA (lay revision) | `acf34d98afa89a9d0638e75701d85a67b27c069b` |
+| CI (lay revision) | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42384170664 (success) |
+| Faculty review | https://github.com/hmi-iiitd/hmi-lab-website/pull/13#pullrequestreview-5813014854 |
 
 ## Recommendation
 
