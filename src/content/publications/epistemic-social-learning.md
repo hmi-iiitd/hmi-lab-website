@@ -55,12 +55,15 @@ plain_language_tldr: >-
   another. This paper develops a way to update beliefs about other agents quickly
   while learning broader patterns more slowly, helping agents adapt when others
   change their behavior.
-tldr_status: ai_assisted_draft
+tldr_status: owner_approved
 tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_reviewed_by: PI Jainendra Shukla (PR #13 individual acceptance review 5813117979)
+tldr_approved_at: "2026-11-07"
 tldr_source_note: >-
   Lay draft after PR #13 scientific review; grounded in NeurIPS 2026 poster
   abstract (neurips.cc/virtual/2026/poster/150541). Quantitative 26% claim omitted
   pending accepted-manuscript verification. Not owner-approved for public display.
+tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368504"
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

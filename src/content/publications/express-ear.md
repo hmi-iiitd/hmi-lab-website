@@ -44,12 +44,15 @@ plain_language_tldr: >-
   camera? In a study with 12 participants, ExpressEar distinguished many individual
   facial movements under controlled conditions. Performance and the range of
   recognizable movements were more limited during walking and train travel.
-tldr_status: ai_assisted_draft
+tldr_status: owner_approved
 tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_reviewed_by: PI Jainendra Shukla (PR #13 individual acceptance review 5813117979)
+tldr_approved_at: "2026-11-07"
 tldr_source_note: >-
   Lay draft after PR #13 scientific review; grounded in IMWUT abstract
   (DOI 10.1145/3478085) and HMI project description. Not owner-approved for public
   display.
+tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368561"
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

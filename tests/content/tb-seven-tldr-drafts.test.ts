@@ -13,16 +13,55 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const pubDir = path.join(root, "src/content/publications");
 
-/** M421 §9 Phase B — seven Selected papers for T-B drafting. */
-const TB_SLUGS = [
-  "epistemic-social-learning",
-  "predictive-asd-acoustic-linguistic",
-  "trial-pupil-dynamics-adhd",
-  "social-robots-autism-care-india",
-  "vr-flat-screen-gaming-responses",
-  "emotion-recognition-eda",
-  "express-ear",
+/** M421 §9 Phase B — seven Selected papers; PI-approved exact strings 2026-11-07. */
+const TB_APPROVED = [
+  {
+    slug: "epistemic-social-learning",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368504",
+    text: "When AI agents interact, their own choices affect what they learn about one another. This paper develops a way to update beliefs about other agents quickly while learning broader patterns more slowly, helping agents adapt when others change their behavior.",
+  },
+  {
+    slug: "predictive-asd-acoustic-linguistic",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368523",
+    text: "Researchers analysed conversations involving English- and Hindi-speaking children to identify speech patterns that could help distinguish children with and without autism in the study groups. The findings show promise for language-aware assessment research, but do not establish a stand-alone clinical diagnostic test.",
+  },
+  {
+    slug: "trial-pupil-dynamics-adhd",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368530",
+    text: "Researchers analysed pupil measurements from 50 children during a memory task. Patterns across repeated trials were related to task performance and medication conditions, although some group comparisons were uncertain after statistical correction. Pupil changes are not a direct measure of attention or medication effectiveness.",
+  },
+  {
+    slug: "social-robots-autism-care-india",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368537",
+    text: "Interviews and workshops with 25 special educators in India explored the use of social robots in autism care. Educators saw possible benefits but worried about being replaced and about limited resources. The study reports professional perspectives; it does not establish that robots improve clinical outcomes.",
+  },
+  {
+    slug: "vr-flat-screen-gaming-responses",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368542",
+    text: "Researchers compared how 33 participants responded while playing selected games in virtual reality and on flat screens. In this study, virtual reality produced stronger emotions, greater mental effort, and more physiological stress-related responses. The results may not generalize beyond the games and laboratory conditions studied.",
+  },
+  {
+    slug: "emotion-recognition-eda",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368554",
+    text: "Can changes in skin electrical activity help computers recognize emotions? Researchers compared 40 ways of analysing these signals. Some methods worked better than others, especially when trained separately for each participant. Recognizing emotions in people not used for training proved more difficult.",
+  },
+  {
+    slug: "express-ear",
+    evidence:
+      "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368561",
+    text: "Could a small motion sensor worn at the ear recognize facial movements without a camera? In a study with 12 participants, ExpressEar distinguished many individual facial movements under controlled conditions. Performance and the range of recognizable movements were more limited during walking and train travel.",
+  },
 ] as const;
+
+function normalize(text: string): string {
+  return text.replace(/\s+/g, " ").trim();
+}
 
 function loadPub(slug: string) {
   const data = matter(readFileSync(path.join(pubDir, `${slug}.md`), "utf8")).data;
@@ -31,62 +70,45 @@ function loadPub(slug: string) {
   return parsed.success ? parsed.data : data;
 }
 
-describe("T-B seven Selected TL;DR drafts (review-only)", () => {
-  it("stores paper-grounded ai_assisted_draft summaries for exactly the seven Phase B slugs", () => {
-    for (const slug of TB_SLUGS) {
-      const pub = loadPub(slug);
-      expect(pub.tldr_status, slug).toBe("ai_assisted_draft");
-      expect(pub.plain_language_tldr?.trim().length, slug).toBeGreaterThan(0);
-      const words = pub.plain_language_tldr!.trim().split(/\s+/).length;
-      expect(words, `${slug} word count`).toBeGreaterThanOrEqual(30);
-      expect(words, `${slug} word count`).toBeLessThanOrEqual(50);
-      expect(pub.tldr_drafted_by, slug).toMatch(/T-B/);
-      expect(pub.tldr_source_note?.trim().length, slug).toBeGreaterThan(0);
-      expect(pub.tldr_status, slug).not.toBe("owner_approved");
+describe("T-B seven Selected TL;DRs — owner_approved publication", () => {
+  it("stores exact PI-approved wording with complete approval metadata for the seven papers", () => {
+    for (const row of TB_APPROVED) {
+      const pub = loadPub(row.slug);
+      expect(pub.tldr_status, row.slug).toBe("owner_approved");
+      expect(normalize(pub.plain_language_tldr ?? ""), row.slug).toBe(normalize(row.text));
+      expect(pub.tldr_approved_at, row.slug).toBe("2026-11-07");
+      expect(pub.tldr_review_evidence, row.slug).toBe(row.evidence);
+      expect(pub.tldr_reviewed_by?.trim().length, row.slug).toBeGreaterThan(0);
+      expect(pub.tldr_reviewed_by, row.slug).toMatch(/PI|faculty|Shukla/i);
+      expect(pub.tldr_source_note?.trim().length, row.slug).toBeGreaterThan(0);
+      expect(getApprovedPlainLanguageTldr(pub), row.slug).toBe(normalize(row.text));
     }
   });
 
-  it("keeps getApprovedPlainLanguageTldr undefined for every T-B draft", () => {
-    for (const slug of TB_SLUGS) {
-      const pub = loadPub(slug);
-      expect(getApprovedPlainLanguageTldr(pub), slug).toBeUndefined();
-    }
-  });
-
-  it("does not mark any non-fixture real publication as owner_approved yet", () => {
+  it("limits real (non-fixture) owner_approved TL;DRs to exactly the seven Phase B papers", () => {
+    const approved: string[] = [];
     for (const name of readdirSync(pubDir).filter((f) => f.endsWith(".md"))) {
       const data = matter(readFileSync(path.join(pubDir, name), "utf8")).data;
       if (data.test_fixture) continue;
-      expect(data.tldr_status ?? "missing", name).not.toBe("owner_approved");
+      if (data.tldr_status === "owner_approved") approved.push(String(data.slug));
     }
+    expect(approved.sort()).toEqual([...TB_APPROVED.map((r) => r.slug)].sort());
   });
 
-  it("derives staging leak markers from current draft TL;DR text (no hard-coded phrases)", () => {
-    const pubs = TB_SLUGS.map((slug) => loadPub(slug));
-    const markers = collectDraftTldrLeakMarkers(pubs);
-    expect(markers.length).toBeGreaterThanOrEqual(TB_SLUGS.length);
+  it("keeps draft-leak marker derivation rewrite-safe for future unpublished drafts", () => {
+    // Approved records must not contribute draft leak markers.
+    expect(collectDraftTldrLeakMarkers(TB_APPROVED.map((r) => loadPub(r.slug)))).toEqual([]);
 
-    for (const pub of pubs) {
-      const windows = leakWindowsFromText(pub.plain_language_tldr!);
-      expect(windows.length).toBeGreaterThan(0);
-      for (const window of windows) {
-        expect(markers, window).toContain(window);
-      }
-    }
-
-    // Rewriting a draft must change the derived marker set.
-    const rewritten = collectDraftTldrLeakMarkers([
-      {
-        ...pubs[0],
-        plain_language_tldr:
-          "REVISED_DRAFT_ONLY unique wording used solely to prove leak markers track rewrites.",
-      },
-    ]);
-    expect(rewritten.some((m) => m.includes("REVISED_DRAFT_ONLY"))).toBe(true);
-    expect(markers).not.toEqual(rewritten);
+    const synthetic = {
+      tldr_status: "ai_assisted_draft" as const,
+      plain_language_tldr:
+        "REVISED_DRAFT_ONLY unique wording used solely to prove leak markers track rewrites.",
+    };
+    const markers = collectDraftTldrLeakMarkers([synthetic]);
+    expect(markers.some((m) => m.includes("REVISED_DRAFT_ONLY"))).toBe(true);
+    expect(leakWindowsFromText(synthetic.plain_language_tldr).length).toBeGreaterThan(0);
 
     const validateSrc = readFileSync(path.join(root, "scripts/validate-content.ts"), "utf8");
     expect(validateSrc).toMatch(/collectDraftTldrLeakMarkers/);
-    expect(validateSrc).not.toMatch(/cutting post-switch regret about 26%/);
   });
 });

@@ -46,11 +46,14 @@ plain_language_tldr: >-
   stronger emotions, greater mental effort, and more physiological stress-related
   responses. The results may not generalize beyond the games and laboratory
   conditions studied.
-tldr_status: ai_assisted_draft
+tldr_status: owner_approved
 tldr_drafted_by: Cursor agent (T-B); faculty editorial revision 2026-11-07
+tldr_reviewed_by: PI Jainendra Shukla (PR #13 individual acceptance review 5813117979)
+tldr_approved_at: "2026-11-07"
 tldr_source_note: >-
   Lay draft after PR #13 scientific review; grounded in IEEE TAC / arXiv abstract
   (DOI 10.1109/taffc.2024.3368703). Not owner-approved for public display.
+tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368542"
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.
