@@ -44,9 +44,10 @@ All seven current `plain_language_tldr` strings were checked against the PI acce
 
 | Item | Value |
 |---|---|
-| PR | _(filled after open)_ |
-| Head SHA | _(filled after push)_ |
-| CI | _(filled after green run)_ |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/14 |
+| Head SHA | `1540ea1` (full: see `git rev-parse` on branch) |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42385908063 (success) |
+| PI acceptance review | https://github.com/hmi-iiitd/hmi-lab-website/pull/13#pullrequestreview-5813117979 |
 
 ## Recommendation
 
