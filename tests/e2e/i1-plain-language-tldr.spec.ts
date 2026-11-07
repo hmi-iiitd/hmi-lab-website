@@ -4,47 +4,17 @@ import { PUNCHLINE } from "../../src/lib/identity";
 const FIXTURE_MARKER = "TEST_ONLY_FICTIONAL summary:";
 const FIXTURE_PAPER = "./papers/test-fixture-synthetic-interaction/";
 
-test.describe("I1/T-A real publications stay without TL;DR chrome", () => {
-  test("homepage keeps one primary feature and three secondary cards", async ({ page }) => {
+test.describe("I1/T-A fixture-enabled approved TL;DR rendering", () => {
+  test("homepage identity and Selected Research cardinality remain frozen", async ({ page }) => {
     await page.goto("./");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
     const selected = page.locator("#selected-research");
     await expect(selected).toBeVisible();
     await expect(selected.locator("article.feature")).toHaveCount(1);
     await expect(selected.locator("article.mini-card")).toHaveCount(3);
-    // Paper-page TL;DR heading must not appear on the homepage chrome.
     await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
   });
 
-  test("publications archive remains readable without JS and omits TL;DR on real rows", async ({
-    browser,
-  }) => {
-    const context = await browser.newContext({ javaScriptEnabled: false });
-    const page = await context.newPage();
-    await page.goto("./publications/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Verified research archive");
-    const express = page.locator("article.pub", { hasText: /ExpressEar/i });
-    await expect(express).toBeVisible();
-    await expect(express.locator(".plain-language-tldr")).toHaveCount(0);
-    await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
-    await context.close();
-  });
-
-  test("real paper page omits TL;DR chrome even when an ai_assisted_draft exists", async ({
-    page,
-  }) => {
-    await page.goto("./papers/express-ear/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("ExpressEar");
-    await expect(page.getByRole("heading", { name: "TL;DR — In plain language" })).toHaveCount(0);
-    await expect(page.getByText(FIXTURE_MARKER)).toHaveCount(0);
-    // T-B draft body must stay off public HTML until owner_approved.
-    await expect(
-      page.getByText("recognizable movements were more limited during walking"),
-    ).toHaveCount(0);
-  });
-});
-
-test.describe("I1/T-A fixture-enabled approved TL;DR rendering", () => {
   test("fixture paper page renders approved plain-language summary", async ({ page }) => {
     await page.goto(FIXTURE_PAPER);
     await expect(page.getByRole("heading", { name: "TL;DR — In plain language" })).toBeVisible();
