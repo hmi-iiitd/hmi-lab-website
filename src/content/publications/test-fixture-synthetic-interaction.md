@@ -14,7 +14,9 @@ research_areas:
 application_tags: []
 project_ids: []
 featured: true
-featured_rank: 99
+# Test-only rank: sits among the four Selected Research slots in INCLUDE_TEST_FIXTURES builds only.
+# Staging/production exclude this fixture via isPublicPublication, so real homepage cardinality is unchanged.
+featured_rank: 2
 published: true
 metadata_verified: true
 verification_status: verified

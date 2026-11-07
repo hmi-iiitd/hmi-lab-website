@@ -12,7 +12,8 @@ interface Props {
 const { publications } = Astro.props;
 const featured = featuredPublications(publications);
 const primary = featured[0];
-const secondary = featured.slice(1);
+// Keep the frozen four-paper Selected Research cardinality (1 primary + 3 secondary).
+const secondary = featured.slice(1, 4);
 const primaryTldr = primary ? getApprovedPlainLanguageTldr(primary.data) : undefined;
 
 function statusLabel(pub: CollectionEntry<"publications">): string {

@@ -42,6 +42,7 @@ function assertDistExcludesDrafts(): void {
     "DRAFT_ONLY_DO_NOT_PUBLISH",
     "draft-seed-incomplete-authors",
     "TEST_ONLY_FICTIONAL",
+    "TEST_ONLY_FICTIONAL summary:",
     "test-fixture-research-story",
     "test-fixture-synthetic-interaction",
   ];

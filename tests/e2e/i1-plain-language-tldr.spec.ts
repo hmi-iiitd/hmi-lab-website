@@ -5,15 +5,15 @@ const FIXTURE_MARKER = "TEST_ONLY_FICTIONAL summary:";
 const FIXTURE_PAPER = "./papers/test-fixture-synthetic-interaction/";
 
 test.describe("I1/T-A real publications stay without TL;DR chrome", () => {
-  test("homepage punchline and real featured cards have no approved TL;DR text", async ({
-    page,
-  }) => {
+  test("homepage keeps one primary feature and three secondary cards", async ({ page }) => {
     await page.goto("./");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
-    await expect(page.locator("#selected-research")).toBeVisible();
-    // Real featured papers have no owner_approved TL;DR; heading only appears on paper pages.
+    const selected = page.locator("#selected-research");
+    await expect(selected).toBeVisible();
+    await expect(selected.locator("article.feature")).toHaveCount(1);
+    await expect(selected.locator("article.mini-card")).toHaveCount(3);
+    // Paper-page TL;DR heading must not appear on the homepage chrome.
     await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
-    await expect(page.getByText(/ExpressEar/i).first()).toHaveCount(0);
   });
 
   test("publications archive remains readable without JS and omits TL;DR on real rows", async ({

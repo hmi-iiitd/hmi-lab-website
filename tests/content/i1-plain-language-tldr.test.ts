@@ -186,4 +186,32 @@ describe("I1/T-A UI surfaces omit empty TL;DR chrome", () => {
     expect(src).toContain("TL;DR — In plain language");
     expect(src).toMatch(/getApprovedPlainLanguageTldr[\s\S]*TL;DR — In plain language/);
   });
+
+  it("preserves frozen Selected Research cardinality of one primary plus three secondary", () => {
+    const src = readFileSync(path.join(root, "src/components/SelectedResearch.astro"), "utf8");
+    expect(src).toMatch(/featured\.slice\(\s*1\s*,\s*4\s*\)/);
+    expect(src).not.toMatch(/featured\.slice\(\s*1\s*\)\s*;/);
+
+    const pubDir = path.join(root, "src/content/publications");
+    const publicFeatured = readdirSync(pubDir)
+      .filter((f) => f.endsWith(".md"))
+      .map((f) => matter(readFileSync(path.join(pubDir, f), "utf8")).data)
+      .filter((p) => p.featured && !p.test_fixture)
+      .sort((a, b) => (a.featured_rank ?? 99) - (b.featured_rank ?? 99));
+    expect(publicFeatured).toHaveLength(4);
+
+    const fixture = matter(
+      readFileSync(path.join(pubDir, "test-fixture-synthetic-interaction.md"), "utf8"),
+    ).data;
+    expect(fixture.test_fixture).toBe(true);
+    expect(fixture.featured).toBe(true);
+    expect(fixture.featured_rank).toBeGreaterThanOrEqual(1);
+    expect(fixture.featured_rank).toBeLessThanOrEqual(4);
+  });
+
+  it("staging dist scanner bans synthetic TL;DR fixture markers", () => {
+    const validator = readFileSync(path.join(root, "scripts/validate-content.ts"), "utf8");
+    expect(validator).toContain("TEST_ONLY_FICTIONAL summary:");
+    expect(validator).toContain("test-fixture-synthetic-interaction");
+  });
 });
