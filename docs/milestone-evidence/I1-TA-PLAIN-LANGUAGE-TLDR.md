@@ -61,9 +61,10 @@
 | Item | Value |
 |---|---|
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/12 |
-| Head SHA | _(filled after push of cardinality fix)_ |
-| CI | _(filled after green run)_ |
+| Head SHA | `2553e78b98667f0005d7fe3718889c1852815153` |
+| CI (cardinality fix) | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42379157883 (success) |
+| Faculty review | https://github.com/hmi-iiitd/hmi-lab-website/pull/12#pullrequestreview-5812505604 |
 
 ## Recommendation
 
-**PASS** for merging I1/T-A after this cardinality correction and green CI — **stop; do not merge without separate PI merge instruction.**
+**PASS** for merging I1/T-A after the Selected Research cardinality correction and green CI — **stop; do not merge without separate PI merge instruction.**
