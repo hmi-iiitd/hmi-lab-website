@@ -38,9 +38,9 @@ For each of the seven strings: accept, revise, or reject the **exact** draft tex
 
 | Item | Value |
 |---|---|
-| PR | _(filled after open)_ |
-| Head SHA | _(filled after push)_ |
-| CI | _(filled after green run)_ |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/13 |
+| Head SHA | `4936ae124a09dcf2257e0c3354b6fe7c026dbf70` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42380140784 (success) |
 
 ## Recommendation
 
