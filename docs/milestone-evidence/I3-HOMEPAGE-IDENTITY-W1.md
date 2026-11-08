@@ -29,7 +29,8 @@ Exactly one semantic H1. Punchline is `.hero-deck`, not a competing headline.
 | Step | SHA | Notes |
 |---|---|---|
 | RED | `469ed58` | Failing I3 tests + before screenshots |
-| GREEN | _(this PR)_ | Identity hierarchy + W1 CSS + test updates |
+| GREEN | `dd2e11c` | Identity hierarchy + W1 CSS + test updates |
+| Follow-up | `91614e1` | M2 homepage H1 assertion update |
 
 ## Screenshots
 
@@ -59,9 +60,9 @@ Allowlist and seven approved TL;DRs retained; MobiTangibles stays off Selected; 
 
 | Item | Value |
 |---|---|
-| PR | _(filled after open)_ |
-| Head SHA | _(filled after push)_ |
-| CI | _(filled after green run)_ |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/16 |
+| Head SHA | `91614e1` (full: `91614e1…` on branch tip) |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42462265424 (success) |
 
 ## Recommendation
 
