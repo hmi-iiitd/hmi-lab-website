@@ -41,6 +41,16 @@ test.describe("I2 seven-paper Selected Research (staging semantics)", () => {
     await expect(selected.locator("article.feature")).toContainText(SELECTED_ORDER[0].title);
     await expect(selected.locator("article.feature")).toContainText(/Accepted/i);
     await expect(selected.locator("article.feature")).toContainText(TLDR_SNIPPETS[0]);
+    // Year must appear once even when venue_short already includes it.
+    await expect(selected.locator("article.feature .feature-meta")).toHaveText(
+      /NeurIPS 2026 · Accepted/,
+    );
+    await expect(selected.locator("article.feature .feature-meta")).not.toHaveText(
+      /2026 · 2026/,
+    );
+    await expect(
+      selected.locator("article.mini-card", { hasText: /Electrodermal Activity/i }).locator(".mini-meta"),
+    ).toHaveText(/IEEE TAC · 2021/);
 
     const cards = selected.locator("article.mini-card");
     // Fixture-enabled builds may insert the synthetic card; ignore TEST_ONLY rows.

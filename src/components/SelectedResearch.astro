@@ -4,6 +4,7 @@ import SectionHeader from "./SectionHeader.astro";
 import { withBase } from "../lib/url";
 import { selectedResearchPublications } from "../lib/publications";
 import { getApprovedPlainLanguageTldr } from "../lib/plain-language-tldr";
+import { selectedResearchStatusLabel } from "../lib/selected-research-label";
 
 interface Props {
   publications: CollectionEntry<"publications">[];
@@ -22,9 +23,7 @@ const elevatedSlugs = new Set([
 
 /** Selected Research status line — D9: suppress promotional award labels here. */
 function statusLabel(pub: CollectionEntry<"publications">): string {
-  const bits = [pub.data.venue_short ?? pub.data.kind, String(pub.data.publication_year)];
-  if (pub.data.status === "accepted") bits.push("Accepted");
-  return bits.join(" · ");
+  return selectedResearchStatusLabel(pub.data);
 }
 ---
 
