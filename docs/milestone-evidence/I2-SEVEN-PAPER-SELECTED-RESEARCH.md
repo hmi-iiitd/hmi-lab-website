@@ -34,7 +34,7 @@ Membership is enforced by `SELECTED_RESEARCH_SLUGS` allowlist in `src/lib/public
 |---|---|---|
 | RED | `ebc13b0` | Failing I2 content/e2e tests |
 | GREEN | `08a5f47` | Allowlist helper, SelectedResearch Option A, featured ranks |
-| CONDITIONAL PASS fix | _(this head)_ | Year dedupe + focused Selected Research screenshots |
+| CONDITIONAL PASS fix | `64c7178` | Year dedupe + focused Selected Research screenshots |
 
 ## Screenshots (Selected Research section only)
 
@@ -73,8 +73,8 @@ The seven `owner_approved` records still carry `tldr_source_note` text ending wi
 | Item | Value |
 |---|---|
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/15 |
-| Head SHA | _(filled after push)_ |
-| CI | _(filled after green run)_ |
+| Head SHA | `64c71789a68311580b3dbf54922066d3482121a0` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42460600589 (success) |
 
 ## Recommendation
 
