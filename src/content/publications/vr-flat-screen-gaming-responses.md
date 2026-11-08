@@ -19,7 +19,8 @@ research_areas:
   - interaction-adaptation
 application_tags: []
 project_ids: []
-featured: false
+featured: true
+featured_rank: 5
 published: true
 metadata_verified: true
 verification_status: verified

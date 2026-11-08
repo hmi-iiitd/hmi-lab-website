@@ -5,6 +5,11 @@ import matter from "gray-matter";
 import { describe, expect, it } from "vitest";
 import { getApprovedPlainLanguageTldr } from "../../src/lib/plain-language-tldr";
 import { publicationDraftSchema } from "../../src/lib/content/schemas";
+import {
+  SELECTED_RESEARCH_SLUGS,
+  selectedResearchPublications,
+  type PubEntry,
+} from "../../src/lib/publications";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const pubDir = path.join(root, "src/content/publications");
@@ -61,7 +66,7 @@ describe("I2 Selected Research seven-paper membership (RED→GREEN)", () => {
     expect(pubsSrc).toMatch(/express-ear/);
 
     expect(src).toMatch(/selectedResearchPublications/);
-    expect(src).toMatch(/slice\(\s*1\s*,\s*7\s*\)/);
+    expect(src).toMatch(/selected\.slice\(\s*1\s*\)/);
     expect(src).not.toMatch(/featured\.slice\(\s*1\s*,\s*4\s*\)/);
     expect(src).not.toMatch(/featuredPublications/);
   });
@@ -84,5 +89,30 @@ describe("I2 Selected Research seven-paper membership (RED→GREEN)", () => {
   it("gives ASD and ADHD elevated compact-card emphasis classes", () => {
     const src = readFileSync(path.join(root, "src/components/SelectedResearch.astro"), "utf8");
     expect(src).toMatch(/mini-card--elevated/);
+  });
+
+  it("selectedResearchPublications ignores non-allowlisted featured records", () => {
+    const pubs = loadPubs();
+    const entries = pubs.map((data) => ({
+      id: data.slug,
+      collection: "publications" as const,
+      data,
+      body: "",
+    })) as PubEntry[];
+    const selected = selectedResearchPublications([
+      ...entries,
+      {
+        ...entries[0],
+        id: "extra-featured",
+        data: {
+          ...entries[0].data,
+          slug: "extra-featured-not-selected",
+          featured: true,
+          featured_rank: 99,
+          test_fixture: false,
+        },
+      } as PubEntry,
+    ]);
+    expect(selected.map((p) => p.data.slug)).toEqual([...SELECTED_RESEARCH_SLUGS]);
   });
 });

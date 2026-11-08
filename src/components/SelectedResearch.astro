@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import SectionHeader from "./SectionHeader.astro";
 import { withBase } from "../lib/url";
-import { featuredPublications } from "../lib/publications";
+import { selectedResearchPublications } from "../lib/publications";
 import { getApprovedPlainLanguageTldr } from "../lib/plain-language-tldr";
 
 interface Props {
@@ -10,16 +10,20 @@ interface Props {
 }
 
 const { publications } = Astro.props;
-const featured = featuredPublications(publications);
-const primary = featured[0];
-// Keep the frozen four-paper Selected Research cardinality (1 primary + 3 secondary).
-const secondary = featured.slice(1, 4);
+const selected = selectedResearchPublications(publications);
+const primary = selected[0];
+// Option A: one primary feature + up to six compact cards (plus optional e2e fixture).
+const secondary = selected.slice(1);
 const primaryTldr = primary ? getApprovedPlainLanguageTldr(primary.data) : undefined;
+const elevatedSlugs = new Set([
+  "predictive-asd-acoustic-linguistic",
+  "trial-pupil-dynamics-adhd",
+]);
 
+/** Selected Research status line — D9: suppress promotional award labels here. */
 function statusLabel(pub: CollectionEntry<"publications">): string {
   const bits = [pub.data.venue_short ?? pub.data.kind, String(pub.data.publication_year)];
   if (pub.data.status === "accepted") bits.push("Accepted");
-  if (pub.data.award) bits.push(pub.data.award);
   return bits.join(" · ");
 }
 ---
@@ -28,7 +32,7 @@ function statusLabel(pub: CollectionEntry<"publications">): string {
   <SectionHeader
     label="01 / Selected work"
     title="Ideas made tangible."
-    intro="A curated set of verified Interactive Intelligence contributions—newer AI work alongside interactive systems and applications. Additional sensing and archival records remain discoverable in the publications archive."
+    intro="Seven verified Interactive Intelligence contributions—foundational multi-agent learning, neurodevelopment and clinical collaboration, human-centered robotics, immersive interaction, affective computing, and wearable sensing. Full records remain in the publications archive."
     titleId="selected-title"
   />
 
@@ -37,36 +41,11 @@ function statusLabel(pub: CollectionEntry<"publications">): string {
       <p class="placeholder-banner">No verified featured publications are available yet</p>
     ) : (
       <>
-        <article class="feature" aria-labelledby="feature-title">
-          <div class="feature-viz" aria-hidden="true">
-            <span class="viz-kicker">Decorative schematic</span>
-            <svg
-              viewBox="0 0 530 320"
-              role="presentation"
-              focusable="false"
-              style="width:100%;max-width:510px;height:auto"
-            >
-              <g fill="none" stroke="#88b9ae" stroke-width="1.35" opacity=".78">
-                <path d="M95 165 Q105 70 255 70 Q390 70 418 164"></path>
-                <path d="M415 184 Q389 273 253 273 Q105 273 95 186"></path>
-              </g>
-              <g fill="#d5efe5" font-family="Georgia, serif" font-size="15" text-anchor="middle">
-                <circle cx="94" cy="177" r="41" fill="#315c57" stroke="#8bb6ac"></circle>
-                <text x="94" y="182">People</text>
-                <circle cx="262" cy="89" r="47" fill="#315c57" stroke="#8bb6ac"></circle>
-                <text x="262" y="94">Systems</text>
-                <circle cx="421" cy="177" r="42" fill="#315c57" stroke="#8bb6ac"></circle>
-                <text x="421" y="182">Agents</text>
-                <circle cx="262" cy="258" r="48" fill="#315c57" stroke="#8bb6ac"></circle>
-                <text x="262" y="263">Learning</text>
-              </g>
-            </svg>
-            <span class="viz-foot">Illustrative layout art · not study data or results</span>
-          </div>
+        <article class="feature feature--text" aria-labelledby="feature-title">
           <div class="feature-body">
             <p class="feature-meta">{statusLabel(primary)}</p>
             <h3 class="feature-title" id="feature-title">{primary.data.title}</h3>
-            <p>
+            <p class="feature-authors">
               {primary.data.authors.map((a: { name: string }) => a.name).join(", ")}
             </p>
             {primaryTldr && <p class="plain-language-tldr">{primaryTldr}</p>}
@@ -81,13 +60,16 @@ function statusLabel(pub: CollectionEntry<"publications">): string {
             <div class="mini-grid">
               {secondary.map((pub) => {
                 const tldr = getApprovedPlainLanguageTldr(pub.data);
+                const elevated = elevatedSlugs.has(pub.data.slug);
                 return (
-                  <article class="mini-card">
+                  <article class:list={["mini-card", { "mini-card--elevated": elevated }]}>
                     <p class="mini-meta">{statusLabel(pub)}</p>
                     <h3>
                       <a href={withBase(`papers/${pub.data.slug}/`)}>{pub.data.title}</a>
                     </h3>
-                    <p>{pub.data.authors.map((a: { name: string }) => a.name).join(", ")}</p>
+                    <p class="mini-authors">
+                      {pub.data.authors.map((a: { name: string }) => a.name).join(", ")}
+                    </p>
                     {tldr && <p class="plain-language-tldr">{tldr}</p>}
                   </article>
                 );

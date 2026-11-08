@@ -24,25 +24,22 @@ test.describe("M3.5 readability and editorial gate", () => {
     await expect(page.getByText(/§\s*30\.8/)).toHaveCount(0);
   });
 
-  test("homepage features ESL Accepted, CHI HM, ADHD Sci Rep, MobiTangibles", async ({
-    page,
-  }) => {
+  test("homepage features the I2 seven-paper Selected set with ESL primary", async ({ page }) => {
     await page.goto("./");
     const selected = page.locator("#selected-research");
     await expect(selected.locator("article.feature")).toHaveCount(1);
-    await expect(selected.locator("article.mini-card")).toHaveCount(3);
+    const miniCount = await selected.locator("article.mini-card").count();
+    expect(miniCount === 6 || miniCount === 7).toBeTruthy();
     await expect(selected.getByText(/Epistemic Social Learning/i)).toBeVisible();
     await expect(selected.getByText(/Accepted/i).first()).toBeVisible();
     await expect(selected.getByText(/NeurIPS 2026/i)).toBeVisible();
-    await expect(selected.getByText(/Honorable Mention/i)).toBeVisible();
     await expect(selected.getByText(/pupil dynamics/i)).toBeVisible();
-    // Fixture-enabled Playwright builds may temporarily occupy one secondary slot with the
-    // synthetic TL;DR fixture (test-only rank). Staging excludes fixtures, restoring MobiTangibles.
-    const mobiCount = await selected.getByText(/MobiTangibles/i).count();
-    const fixtureCount = await selected.getByText(/TEST_ONLY_FICTIONAL/i).count();
-    expect(mobiCount > 0 || fixtureCount > 0).toBeTruthy();
-    await expect(selected.getByText(/ExpressEar/i)).toHaveCount(0);
-    await expect(selected.locator(".viz-foot")).toContainText(/not study data/i);
+    await expect(selected.getByText(/ASD Identification/i)).toBeVisible();
+    await expect(selected.getByRole("link", { name: /ExpressEar/i })).toBeVisible();
+    // D9: Honorable Mention must not appear promotionally in Selected Research.
+    await expect(selected.getByText(/Honorable Mention/i)).toHaveCount(0);
+    await expect(selected.getByText(/MobiTangibles/i)).toHaveCount(0);
+    await expect(selected.locator(".feature-viz")).toHaveCount(0);
   });
 
   test("section labels are unique 01–05", async ({ page }) => {

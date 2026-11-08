@@ -17,8 +17,7 @@ research_areas:
   - perception-understanding
 application_tags: []
 project_ids: []
-featured: true
-featured_rank: 4
+featured: false
 published: true
 metadata_verified: true
 verification_status: verified

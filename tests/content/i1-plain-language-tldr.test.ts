@@ -187,10 +187,12 @@ describe("I1/T-A UI surfaces omit empty TL;DR chrome", () => {
     expect(src).toMatch(/getApprovedPlainLanguageTldr[\s\S]*TL;DR — In plain language/);
   });
 
-  it("preserves frozen Selected Research cardinality of one primary plus three secondary", () => {
+  it("Selected Research uses the I2 seven-paper allowlist with fixture-safe e2e injection", () => {
     const src = readFileSync(path.join(root, "src/components/SelectedResearch.astro"), "utf8");
-    expect(src).toMatch(/featured\.slice\(\s*1\s*,\s*4\s*\)/);
-    expect(src).not.toMatch(/featured\.slice\(\s*1\s*\)\s*;/);
+    const pubsSrc = readFileSync(path.join(root, "src/lib/publications.ts"), "utf8");
+    expect(pubsSrc).toMatch(/SELECTED_RESEARCH_SLUGS/);
+    expect(src).toMatch(/selectedResearchPublications/);
+    expect(src).not.toMatch(/featured\.slice\(\s*1\s*,\s*4\s*\)/);
 
     const pubDir = path.join(root, "src/content/publications");
     const publicFeatured = readdirSync(pubDir)
@@ -198,15 +200,13 @@ describe("I1/T-A UI surfaces omit empty TL;DR chrome", () => {
       .map((f) => matter(readFileSync(path.join(pubDir, f), "utf8")).data)
       .filter((p) => p.featured && !p.test_fixture)
       .sort((a, b) => (a.featured_rank ?? 99) - (b.featured_rank ?? 99));
-    expect(publicFeatured).toHaveLength(4);
+    expect(publicFeatured).toHaveLength(7);
 
     const fixture = matter(
       readFileSync(path.join(pubDir, "test-fixture-synthetic-interaction.md"), "utf8"),
     ).data;
     expect(fixture.test_fixture).toBe(true);
     expect(fixture.featured).toBe(true);
-    expect(fixture.featured_rank).toBeGreaterThanOrEqual(1);
-    expect(fixture.featured_rank).toBeLessThanOrEqual(4);
   });
 
   it("staging dist scanner bans synthetic TL;DR fixture markers", () => {

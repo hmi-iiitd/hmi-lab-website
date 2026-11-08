@@ -19,7 +19,8 @@ application_tags:
   - health
   - neurodevelopment
 project_ids: []
-featured: false
+featured: true
+featured_rank: 2
 published: true
 metadata_verified: true
 verification_status: verified

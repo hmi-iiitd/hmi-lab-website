@@ -25,7 +25,7 @@ application_tags:
   - social-robotics
 project_ids: []
 featured: true
-featured_rank: 2
+featured_rank: 4
 published: true
 metadata_verified: true
 verification_status: verified

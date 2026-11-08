@@ -5,13 +5,16 @@ const FIXTURE_MARKER = "TEST_ONLY_FICTIONAL summary:";
 const FIXTURE_PAPER = "./papers/test-fixture-synthetic-interaction/";
 
 test.describe("I1/T-A fixture-enabled approved TL;DR rendering", () => {
-  test("homepage identity and Selected Research cardinality remain frozen", async ({ page }) => {
+  test("homepage identity remains frozen with I2 Selected Research cardinality", async ({
+    page,
+  }) => {
     await page.goto("./");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
     const selected = page.locator("#selected-research");
     await expect(selected).toBeVisible();
     await expect(selected.locator("article.feature")).toHaveCount(1);
-    await expect(selected.locator("article.mini-card")).toHaveCount(3);
+    const miniCount = await selected.locator("article.mini-card").count();
+    expect(miniCount === 6 || miniCount === 7).toBeTruthy();
     await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
   });
 
