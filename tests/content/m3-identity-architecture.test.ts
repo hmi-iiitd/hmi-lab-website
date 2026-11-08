@@ -136,7 +136,9 @@ describe("M3.5 identity page contracts", () => {
 
   it("homepage consumes identity constants rather than retired slogan", () => {
     const homepage = readFileSync(path.join(root, "src/pages/index.astro"), "utf8");
-    expect(homepage).toMatch(/PUNCHLINE|HERO_INTRODUCTION/);
+    expect(homepage).toMatch(/RESEARCH_IDENTITY/);
+    expect(homepage).toMatch(/PUNCHLINE/);
+    expect(homepage).toMatch(/HERO_INTRODUCTION/);
     expect(homepage).not.toMatch(/Intelligence is<br/);
     expect(homepage).toMatch(/application-pathways|ApplicationPathways/);
   });

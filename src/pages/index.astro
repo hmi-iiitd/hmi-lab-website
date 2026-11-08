@@ -9,6 +9,7 @@ import NewsHighlights from "../components/NewsHighlights.astro";
 import { withBase } from "../lib/url";
 import {
   HERO_INTRODUCTION,
+  HOME_EYEBROW,
   LAB_NAME,
   PRIMARY_THEME_IDS,
   PUNCHLINE,
@@ -61,8 +62,9 @@ const news: CollectionEntry<"news">[] = await getCollection("news");
     </svg>
 
     <div class="hero-copy">
-      <p class="eyebrow">Interactive Intelligence · IIIT-Delhi</p>
-      <h1 id="hero-title">Intelligence emerges <em>through interaction.</em></h1>
+      <p class="eyebrow">{HOME_EYEBROW}</p>
+      <h1 id="hero-title">{RESEARCH_IDENTITY}</h1>
+      <p class="hero-deck">{PUNCHLINE}</p>
       <div class="hero-bottom">
         <p class="lead">{HERO_INTRODUCTION}</p>
         <div class="hero-actions">

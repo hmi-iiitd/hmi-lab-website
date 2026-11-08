@@ -5,6 +5,7 @@ import {
   HOMEPAGE_THEMES_INTRO,
   MINSKY_SOCIETY_OF_MIND,
   PUNCHLINE,
+  RESEARCH_IDENTITY,
   RESEARCH_PAGE_THEMES_LEDE,
   RESEARCH_PHILOSOPHY_LABEL,
   RESEARCH_PHILOSOPHY_PARAGRAPHS,
@@ -22,7 +23,8 @@ async function assertNoHorizontalOverflow(page: Page) {
 test.describe("Research positioning implementation", () => {
   test("homepage uses approved intro and concise themes lede", async ({ page }) => {
     await page.goto("./");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(RESEARCH_IDENTITY);
+    await expect(page.locator("#hero .hero-deck")).toHaveText(PUNCHLINE);
     await expect(page.getByText(HERO_INTRODUCTION, { exact: true })).toBeVisible();
     await expect(page.locator("#research-themes .section-intro")).toHaveText(HOMEPAGE_THEMES_INTRO);
     await expect(page.getByText(RESEARCH_PAGE_THEMES_LEDE, { exact: true })).toHaveCount(0);

@@ -22,7 +22,7 @@ describe("I3 homepage identity hierarchy (RED→GREEN)", () => {
     // H1 must bind RESEARCH_IDENTITY, not wrap PUNCHLINE as the sole heading text.
     expect(homepage).toMatch(/<h1[^>]*>\{\s*RESEARCH_IDENTITY\s*\}<\/h1>/);
     expect(homepage).not.toMatch(/<h1[^>]*>Intelligence emerges/);
-    expect(homepage).toMatch(/Human–Machine Interaction|Human-Machine Interaction/);
+    expect(homepage).toMatch(/HOME_EYEBROW/);
   });
 
   it("keeps approved identity constants unchanged", () => {

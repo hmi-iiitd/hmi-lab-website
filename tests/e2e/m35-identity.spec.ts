@@ -4,15 +4,17 @@ import {
   MINSKY_SOCIETY_OF_MIND,
   PRIMARY_THEME_TITLES,
   PUNCHLINE,
+  RESEARCH_IDENTITY,
 } from "../../src/lib/identity";
 import { runtimeScreenshotPath } from "./screenshot-path";
 
 test.describe("M3.5 Interactive Intelligence identity", () => {
-  test("homepage hero punchline and introduction match approved text exactly", async ({
+  test("homepage hero identity hierarchy and introduction match approved text", async ({
     page,
   }) => {
     await page.goto("./");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(RESEARCH_IDENTITY);
+    await expect(page.locator("#hero .hero-deck")).toHaveText(PUNCHLINE);
     await expect(page.getByText(HERO_INTRODUCTION, { exact: true })).toBeVisible();
     await expect(page.getByText(/Intelligence is\s+an interaction/i)).toHaveCount(0);
   });
