@@ -32,7 +32,7 @@ Membership is enforced by `SELECTED_RESEARCH_SLUGS` allowlist in `src/lib/public
 | Step | SHA | Notes |
 |---|---|---|
 | RED | `ebc13b0` | Failing I2 content/e2e tests + before screenshots |
-| GREEN | _(this PR head)_ | Allowlist helper, SelectedResearch Option A, featured ranks, test updates |
+| GREEN | `08a5f47` | Allowlist helper, SelectedResearch Option A, featured ranks, test updates |
 
 ## Screenshots
 
@@ -61,9 +61,9 @@ MobiTangibles remains on `/publications/` and `/papers/mobitangibles/`.
 
 | Item | Value |
 |---|---|
-| PR | _(filled after open)_ |
-| Head SHA | _(filled after push)_ |
-| CI | _(filled after green run)_ |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/15 |
+| Head SHA | `08a5f4785d9e22102a45e9d046ca95266a4e4219` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42459689849 (success) |
 
 ## Recommendation
 
