@@ -45,6 +45,42 @@ export function featuredPublications(entries: PubEntry[]): PubEntry[] {
     .sort((a, b) => (a.data.featured_rank ?? 99) - (b.data.featured_rank ?? 99));
 }
 
+/**
+ * Faculty-approved Selected Research membership (I2 / M421 D6–D7).
+ * Hard allowlist — marking another record `featured` cannot silently expand the module.
+ */
+export const SELECTED_RESEARCH_SLUGS = [
+  "epistemic-social-learning",
+  "predictive-asd-acoustic-linguistic",
+  "trial-pupil-dynamics-adhd",
+  "social-robots-autism-care-india",
+  "vr-flat-screen-gaming-responses",
+  "emotion-recognition-eda",
+  "express-ear",
+] as const;
+
+export type SelectedResearchSlug = (typeof SELECTED_RESEARCH_SLUGS)[number];
+
+/** Homepage Selected Research set: exactly the seven allowlisted papers on staging. */
+export function selectedResearchPublications(entries: PubEntry[]): PubEntry[] {
+  const listable = entries.filter(isListablePublication);
+  const bySlug = new Map(listable.map((entry) => [entry.data.slug, entry]));
+  const selected = SELECTED_RESEARCH_SLUGS.map((slug) => bySlug.get(slug)).filter(
+    (entry): entry is PubEntry => Boolean(entry),
+  );
+
+  // Fixture-enabled Playwright builds may inject the synthetic TL;DR fixture after ESL
+  // for positive-path coverage. Staging/production never include fixtures.
+  if (includeTestFixtures()) {
+    const fixture = listable.find((entry) => entry.data.test_fixture && entry.data.featured);
+    if (fixture && selected[0]) {
+      return [selected[0], fixture, ...selected.slice(1)];
+    }
+  }
+
+  return selected;
+}
+
 /** Verified public publications for a primary theme (includes accepted). */
 export function publicationsForTheme(entries: PubEntry[], themeId: string): PubEntry[] {
   return entries

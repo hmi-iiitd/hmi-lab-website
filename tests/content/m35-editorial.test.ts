@@ -17,7 +17,7 @@ describe("M3.5 editorial corrections", () => {
     expect(MINSKY_SOCIETY_OF_MIND.text).not.toMatch(/magical trick/i);
   });
 
-  it("features ESL, CHI HM, Sci Rep ADHD, and MobiTangibles in that order", () => {
+  it("features the I2 seven-paper Selected set and keeps MobiTangibles archival", () => {
     const dir = path.join(root, "src/content/publications");
     const pubs = readdirSync(dir)
       .filter((f) => f.endsWith(".md"))
@@ -29,13 +29,16 @@ describe("M3.5 editorial corrections", () => {
 
     expect(featured.map((p) => p.slug)).toEqual([
       "epistemic-social-learning",
-      "social-robots-autism-care-india",
+      "predictive-asd-acoustic-linguistic",
       "trial-pupil-dynamics-adhd",
-      "mobitangibles",
+      "social-robots-autism-care-india",
+      "vr-flat-screen-gaming-responses",
+      "emotion-recognition-eda",
+      "express-ear",
     ]);
 
-    const express = pubs.find((p) => p.slug === "express-ear");
-    expect(express?.featured).toBe(false);
+    const mobi = pubs.find((p) => p.slug === "mobitangibles");
+    expect(mobi?.featured).toBe(false);
   });
 
   it("keeps homepage section numbers unique and sequential", () => {

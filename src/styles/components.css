@@ -211,6 +211,37 @@
   margin-bottom: 1.5rem;
 }
 
+/* I2 Option A — text-first primary feature (decorative schematic retired). */
+.feature--text {
+  display: block;
+  min-height: 0;
+  background: var(--color-paper);
+  border-color: var(--color-line);
+}
+
+.feature--text .feature-body {
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0 1.5rem;
+  background: transparent;
+  max-width: 46rem;
+}
+
+.feature--text .feature-authors,
+.mini-authors {
+  color: var(--color-muted);
+  font-size: var(--text-secondary);
+  line-height: var(--leading-prose);
+  margin: 0 0 0.85rem;
+}
+
+.mini-card--elevated {
+  border-bottom: 2px solid #7aa399;
+  padding-bottom: 1.35rem;
+}
+
+.mini-card--elevated .mini-meta {
+  color: var(--color-ink);
+}
+
 .feature-viz {
   background: var(--color-night);
   position: relative;
@@ -948,6 +979,10 @@
 @media (max-width: 1020px) {
   .feature {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .mini-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hero-art {

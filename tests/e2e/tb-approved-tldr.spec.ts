@@ -53,7 +53,8 @@ test.describe("T-B approved TL;DR publication surfaces", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
     const selected = page.locator("#selected-research");
     await expect(selected.locator("article.feature")).toHaveCount(1);
-    await expect(selected.locator("article.mini-card")).toHaveCount(3);
+    const miniCount = await selected.locator("article.mini-card").count();
+    expect(miniCount === 6 || miniCount === 7).toBeTruthy();
     await expect(page.getByText("TL;DR — In plain language")).toHaveCount(0);
 
     // ESL is always the primary feature; its approved TL;DR must render.
@@ -70,9 +71,9 @@ test.describe("T-B approved TL;DR publication surfaces", () => {
       }
     }
 
-    // Archive-only approvals must not appear in the frozen four-card Selected set.
-    await expect(selected.getByText("stand-alone clinical diagnostic test")).toHaveCount(0);
-    await expect(selected.getByText("recognizable movements were more limited")).toHaveCount(0);
+    // I2 includes all seven approved TL;DRs on Selected Research.
+    await expect(selected.getByText("stand-alone clinical diagnostic test")).toBeVisible();
+    await expect(selected.getByText("recognizable movements were more limited")).toBeVisible();
   });
 
   test("all seven approved summaries appear on paper pages and the archive", async ({ page }) => {
