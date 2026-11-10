@@ -171,9 +171,9 @@ Staging HTML SHA-256 identical before/after for homepage, publications archive, 
 
 | Item | Value |
 |---|---|
-| PR | *(filled after open)* |
-| Head SHA | *(branch tip)* |
-| CI | *(filled after Actions)* |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/19 |
+| Head SHA | `13fb2625106f82909d591dc11a5eabead9ea4660` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42796570354 (quality success) |
 
 ## Recommendation
 
