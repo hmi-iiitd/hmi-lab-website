@@ -2,6 +2,7 @@
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
+  HMI_RESEARCH_PROPOSITION,
   LAB_NAME,
   MINSKY_SOCIETY_OF_MIND,
   RESEARCH_IDENTITY,
@@ -32,6 +33,10 @@ const { Content } = await render(entry);
       <h2 class="section-title" id="research-philosophy-title">{RESEARCH_PHILOSOPHY_QUESTION}</h2>
       <div class="about-prose about-philosophy-prose">
         {RESEARCH_PHILOSOPHY_PARAGRAPHS.map((paragraph) => <p>{paragraph}</p>)}
+        <p class="hmi-research-proposition">
+          Our HMI research programme asks a question inspired by the form of Minsky’s inquiry:
+          <span>{HMI_RESEARCH_PROPOSITION}</span>
+        </p>
       </div>
     </section>
 
