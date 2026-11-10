@@ -36,9 +36,10 @@ test.describe("M2 homepage structure", () => {
     await expect(page.locator("#community")).toBeVisible();
     await expect(page.locator("#news-highlights")).toBeVisible();
 
-    await expect(
-      page.getByRole("heading", { name: /Intelligence emerges through interaction/i }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Interactive Intelligence/i);
+    await expect(page.locator("#hero .hero-deck")).toHaveText(
+      /Intelligence emerges through interaction/i,
+    );
     await expect(page.getByRole("link", { name: "Explore research", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: "View publications", exact: true })).toBeVisible();
   });

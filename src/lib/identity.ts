@@ -7,6 +7,8 @@ export const LAB_NAME = "Human–Machine Interaction Research Group";
 export const INSTITUTION = "IIIT-Delhi";
 export const RESEARCH_IDENTITY = "Interactive Intelligence";
 export const PUNCHLINE = "Intelligence emerges through interaction.";
+/** Homepage eyebrow only (I3) — programme name is the H1, not chrome. */
+export const HOME_EYEBROW = `Human–Machine Interaction · ${INSTITUTION}`;
 
 /** Concise homepage hero introduction — approved positioning (people, agents, physical world). */
 export const HERO_INTRODUCTION =

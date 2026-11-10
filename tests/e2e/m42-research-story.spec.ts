@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { PRIMARY_THEME_IDS, PUNCHLINE } from "../../src/lib/identity";
+import { PRIMARY_THEME_IDS, RESEARCH_IDENTITY } from "../../src/lib/identity";
 
 const FIXTURE_STORY = "./projects/test-fixture-research-story/";
 const FIXTURE_PAPER = "./papers/test-fixture-synthetic-interaction/";
@@ -45,9 +45,11 @@ test.describe("M4.2 research story remains unpublished on public surfaces", () =
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Verified research archive");
   });
 
-  test("M4.1 theme routes and frozen homepage punchline remain intact", async ({ page }) => {
+  test("M4.1 theme routes and homepage Interactive Intelligence H1 remain intact", async ({
+    page,
+  }) => {
     await page.goto("./");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(RESEARCH_IDENTITY);
     for (const id of PRIMARY_THEME_IDS) {
       await page.goto(`./research/${id}/`);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();

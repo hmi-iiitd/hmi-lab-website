@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { PUNCHLINE } from "../../src/lib/identity";
+import { RESEARCH_IDENTITY } from "../../src/lib/identity";
 
 const FIXTURE_MARKER = "TEST_ONLY_FICTIONAL summary:";
 const FIXTURE_PAPER = "./papers/test-fixture-synthetic-interaction/";
@@ -9,7 +9,7 @@ test.describe("I1/T-A fixture-enabled approved TL;DR rendering", () => {
     page,
   }) => {
     await page.goto("./");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(PUNCHLINE);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(RESEARCH_IDENTITY);
     const selected = page.locator("#selected-research");
     await expect(selected).toBeVisible();
     await expect(selected.locator("article.feature")).toHaveCount(1);

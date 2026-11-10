@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { MINSKY_SOCIETY_OF_MIND, PUNCHLINE } from "../../src/lib/identity";
+import { MINSKY_SOCIETY_OF_MIND, PUNCHLINE, RESEARCH_IDENTITY } from "../../src/lib/identity";
 import { runtimeScreenshotPath } from "./screenshot-path";
 
 async function assertNoHorizontalOverflow(page: Page) {
@@ -140,7 +140,9 @@ test.describe("M3.5 readability and editorial gate", () => {
       });
     }
 
-    await expect(page.getByRole("heading", { name: PUNCHLINE }).or(page.locator("h1"))).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: RESEARCH_IDENTITY }).or(page.getByRole("heading", { name: PUNCHLINE })).or(page.locator("h1")),
+    ).toBeVisible();
   });
 
   test("320px reflow keeps primary content usable without overflow", async ({ page }) => {
