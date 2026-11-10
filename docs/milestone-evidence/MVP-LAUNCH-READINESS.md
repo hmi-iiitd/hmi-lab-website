@@ -2,7 +2,7 @@
 
 **PR title:** `release: MVP production readiness and launch hardening`  
 **Baseline (main before release branch):** `78c958926d39d365afcaab9af5266f73aeb22c48`  
-**Proposed release SHA:** *(fill with PR HEAD after push — see §1)*  
+**Proposed release SHA:** `c62a43157300465e00e7d956acdc47ae1ced7515`  
 **Production target:** https://hmi.iiitd.edu.in/  
 **Staging (unchanged):** https://hmi-iiitd.github.io/hmi-lab-website/  
 **Verdict:** **NO-GO for production cutover** until the P0 blockers in §2 are cleared.  
@@ -12,13 +12,11 @@
 
 ## 1. Exact release commit SHA
 
-Record the tip of `release/mvp-production-readiness` after this evidence lands:
-
 | Field | Value |
 |---|---|
 | Branch | `release/mvp-production-readiness` |
-| Proposed release SHA | _see `git rev-parse HEAD` on PR tip_ |
-| Production artifact SHA-256 | `docs/milestone-evidence/MVP-PRODUCTION-ARTIFACT.sha256` (`artifact_sha256=…`) |
+| Proposed release SHA | `c62a43157300465e00e7d956acdc47ae1ced7515` |
+| Production artifact SHA-256 | `9c04b5234f539eed4d7cc871a56d68e729677aa355292d39c1ca064a4d8825f9` (see `MVP-PRODUCTION-ARTIFACT.sha256`) |
 | Build command | `npm run build:production` |
 | Artifact root | `dist/` (immutable checksum of file paths + bytes) |
 
