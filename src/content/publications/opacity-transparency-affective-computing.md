@@ -42,17 +42,17 @@ evidence_note: "Verified against Crossref DOI 10.1109/taffc.2023.3278230 on 2026
 verified_at: '2026-11-03'
 unresolved_notes: []
 plain_language_tldr: >-
-  This conceptual ethics paper argues that affective computing tends to make people more
-  transparent to machines while systems themselves stay opaque. The authors warn of risks
-  to autonomy, manipulation, anxiety, and unfair burdens on vulnerable groups. It is a
-  normative analysis, not an experimental performance study.
+  This conceptual ethics paper argues that technologies that infer or respond to people's
+  emotions tend to make people more transparent to machines while systems stay opaque.
+  The authors warn of risks to autonomy, manipulation, anxiety, and unfair burdens on
+  vulnerable groups. It is a normative analysis, not an experimental study.
 tldr_status: ai_assisted_draft
-tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract and accessible full text 2026-11-10
+tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract and accessible full text 2026-11-10; review wording 2026-11-10
 tldr_source_note: >-
-  Conceptual/normative ethics article. Grounded in IEEE TAC abstract via DOI
-  10.1109/taffc.2023.3278230 and accessible full-text PDF used for teaching
-  (cs.uwaterloo.ca course mirror). Collaborative authorship. No datasets, participant
-  counts, or algorithmic performance claims in this draft.
+  Conceptual/normative ethics article. DOI 10.1109/taffc.2023.3278230; accessible
+  full-text teaching PDF. Affective computing glossed as technologies that infer or
+  respond to people's emotions. Collaborative authorship. No datasets, participant
+  counts, or algorithmic performance claims.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

@@ -40,18 +40,18 @@ evidence_note: "Verified against Crossref DOI 10.1109/icassp49357.2023.10095135 
 verified_at: '2026-11-03'
 unresolved_notes: []
 plain_language_tldr: >-
-  Researchers analysed children's conversation transcripts for semantic and pragmatic
-  speech patterns—such as echolalia, coherence, and repetition—linked to autism
-  assessment research. On transcripts from 76 children, these features complemented
-  other language cues and supported classification in the study. The work does not
-  establish a standalone clinical diagnostic test.
+  Can the way children use language in conversation help researchers study autism?
+  SPASHT examined repetition and how ideas connect in transcripts from 76 children.
+  These patterns helped distinguish children with and without autism in this study, but
+  the findings do not establish a clinical diagnostic test.
 tldr_status: ai_assisted_draft
-tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract 2026-11-10
+tldr_drafted_by: Cursor agent (T-C Batch 1); full-text audit via ResearchGate author upload 2026-11-10
 tldr_source_note: >-
-  ABSTRACT-ONLY / LIMITED EVIDENCE. Grounded in ICASSP 2023 abstract via DOI
-  10.1109/icassp49357.2023.10095135 (IEEE/SPS abstract text; CHILDES n=76). Abstract
-  reports 94% classification accuracy; draft omits that figure pending full-text
-  verification of evaluation protocol. Not a clinical diagnostic claim.
+  FULL TEXT REVIEWED (author upload). ResearchGate publication/371287533 plus DOI
+  10.1109/icassp49357.2023.10095135. §3.3 Experiments: 90:10 train/test split; SVM RBF
+  with grid search and 5-fold CV for C/γ; CHILDES n=76 (35 ASD / 41 TD). Table 3 reports
+  SVM accuracy 94.1% — omitted from public draft pending evaluation-adequacy review.
+  Not a clinical diagnostic claim.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.

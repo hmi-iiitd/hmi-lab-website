@@ -1,8 +1,9 @@
 # T-C Batch 1 — Five source-grounded plain-language TL;DR drafts
 
 **Status:** Draft preparation for PI/paper-owner review. **Not approved for public display.**  
-**Baseline:** `main` @ `e2bb96f9c7efe183e1e2e3c7c4b0e8ce2d2e389f` (PR #18 merged; CI + Pages OK)  
-**Authority:** M421 T-C coverage phase.  
+**Baseline (original):** `main` @ `e2bb96f` → merged as PR #19 @ `a5ffcc8`  
+**Review:** Independent CONDITIONAL PASS — https://github.com/hmi-iiitd/hmi-lab-website/pull/19#pullrequestreview-5840280294  
+**This update:** Post-merge editorial/dossier corrections on follow-up branch (PR #19 was already merged; wording fixes cannot be amended onto the closed PR).  
 **Gate:** All five remain `tldr_status: ai_assisted_draft`. No Cursor scientific approval.
 
 ---
@@ -16,22 +17,16 @@
 | DOI | `10.1109/tvcg.2024.3456191` |
 | Lab attribution | collaborative |
 | Source adequacy | **ABSTRACT-ONLY / LIMITED EVIDENCE** |
-| Source URL | https://doi.org/10.1109/tvcg.2024.3456191 (IEEE/ACM abstract) |
+| Source URL | https://doi.org/10.1109/tvcg.2024.3456191 (PubMed PMID 39269808 / ACM abstract) |
 | Suggested reviewer | Abhijeet Mishra / Jainendra Shukla — **Owner confirmation needed** |
 | Decision | **PENDING PI/PAPER-OWNER REVIEW** |
 
-**Proposed TL;DR (46 words):**
+**Proposed TL;DR (47 words):**
 
-> Researchers built low-cost smartphone magnetic proxies so people can feel precise tool-like motions—such as single-axis sliding and turning—in VR. In a 15-person study, the proxies felt more realistic and less fatiguing than bare hands or standard controllers. Results are limited to the tested tools and settings.
+> Researchers used physical props and smartphone magnetic sensing so people can feel precise tool-like motions—such as sliding and turning—in VR. In a 15-person study, these props felt more realistic and less fatiguing than bare hands or standard controllers. Results are limited to the tested tools and settings.
 
-**Claim support (from abstract):**
-
-- Problem: miniature control of precision hand-held tools in VR is hard with complex prototypes.
-- Contribution: smartphone magnetic-sensing proxies for single-axis translation/rotation.
-- Evidence: technical EMI evaluation; 15-participant comparison vs bare hands and VR controllers; higher realism, lower fatigue (author-reported).
-- Limitation stated in draft: tested tools/settings only.
-
-**Material uncertainties / overclaim risks:** Full methods/results pages not verified beyond abstract. Do not imply all virtual objects become physically tangible or that advantage generalizes beyond the study.
+**Claim support:** Abstract supports physical proxies, magnetic sensing, n=15, realism/fatigue vs bare hands and VR controllers.  
+**Remaining concern:** Full-text methods/results pages not independently verified.
 
 ---
 
@@ -43,22 +38,25 @@
 | Slug | `spasht-autism-speech` |
 | DOI | `10.1109/icassp49357.2023.10095135` |
 | Lab attribution | lab-led |
-| Source adequacy | **ABSTRACT-ONLY / LIMITED EVIDENCE** |
-| Source URL | https://doi.org/10.1109/icassp49357.2023.10095135 ; IEEE SPS abstract mirror |
+| Source adequacy | **FULL TEXT REVIEWED** (author-uploaded ResearchGate PDF text) |
+| Source URL | https://www.researchgate.net/publication/371287533_SPASHT_Semantic_and_Pragmatic_Speech_Features_for_Automatic_Assessment_of_Autism ; DOI link |
+| Sections reviewed | Abstract; §3.3 Experiments; §4 Results (Tables 3–4); §5 Conclusion |
 | Suggested reviewer | Ashwini B / Jainendra Shukla |
 | Decision | **PENDING PI/PAPER-OWNER REVIEW** |
 
-**Proposed TL;DR (47 words):**
+**Proposed TL;DR (46 words):**
 
-> Researchers analysed children's conversation transcripts for semantic and pragmatic speech patterns—such as echolalia, coherence, and repetition—linked to autism assessment research. On transcripts from 76 children, these features complemented other language cues and supported classification in the study. The work does not establish a standalone clinical diagnostic test.
+> Can the way children use language in conversation help researchers study autism? SPASHT examined repetition and how ideas connect in transcripts from 76 children. These patterns helped distinguish children with and without autism in this study, but the findings do not establish a clinical diagnostic test.
 
-**Claim support (from abstract):**
+**Validation methodology (full text §3.3):**
 
-- Semantic/pragmatic features (echolalia, coherence, repetitive language) via NLP/ML.
-- Validation on CHILDES transcripts: 76 children (35 ASD, 41 TD).
-- Abstract reports features complement syntactic/lexical cues and 94% classification accuracy — **accuracy figure omitted from draft** pending full-text protocol check.
+- Dataset: CHILDES transcripts; 76 children (35 ASD, 41 TD).
+- Train/test split: **90:10**.
+- Model selection: AutoML comparison; SVM with RBF kernel selected.
+- Hyperparameters: grid search with **5-fold cross-validation** for regularisation parameter C and γ.
+- Table 3: SVM accuracy **94.1%** (macro-F1 94) — **not placed in the public TL;DR** pending evaluation-adequacy review (small test split; CHILDES population).
 
-**Material uncertainties / overclaim risks:** Abstract-only; CHILDES population may not generalize. Must not imply clinically validated standalone diagnosis. Full-text verification recommended before approval.
+**Material uncertainties / overclaim risks:** Do not imply clinically validated diagnosis. 94% remains dossier-only until owners accept evaluation adequacy.
 
 ---
 
@@ -71,21 +69,28 @@
 | DOI | `10.1007/978-3-031-64302-6_28` |
 | Lab attribution | lab-led |
 | Source adequacy | **ABSTRACT-ONLY / LIMITED EVIDENCE** |
-| Source URL | https://doi.org/10.1007/978-3-031-64302-6_28 (Springer abstract); supporting lab page https://hmi.iiitd.edu.in/engagemeDataset.html |
+| Source URL | https://link.springer.com/chapter/10.1007/978-3-031-64302-6_28 ; dataset page https://hmi.iiitd.edu.in/engagemeDataset.html |
 | Suggested reviewer | Saumya Yadav / Jainendra Shukla |
 | Decision | **PENDING PI/PAPER-OWNER REVIEW** |
 
-**Proposed TL;DR (49 words):**
+**Proposed TL;DR (46 words) — required review wording:**
 
-> Researchers explored neuropsychological tests of selective, sustained, and alternating attention as a way to assess cognitive engagement in online learning. In a study with 73 students, manual facial-video labels agreed strongly with test scores. The work assesses attention during tasks; it does not demonstrate improved learning or classroom efficacy.
+> Researchers tested whether established attention tasks could help assess students’ engagement during online learning. In a study involving 73 students, ratings made from facial videos were correlated with scores on attention tests. The work explores ways to measure attention; it does not show improved learning outcomes.
 
-**Claim support (from abstract):**
+**Distinguish agreement vs correlation (Springer abstract):**
 
-- Maps clinical attention models to selective/sustained/alternating attention in online learning.
-- Neuropsychological assessments (Stroop, CPT, TMT); cohort of 73 students in published abstract.
-- Abstract reports strong annotator agreement (Krippendorff’s α 0.864) and correlation (Spearman 0.673) with test scores.
+| Statistic | Meaning | Value |
+|---|---|---|
+| Krippendorff’s **α = 0.864** | Inter-annotator agreement on facial-video ratings | Agreement among raters |
+| Spearman **ρ = 0.673** | Correlation between facial-video ratings and neuropsychological test scores | Cross-measure association |
 
-**Material uncertainties / overclaim risks:** Lab dataset page mentions 98 participants — draft follows published abstract’s **73**. Attention assessment ≠ learning/intelligence/educational success. No predictive classroom efficacy claimed.
+Do **not** collapse these into a single “agreed strongly with test scores” phrase.
+
+**Unresolved participant discrepancy (preserve explicitly):**
+
+- Published Springer abstract: **n = 73**
+- HMI EngageME dataset page: **n = 98**
+- Author reconciliation required before scientific approval. Draft follows abstract’s 73.
 
 ---
 
@@ -97,22 +102,16 @@
 | Slug | `ethics-child-robot-under-resourced` |
 | DOI | `10.1007/s12369-022-00882-1` |
 | Lab attribution | lab-led |
-| Source adequacy | **FULL-TEXT accessible** (Springer bronze OA / Leiden repository) |
-| Source URL | https://doi.org/10.1007/s12369-022-00882-1 ; https://scholarlypublications.universiteitleiden.nl/handle/1887/3677493 |
+| Source adequacy | **FULL-TEXT accessible** (PMC9133315 / Leiden) |
+| Source URL | https://doi.org/10.1007/s12369-022-00882-1 |
 | Suggested reviewer | Divyanshu Kumar Singh / Manohar Kumar / Jainendra Shukla — **Owner confirmation needed** |
 | Decision | **PENDING PI/PAPER-OWNER REVIEW** |
 
 **Proposed TL;DR (49 words):**
 
-> A five-week field study with 12 kindergarten children in an under-resourced New Delhi school examined ethical and pedagogical issues when a social robot was used in education. The authors highlight language barriers, harms from malfunction, trust and deception, and whether such innovation is viable locally—not claims of clinical benefit.
+> A five-week field study with 12 kindergarten children in an under-resourced New Delhi school examined ethical issues when a social robot was used in education. The authors highlight language barriers, possible harms if robots malfunction, trust and deception, and whether such innovation is viable locally—not claims of clinical benefit.
 
-**Claim support:**
-
-- 5-week in-the-wild study; 12 kindergarten students; under-resourced community school, New Delhi.
-- Interaction analysis of video; four ethical themes (language/accent; malfunction/harm; trust/deception; ecological viability).
-- Paper is ethical/pedagogical reflection, not an outcomes trial.
-
-**Material uncertainties / overclaim risks:** Do not convert recommendations into claims of clinical or educational effectiveness. Small qualitative sample; context-specific.
+**Note:** “possible harms if robots malfunction” — does not imply measured clinical harm.
 
 ---
 
@@ -124,23 +123,14 @@
 | Slug | `opacity-transparency-affective-computing` |
 | DOI | `10.1109/taffc.2023.3278230` |
 | Lab attribution | collaborative |
-| Source adequacy | **FULL-TEXT accessible** (IEEE abstract + accessible teaching PDF) |
-| Source URL | https://doi.org/10.1109/taffc.2023.3278230 ; https://cs.uwaterloo.ca/~jhoey/teaching/cs886-affect/papers/Ethics-AC.pdf |
-| Suggested reviewer | Manohar Kumar / Aisha Aijaz (corresponding in PDF) — **Owner confirmation needed** |
+| Source adequacy | **FULL-TEXT accessible** |
+| Source URL | https://doi.org/10.1109/taffc.2023.3278230 |
+| Suggested reviewer | Manohar Kumar / Aisha Aijaz — **Owner confirmation needed** |
 | Decision | **PENDING PI/PAPER-OWNER REVIEW** |
 
-**Proposed TL;DR (46 words):**
+**Proposed TL;DR (50 words):**
 
-> This conceptual ethics paper argues that affective computing tends to make people more transparent to machines while systems themselves stay opaque. The authors warn of risks to autonomy, manipulation, anxiety, and unfair burdens on vulnerable groups. It is a normative analysis, not an experimental performance study.
-
-**Claim support:**
-
-- Conceptual opacity–transparency framework for human–machine affective information.
-- Normative risks: autonomy, deception/manipulation, anxiety, distributive burdens.
-- Assessment of AC technology through that lens; responses to beneficence/privacy/capture objections.
-- No experimental dataset or performance metrics.
-
-**Material uncertainties / overclaim risks:** Must remain framed as conceptual/normative. Do not invent participant counts or algorithmic improvements. Collaborative attribution preserved.
+> This conceptual ethics paper argues that technologies that infer or respond to people's emotions tend to make people more transparent to machines while systems stay opaque. The authors warn of risks to autonomy, manipulation, anxiety, and unfair burdens on vulnerable groups. It is a normative analysis, not an experimental study.
 
 ---
 
@@ -148,34 +138,14 @@
 
 | Paper | Source adequacy | Claim verification | Readability | Remaining concern | Decision |
 |---|---|---|---|---|---|
-| MobiTangibles | Abstract-only | Abstract-supported; n=15/realism/fatigue checked against abstract | Clear lay wording | Full-text verification before any numeric strengthening | PENDING PI/PAPER-OWNER REVIEW |
-| SPASHT | Abstract-only | Core semantic/pragmatic + n=76 checked; 94% omitted | Clear; clinical caveat included | Full-text verification of evaluation protocol | PENDING PI/PAPER-OWNER REVIEW |
-| EngageME | Abstract-only (+ lab dataset page) | Attention types + n=73 + agreement claims from abstract | Clear; no learning-outcome hype | Resolve 73 vs dataset-page 98 with owners | PENDING PI/PAPER-OWNER REVIEW |
-| Child–robot ethics | Full-text accessible | n=12, 5 weeks, four themes verified | Clear; non-efficacy framing | Confirm preferred owner/reviewer among co-authors | PENDING PI/PAPER-OWNER REVIEW |
-| Opacity/transparency AC | Full-text accessible | Conceptual claims verified; no invented experiments | Clear normative framing | Confirm collaborative owner sign-off | PENDING PI/PAPER-OWNER REVIEW |
+| MobiTangibles | Abstract-only | n=15 / realism / fatigue match abstract | Physical props + magnetic sensing clarified | Full-text verification | PENDING PI/PAPER-OWNER REVIEW |
+| SPASHT | Full text reviewed (RG) | n=76; §3.3 90:10 + 5-fold grid search verified; 94.1% dossier-only | Lay wording without unexplained jargon | Evaluation-adequacy of 94% before any numeric public claim | PENDING PI/PAPER-OWNER REVIEW |
+| EngageME | Abstract-only | α vs ρ distinguished; n=73 used | Required review wording applied | Unresolved **73 vs 98** participant count | PENDING PI/PAPER-OWNER REVIEW |
+| Child–robot ethics | Full-text | n=12 / five weeks / themes verified | “Possible harms if robots malfunction” | Confirm preferred owner/reviewer | PENDING PI/PAPER-OWNER REVIEW |
+| Opacity/transparency AC | Full-text | Conceptual framing verified | Affective computing glossed | Collaborative owner sign-off | PENDING PI/PAPER-OWNER REVIEW |
 
-**No row is scientifically approved by Cursor.**
-
----
-
-## RED → GREEN / staging proof
-
-| Step | SHA | Notes |
-|---|---|---|
-| RED | `7bba466` | Failing Batch 1 draft tests |
-| GREEN | `9e98e65` | Five `ai_assisted_draft` records + this dossier |
-
-Staging HTML SHA-256 identical before/after for homepage, publications archive, five Batch 1 paper pages, and seven approved paper pages. Draft snippets absent from public HTML. Seven owner-approved TL;DRs unchanged.
-
-## CI evidence
-
-| Item | Value |
-|---|---|
-| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/19 |
-| Head SHA | `13fb2625106f82909d591dc11a5eabead9ea4660` |
-| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42796570354 (quality success) |
+**No row is scientifically approved by Cursor. No summary elevated to `owner_approved`.**
 
 ## Recommendation
 
-**CONDITIONAL PASS** for *draft readiness* (three abstracts are abstract-only; full-text verification flagged).  
-**STOP before merge.** Publication requires separate per-summary PI/paper-owner acceptance.
+**CONDITIONAL PASS** for updated draft readiness after review wording — **STOP before merge of any approval elevation.** Individual PI/paper-owner acceptance still required per draft.

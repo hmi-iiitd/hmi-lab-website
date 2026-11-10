@@ -43,17 +43,15 @@ verified_at: '2026-11-03'
 unresolved_notes: []
 plain_language_tldr: >-
   A five-week field study with 12 kindergarten children in an under-resourced New Delhi
-  school examined ethical and pedagogical issues when a social robot was used in
-  education. The authors highlight language barriers, harms from malfunction, trust and
-  deception, and whether such innovation is viable locally—not claims of clinical
-  benefit.
+  school examined ethical issues when a social robot was used in education. The authors
+  highlight language barriers, possible harms if robots malfunction, trust and deception,
+  and whether such innovation is viable locally—not claims of clinical benefit.
 tldr_status: ai_assisted_draft
-tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract and OA full text 2026-11-10
+tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from OA full text 2026-11-10; review wording 2026-11-10
 tldr_source_note: >-
-  Grounded in IJSR abstract/full text via DOI 10.1007/s12369-022-00882-1 and Leiden
-  scholarly repository handle 1887/3677493 (5-week in-the-wild study; n=12; four ethical
-  themes). Empirical ethics/pedagogy reflection—not an effectiveness trial for clinical
-  or educational outcomes.
+  FULL TEXT (PMC9133315 / DOI 10.1007/s12369-022-00882-1; Leiden 1887/3677493). Five-week
+  in-the-wild study; n=12; four ethical themes. Wording uses “possible harms if robots
+  malfunction” (not measured clinical harm). Not an effectiveness trial.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.
