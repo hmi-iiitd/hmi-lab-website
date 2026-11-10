@@ -62,7 +62,7 @@ tldr_approved_at: "2026-11-07"
 tldr_source_note: >-
   Lay draft after PR #13 scientific review; grounded in NeurIPS 2026 poster
   abstract (neurips.cc/virtual/2026/poster/150541). Quantitative 26% claim omitted
-  pending accepted-manuscript verification. Not owner-approved for public display.
+  pending accepted-manuscript verification.
 tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368504"
 ---
 

@@ -55,7 +55,7 @@ tldr_approved_at: "2026-11-07"
 tldr_source_note: >-
   Lay draft after PR #13 scientific review; grounded in Scientific Reports abstract
   (DOI 10.1038/s41598-026-68871-2). Preserves post-correction uncertainty and
-  medication-limitation caveats. Not owner-approved for public display.
+  medication-limitation caveats.
 tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368530"
 ---
 

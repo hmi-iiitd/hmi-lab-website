@@ -112,3 +112,60 @@ describe("T-B seven Selected TL;DRs — owner_approved publication", () => {
     expect(validateSrc).toMatch(/collectDraftTldrLeakMarkers/);
   });
 });
+
+/**
+ * T-B metadata consistency — owner_approved records must not retain the drafting-phase
+ * public-display denial that contradicted PI approval in PR #13 / #14.
+ */
+const STALE_APPROVAL_DENIAL =
+  /not\s+owner[- ]approved(?:\s+for\s+public\s+display)?|not\s+approved\s+for\s+public\s+display|pending\s+owner\s+approval\s+for\s+public/i;
+
+describe("T-B owner_approved source-note consistency (metadata cleanup)", () => {
+  function loadOwnerApprovedNonFixtures() {
+    const rows: { slug: string; note: string; data: ReturnType<typeof loadPub> }[] = [];
+    for (const name of readdirSync(pubDir).filter((f) => f.endsWith(".md"))) {
+      const raw = matter(readFileSync(path.join(pubDir, name), "utf8")).data;
+      if (raw.test_fixture) continue;
+      if (raw.tldr_status !== "owner_approved") continue;
+      const data = loadPub(String(raw.slug));
+      rows.push({
+        slug: String(raw.slug),
+        note: String(data.tldr_source_note ?? ""),
+        data,
+      });
+    }
+    return rows;
+  }
+
+  it("removes obsolete public-display denial from every non-fixture owner_approved source note", () => {
+    const approved = loadOwnerApprovedNonFixtures();
+    expect(approved.map((r) => r.slug).sort()).toEqual(
+      [...TB_APPROVED.map((r) => r.slug)].sort(),
+    );
+    for (const row of approved) {
+      expect(row.note, row.slug).not.toMatch(/Not owner-approved for public display/i);
+      expect(row.note, `${row.slug} equivalent denial`).not.toMatch(STALE_APPROVAL_DENIAL);
+    }
+  });
+
+  it("keeps scientific provenance in source notes without swapping in generic approval copy", () => {
+    for (const row of loadOwnerApprovedNonFixtures()) {
+      expect(row.note.trim().length, row.slug).toBeGreaterThan(40);
+      expect(row.note, row.slug).toMatch(/DOI|abstract|NeurIPS|arXiv|IMWUT|CHI|Scientific Reports|IEEE/i);
+      expect(row.note, row.slug).not.toMatch(
+        /^(Owner[- ]approved|PI[- ]approved|Approved for public display)\.?$/i,
+      );
+    }
+  });
+
+  it("preserves the seven canonical PI-approved TL;DR strings and approval evidence URLs", () => {
+    for (const expected of TB_APPROVED) {
+      const pub = loadPub(expected.slug);
+      expect(pub.tldr_status).toBe("owner_approved");
+      expect(normalize(pub.plain_language_tldr ?? "")).toBe(normalize(expected.text));
+      expect(pub.tldr_review_evidence).toBe(expected.evidence);
+      expect(pub.tldr_approved_at).toBe("2026-11-07");
+      expect(pub.tldr_reviewed_by).toMatch(/PI Jainendra Shukla/);
+    }
+  });
+});

@@ -71,7 +71,7 @@ tldr_reviewed_by: PI Jainendra Shukla (PR #13 individual acceptance review 58131
 tldr_approved_at: "2026-11-07"
 tldr_source_note: >-
   Lay draft after PR #13 scientific review; grounded in CHI 2024 abstract
-  (DOI 10.1145/3613904.3642836). Not owner-approved for public display.
+  (DOI 10.1145/3613904.3642836).
 tldr_review_evidence: "https://github.com/hmi-iiitd/hmi-lab-website/pull/13#discussion_r4502368537"
 ---
 
