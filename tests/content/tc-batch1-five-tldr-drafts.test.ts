@@ -130,7 +130,7 @@ describe("T-C Batch 1 — five ai_assisted_draft TL;DRs", () => {
   });
 
   it("does not add TL;DR fields to any other non-fixture publication", () => {
-    const protectedSlugs = new Set([
+    const protectedSlugs: Set<string> = new Set([
       ...TC_BATCH1.map((r) => r.slug),
       ...TB_APPROVED_EVIDENCE.map((r) => r.slug),
     ]);
