@@ -53,7 +53,9 @@ describe("M3.5 editorial corrections", () => {
     );
     expect(apps).toMatch(/03 \/ Application/);
     expect(community).toMatch(/04 \/ People/);
+    // News label remains 05 when the section is rendered; empty news omits the section.
     expect(news).toMatch(/05 \/ News/);
+    expect(news).not.toMatch(/Development placeholder/i);
     expect(community).not.toMatch(/03 \/ People/);
   });
 });

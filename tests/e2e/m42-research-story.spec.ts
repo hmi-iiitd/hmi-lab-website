@@ -17,7 +17,9 @@ async function assertNoHorizontalOverflow(page: Page) {
 test.describe("M4.2 research story remains unpublished on public surfaces", () => {
   test("Research index has no links to draft or fixture projects", async ({ page }) => {
     await page.goto("./research/");
-    await expect(page.getByText("No verified project pages yet.", { exact: false })).toBeVisible();
+    // Empty Projects listing is omitted rather than showing a development placeholder.
+    await expect(page.getByText("No verified project pages yet.", { exact: false })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: /^Projects$/i })).toHaveCount(0);
     await expect(page.locator('a[href*="/projects/esl-research-story/"]')).toHaveCount(0);
     await expect(page.locator('a[href*="/projects/test-fixture-research-story/"]')).toHaveCount(0);
     await expect(page.getByText(/TEST_ONLY_FICTIONAL/i)).toHaveCount(0);

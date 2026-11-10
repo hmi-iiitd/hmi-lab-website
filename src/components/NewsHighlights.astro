@@ -10,27 +10,15 @@ const { items } = Astro.props;
 const published = items.filter((item) => item.data.published);
 ---
 
-<section class="section wrap" id="news-highlights" aria-labelledby="news-title">
-  <SectionHeader
-    label="05 / News & achievements"
-    title="What the lab is building toward."
-    intro="Only dated, verified highlights appear here. Until those records exist, this module stays explicitly non-production."
-    titleId="news-title"
-  />
-
-  {
-    published.length === 0 ? (
-      <div class="news-panel">
-        <div>
-          <p class="placeholder-banner">Development placeholder · No verified highlights yet</p>
-          <h3>Highlights module ready for verified updates</h3>
-          <p>
-            News, awards, and opportunities will render from the news content collection once each
-            item has a confirmed date, summary, and publication approval.
-          </p>
-        </div>
-      </div>
-    ) : (
+{
+  published.length > 0 && (
+    <section class="section wrap" id="news-highlights" aria-labelledby="news-title">
+      <SectionHeader
+        label="05 / News & achievements"
+        title="What the lab is building toward."
+        intro="Dated, verified highlights from the HMI Research Group."
+        titleId="news-title"
+      />
       <div class="news-list">
         {published.map((item) => (
           <article class="news-item">
@@ -42,6 +30,6 @@ const published = items.filter((item) => item.data.published);
           </article>
         ))}
       </div>
-    )
-  }
-</section>
+    </section>
+  )
+}

@@ -1,11 +1,12 @@
 ---
 id: director-placeholder
 slug: lab-director
-name: "Lab Director (placeholder)"
+name: "Lab Director (unpublished scaffold)"
 role: director
 published: false
 title: "Director, HMI Research Group"
 image_permission: none
 ---
 
-Unpublished placeholder so the people collection exists. Replace with verified public profile data before setting `published: true`.
+Unpublished scaffold retained only so historical content ids remain stable. The public
+director profile is `jainendra-shukla.md`.

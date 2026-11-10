@@ -22,9 +22,11 @@
     "build": "npm run build:staging",
     "build:staging": "PUBLIC_SITE_URL=https://hmi-iiitd.github.io PUBLIC_BASE_PATH=/hmi-lab-website/ astro build",
     "build:staging:e2e": "INCLUDE_TEST_FIXTURES=1 PUBLIC_SITE_URL=https://hmi-iiitd.github.io PUBLIC_BASE_PATH=/hmi-lab-website/ astro build --outDir dist-e2e",
-    "build:production": "PUBLIC_SITE_URL=https://hmi.iiitd.edu.in PUBLIC_BASE_PATH=/ astro build",
+    "build:production": "PUBLIC_SITE_URL=https://hmi.iiitd.edu.in PUBLIC_BASE_PATH=/ astro build && node scripts/write-production-seo.mjs dist https://hmi.iiitd.edu.in",
     "preview": "astro preview --port 4321",
     "preview:staging": "npm run build:staging && astro preview --port 4321",
+    "preview:production": "npm run build:production && PUBLIC_SITE_URL=https://hmi.iiitd.edu.in PUBLIC_BASE_PATH=/ astro preview --port 4322 --host 127.0.0.1",
+    "smoke:production": "SMOKE_BASE_URL=${SMOKE_BASE_URL:-http://127.0.0.1:4322/} node scripts/smoke-production.mjs",
     "preview:e2e": "astro preview --outDir dist-e2e --host 127.0.0.1 --port 4321",
     "ci": "npm run lint && npm run typecheck && npm run test && npm run validate:content && npm run build:staging && npm run validate:content"
   },
