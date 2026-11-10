@@ -44,7 +44,7 @@ Exactly one `figure.about-quote` on About. D5 additional thinkers not introduced
 |---|---|---|
 | RED | `b29cb53` | Failing content + E2E I4 tests |
 | GREEN | `86608b1` | Constant + About prose + assertion tighten |
-| Faculty framing | *(this commit)* | CONDITIONAL PASS: replace intro with “Our HMI research programme asks…” |
+| Faculty framing | `d1dc087` | CONDITIONAL PASS: replace intro with “Our HMI research programme asks…” |
 
 ## Screenshots
 
@@ -80,8 +80,8 @@ Capture helper: `scripts/capture-i4-about-shots.mjs`.
 | Item | Value |
 |---|---|
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/17 |
-| Head SHA | *(filled after framing commit)* |
-| CI | *(filled after Actions on framing head)* |
+| Head SHA | `d1dc087e916e270ba3b72b49ca4f9421f642b5d2` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42762911392 (quality success) |
 
 ## Recommendation
 
