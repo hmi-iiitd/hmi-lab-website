@@ -162,12 +162,20 @@
 
 | Step | SHA | Notes |
 |---|---|---|
-| RED | *(filled after commit)* | Failing Batch 1 draft tests |
-| GREEN | *(filled after commit)* | Five `ai_assisted_draft` records + this dossier |
+| RED | `7bba466` | Failing Batch 1 draft tests |
+| GREEN | `9e98e65` | Five `ai_assisted_draft` records + this dossier |
 
-Staging HTML must show **zero** of the five draft strings. Seven owner-approved TL;DRs unchanged.
+Staging HTML SHA-256 identical before/after for homepage, publications archive, five Batch 1 paper pages, and seven approved paper pages. Draft snippets absent from public HTML. Seven owner-approved TL;DRs unchanged.
+
+## CI evidence
+
+| Item | Value |
+|---|---|
+| PR | *(filled after open)* |
+| Head SHA | *(branch tip)* |
+| CI | *(filled after Actions)* |
 
 ## Recommendation
 
-**PASS / CONDITIONAL PASS / HOLD** for *draft readiness* only — filled after CI.  
+**CONDITIONAL PASS** for *draft readiness* (three abstracts are abstract-only; full-text verification flagged).  
 **STOP before merge.** Publication requires separate per-summary PI/paper-owner acceptance.
