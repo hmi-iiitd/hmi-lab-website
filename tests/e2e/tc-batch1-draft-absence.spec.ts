@@ -2,11 +2,11 @@ import { expect, test } from "@playwright/test";
 import { TC_BATCH1 } from "../fixtures/tc-batch1-drafts";
 
 const DRAFT_SNIPPETS = [
-  "smartphone magnetic proxies",
-  "echolalia, coherence, and repetition",
-  "selective, sustained, and alternating attention",
-  "under-resourced New Delhi school",
-  "normative analysis, not an experimental performance study",
+  "physical props and smartphone magnetic sensing",
+  "SPASHT examined repetition and how ideas connect",
+  "ratings made from facial videos were correlated",
+  "possible harms if robots malfunction",
+  "technologies that infer or respond to people's emotions",
 ] as const;
 
 test.describe("T-C Batch 1 drafts stay off staging surfaces", () => {

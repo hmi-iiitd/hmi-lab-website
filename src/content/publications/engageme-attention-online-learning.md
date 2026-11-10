@@ -41,18 +41,19 @@ evidence_note: Verified against Crossref DOI 10.1007/978-3-031-64302-6_28 on 202
 verified_at: '2026-11-03'
 unresolved_notes: []
 plain_language_tldr: >-
-  Researchers explored neuropsychological tests of selective, sustained, and alternating
-  attention as a way to assess cognitive engagement in online learning. In a study with
-  73 students, manual facial-video labels agreed strongly with test scores. The work
-  assesses attention during tasks; it does not demonstrate improved learning or
-  classroom efficacy.
+  Researchers tested whether established attention tasks could help assess students’
+  engagement during online learning. In a study involving 73 students, ratings made from
+  facial videos were correlated with scores on attention tests. The work explores ways to
+  measure attention; it does not show improved learning outcomes.
 tldr_status: ai_assisted_draft
-tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract 2026-11-10
+tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract 2026-11-10; review wording 2026-11-10
 tldr_source_note: >-
-  ABSTRACT-ONLY / LIMITED EVIDENCE. Grounded in AIED 2024 / Springer abstract via DOI
-  10.1007/978-3-031-64302-6_28 (n=73; Stroop/CPT/TMT; Krippendorff α and Spearman
-  correlation claimed in abstract). Lab dataset page mentions a larger cohort; draft
-  follows the published abstract's 73. No learning-outcome or classroom-efficacy claim.
+  ABSTRACT-ONLY / LIMITED EVIDENCE. Springer abstract DOI 10.1007/978-3-031-64302-6_28
+  reports n=73, Krippendorff’s α = 0.864 (inter-annotator agreement on facial-video
+  ratings) and Spearman ρ = 0.673 (correlation with neuropsychological test scores)—keep
+  these distinct. Lab dataset page https://hmi.iiitd.edu.in/engagemeDataset.html reports
+  n=98; unresolved 73-versus-98 discrepancy pending author reconciliation. No
+  learning-outcome claim.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.
