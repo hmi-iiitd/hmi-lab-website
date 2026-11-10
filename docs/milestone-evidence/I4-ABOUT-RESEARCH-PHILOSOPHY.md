@@ -10,9 +10,9 @@
 
 > The question is not whether intelligent machines can interact, but whether intelligence for human worlds can emerge without interactional learning.
 
-**Rendered framing** (ordinary `<p class="hmi-research-proposition">` after the two existing philosophy paragraphs):
+**Rendered framing** (ordinary `<p class="hmi-research-proposition">` after the two existing philosophy paragraphs; faculty CONDITIONAL PASS wording):
 
-> Our programme poses a question — an HMI programme statement inspired by the form of Minsky's inquiry: *[proposition verbatim]*
+> Our HMI research programme asks a question inspired by the form of Minsky’s inquiry: *[proposition verbatim]*
 
 This is an HMI-authored programme statement. It is **not** a Marvin Minsky quotation.
 
@@ -23,7 +23,7 @@ This is an HMI-authored programme statement. It is **not** a Marvin Minsky quota
 | Inside existing `.about-philosophy` | Yes |
 | After both `RESEARCH_PHILOSOPHY_PARAGRAPHS` | Yes |
 | Ordinary paragraph (not blockquote / about-quote / cite) | Yes |
-| Identified as HMI programme statement | Yes |
+| Identified as HMI research programme (faculty framing) | Yes |
 | Minsky-inspired framing without misattribution | Yes |
 | Reading order: approved description → philosophy → Minsky | Preserved |
 | Homepage / Research index | Proposition absent |
@@ -44,6 +44,7 @@ Exactly one `figure.about-quote` on About. D5 additional thinkers not introduced
 |---|---|---|
 | RED | `b29cb53` | Failing content + E2E I4 tests |
 | GREEN | `86608b1` | Constant + About prose + assertion tighten |
+| Faculty framing | *(this commit)* | CONDITIONAL PASS: replace intro with “Our HMI research programme asks…” |
 
 ## Screenshots
 
@@ -79,9 +80,9 @@ Capture helper: `scripts/capture-i4-about-shots.mjs`.
 | Item | Value |
 |---|---|
 | PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/17 |
-| Head SHA | `c2abf7f7aa38b2838e7162ad26c26c70a46c9855` |
-| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42761356853 (quality success) |
+| Head SHA | *(filled after framing commit)* |
+| CI | *(filled after Actions on framing head)* |
 
 ## Recommendation
 
-**PASS** for merging I4 after green CI — **stop; do not merge without separate PI merge instruction.**
+**PASS** after faculty CONDITIONAL PASS framing correction and green CI — **stop; do not merge without separate PI merge instruction.**

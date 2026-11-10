@@ -23,8 +23,12 @@ test.describe("I4 About Research Philosophy proposition", () => {
     await expect(philosophy.locator("figure")).toHaveCount(0);
     await expect(philosophy.locator("cite")).toHaveCount(0);
 
-    await expect(philosophy.getByText(/HMI programme statement|programme statement/i)).toBeVisible();
-    await expect(philosophy.getByText(/inspired by|Minsky/i)).toBeVisible();
+    await expect(
+      philosophy.getByText(/Our HMI research programme asks a question/i),
+    ).toBeVisible();
+    await expect(
+      philosophy.getByText(/inspired by the form of Minsky.?s inquiry/i),
+    ).toBeVisible();
 
     for (const paragraph of RESEARCH_PHILOSOPHY_PARAGRAPHS) {
       await expect(philosophy.getByText(paragraph, { exact: true })).toBeVisible();

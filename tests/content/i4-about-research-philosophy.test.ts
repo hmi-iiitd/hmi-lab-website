@@ -29,8 +29,8 @@ describe("I4 About Research Philosophy proposition (RED→GREEN)", () => {
     const about = readFileSync(path.join(root, "src/pages/about/index.astro"), "utf8");
     expect(about).toContain("HMI_RESEARCH_PROPOSITION");
     expect(about).toMatch(/about-philosophy/);
-    expect(about).toMatch(/programme statement|program statement|HMI programme/i);
-    expect(about).toMatch(/inspired by.*Minsky|Minsky.?s (form|inquiry|question)/i);
+    expect(about).toMatch(/Our HMI research programme asks a question/i);
+    expect(about).toMatch(/inspired by the form of Minsky.?s inquiry/i);
 
     const philosophyStart = about.indexOf("about-philosophy");
     const quoteStart = about.indexOf('class="about-quote"');
