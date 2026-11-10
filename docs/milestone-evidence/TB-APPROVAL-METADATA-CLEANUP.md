@@ -77,9 +77,9 @@ Local `npm run build:staging` SHA-256 comparison (before → after):
 
 | Item | Value |
 |---|---|
-| PR | *(filled after open)* |
-| Head SHA | *(branch tip)* |
-| CI | *(filled after Actions)* |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/18 |
+| Head SHA | `bcd8145a5c52c590bf4d98492376a0cf1e00fb2d` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42777592193 (quality success) |
 
 ## Recommendation
 
