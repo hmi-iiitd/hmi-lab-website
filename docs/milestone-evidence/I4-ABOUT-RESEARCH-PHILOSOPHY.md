@@ -78,9 +78,9 @@ Capture helper: `scripts/capture-i4-about-shots.mjs`.
 
 | Item | Value |
 |---|---|
-| PR | *(filled after open)* |
-| Head SHA | *(branch tip after evidence commit)* |
-| CI | *(filled after Actions)* |
+| PR | https://github.com/hmi-iiitd/hmi-lab-website/pull/17 |
+| Head SHA | `c2abf7f7aa38b2838e7162ad26c26c70a46c9855` |
+| CI | https://github.com/hmi-iiitd/hmi-lab-website/actions/runs/42761356853 (quality success) |
 
 ## Recommendation
 
