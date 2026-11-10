@@ -35,6 +35,13 @@ export const RESEARCH_PHILOSOPHY_PARAGRAPHS = [
   "We therefore ask how systems can perceive and understand people, other agents, and situations under changing conditions; how they can learn and coordinate when behaviours continually reshape one another; and how interfaces, robots, and assistive systems should adapt so interaction remains usable and trustworthy. Our three research themes name connected aspects of this ongoing feedback loop while preserving each theme’s individual scientific scope.",
 ] as const;
 
+/**
+ * HMI-authored research programme statement for About → Research Philosophy (I4).
+ * Inspired by the rhetorical form of Minsky’s emotion/intelligence question — not a Minsky quotation.
+ */
+export const HMI_RESEARCH_PROPOSITION =
+  "The question is not whether intelligent machines can interact, but whether intelligence for human worlds can emerge without interactional learning.";
+
 /** Primary theme ids in display order. */
 export const PRIMARY_THEME_IDS = [
   "perception-understanding",

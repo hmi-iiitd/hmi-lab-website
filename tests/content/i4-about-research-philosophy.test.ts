@@ -33,15 +33,17 @@ describe("I4 About Research Philosophy proposition (RED→GREEN)", () => {
     expect(about).toMatch(/inspired by.*Minsky|Minsky.?s (form|inquiry|question)/i);
 
     const philosophyStart = about.indexOf("about-philosophy");
-    const propositionUse = about.indexOf("HMI_RESEARCH_PROPOSITION");
-    const quoteStart = about.indexOf("about-quote");
-    expect(propositionUse).toBeGreaterThan(philosophyStart);
-    expect(propositionUse).toBeLessThan(quoteStart);
+    const quoteStart = about.indexOf('class="about-quote"');
+    // Template render site (not the import) must sit inside philosophy, before Minsky.
+    const propositionRender = about.indexOf("{HMI_RESEARCH_PROPOSITION}", philosophyStart);
+    expect(propositionRender).toBeGreaterThan(philosophyStart);
+    expect(propositionRender).toBeLessThan(quoteStart);
+    expect(about.slice(philosophyStart, quoteStart)).toContain("hmi-research-proposition");
 
     // Must not place the proposition inside the Minsky figure/blockquote.
     const quoteBlock = about.slice(quoteStart);
-    expect(quoteBlock).not.toContain("HMI_RESEARCH_PROPOSITION");
-    expect(about.match(/about-quote/g)?.length).toBe(1);
+    expect(quoteBlock).not.toContain("{HMI_RESEARCH_PROPOSITION}");
+    expect(about.match(/class="about-quote"/g)?.length).toBe(1);
   });
 
   it("does not place the proposition on homepage or Research index", () => {
