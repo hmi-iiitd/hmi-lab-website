@@ -40,6 +40,19 @@ sources:
 evidence_note: Verified against Crossref DOI 10.1007/978-3-031-64302-6_28 on 2026-11-03.
 verified_at: '2026-11-03'
 unresolved_notes: []
+plain_language_tldr: >-
+  Researchers explored neuropsychological tests of selective, sustained, and alternating
+  attention as a way to assess cognitive engagement in online learning. In a study with
+  73 students, manual facial-video labels agreed strongly with test scores. The work
+  assesses attention during tasks; it does not demonstrate improved learning or
+  classroom efficacy.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract 2026-11-10
+tldr_source_note: >-
+  ABSTRACT-ONLY / LIMITED EVIDENCE. Grounded in AIED 2024 / Springer abstract via DOI
+  10.1007/978-3-031-64302-6_28 (n=73; Stroop/CPT/TMT; Krippendorff α and Spearman
+  correlation claimed in abstract). Lab dataset page mentions a larger cohort; draft
+  follows the published abstract's 73. No learning-outcome or classroom-efficacy claim.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.
