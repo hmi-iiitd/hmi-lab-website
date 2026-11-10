@@ -39,6 +39,19 @@ sources:
 evidence_note: "Verified against Crossref DOI 10.1109/icassp49357.2023.10095135 on 2026-11-03."
 verified_at: '2026-11-03'
 unresolved_notes: []
+plain_language_tldr: >-
+  Researchers analysed children's conversation transcripts for semantic and pragmatic
+  speech patterns—such as echolalia, coherence, and repetition—linked to autism
+  assessment research. On transcripts from 76 children, these features complemented
+  other language cues and supported classification in the study. The work does not
+  establish a standalone clinical diagnostic test.
+tldr_status: ai_assisted_draft
+tldr_drafted_by: Cursor agent (T-C Batch 1); source-grounded from publisher abstract 2026-11-10
+tldr_source_note: >-
+  ABSTRACT-ONLY / LIMITED EVIDENCE. Grounded in ICASSP 2023 abstract via DOI
+  10.1109/icassp49357.2023.10095135 (IEEE/SPS abstract text; CHILDES n=76). Abstract
+  reports 94% classification accuracy; draft omits that figure pending full-text
+  verification of evaluation protocol. Not a clinical diagnostic claim.
 ---
 
 Bibliographic record managed in the HMI content collection. Resource links are included only when verified.
