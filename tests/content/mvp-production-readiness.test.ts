@@ -41,6 +41,13 @@ describe("MVP production readiness — public placeholder freeze", () => {
     expect(published[0].name).toMatch(/Jainendra Shukla/);
     expect(published[0].image_permission).toBe("none");
     expect(published[0].email ?? null).toBeFalsy();
+    expect(published[0].title).toMatch(/Associate Professor \(Computer Science and Engineering/);
+    expect(published[0].title).toMatch(/Founder and Director/);
+    expect(published[0].bio).toMatch(/interactive intelligence/i);
+    expect(published[0].website).toBe("https://www.iiitd.ac.in/jainendra");
+
+    const peoplePage = readFileSync(path.join(root, "src/pages/people/index.astro"), "utf8");
+    expect(peoplePage).toMatch(/bioParagraphs\(person\.data\.bio\)/);
   });
 
   it("ships an institutional Apache redirect map for Variant B cutover", () => {
