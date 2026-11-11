@@ -14,7 +14,7 @@
 | Field | Value |
 |---|---|
 | Prior merged readiness | `f1038e749df88d92736bebaba9f50c004a250a7a` (#21) |
-| Proposed release SHA | tip of `release/mvp-pi-profile-amendment` after this amendment lands (see PR) |
+| Proposed release SHA | `6b575311627f995c31a130ae5b9778ef64d1ee04` |
 | Production artifact SHA-256 | `23d869681466fa6e282af424869649cc6ace63c2be44750cc96054c2e49b069c` (see `MVP-PRODUCTION-ARTIFACT.sha256`) |
 | Build command | `npm run build:production` |
 | Artifact root | `dist/` (immutable checksum of file paths + bytes) |
