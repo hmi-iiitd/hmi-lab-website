@@ -11,6 +11,36 @@ const people: CollectionEntry<"people">[] = (await getCollection("people"))
     if (byRole !== 0) return byRole;
     return a.data.name.localeCompare(b.data.name);
   });
+
+function titleLines(title: string | undefined, role: string): string[] {
+  const raw = (title ?? role).trim();
+  return raw
+    .split(/\s*;\s*/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
+function bioParagraphs(bio: string | undefined): string[] {
+  if (!bio) return [];
+  return bio
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+}
+
+function emphasizeInteractiveIntelligence(text: string): Array<string | { em: string }> {
+  const parts: Array<string | { em: string }> = [];
+  const re = /interactive intelligence/gi;
+  let last = 0;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(text)) !== null) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    parts.push({ em: match[0] });
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
 ---
 
 <BaseLayout
@@ -36,7 +66,16 @@ const people: CollectionEntry<"people">[] = (await getCollection("people"))
               <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.5rem;">
                 {person.data.name}
               </h2>
-              <p class="muted">{person.data.title ?? person.data.role}</p>
+              {titleLines(person.data.title, person.data.role).map((line) => (
+                <p class="muted">{line}</p>
+              ))}
+              {bioParagraphs(person.data.bio).map((para) => (
+                <p>
+                  {emphasizeInteractiveIntelligence(para).map((part) =>
+                    typeof part === "string" ? part : <em>{part.em}</em>,
+                  )}
+                </p>
+              ))}
               {person.data.website && (
                 <p>
                   <a class="text-link" href={person.data.website} rel="noopener noreferrer">

@@ -1,13 +1,11 @@
 # MVP launch readiness — GO / NO-GO
 
-**PR title:** `release: MVP production readiness and launch hardening`  
-**Baseline (main before release branch):** `78c958926d39d365afcaab9af5266f73aeb22c48`  
-**Proposed release SHA:** tip of this PR (`b8bcff40fb90b2c7a5bfb46a3d15981f757b2141` at evidence stamp; functional hardening `c62a43157300465e00e7d956acdc47ae1ced7515`)  
-
+**Merged readiness:** `#21` → `f1038e749df88d92736bebaba9f50c004a250a7a`  
+**Launch amendment:** PI People profile editorial update (this branch)  
 **Production target:** https://hmi.iiitd.edu.in/  
 **Staging (unchanged):** https://hmi-iiitd.github.io/hmi-lab-website/  
-**Verdict:** **NO-GO for production cutover** until the P0 blockers in §2 are cleared.  
-**Engineering readiness:** release branch is suitable for faculty review of the proposed artifact; **do not merge or deploy** without separate authorization.
+**Verdict:** **NO-GO for production cutover** until hosting owner confirms deployment, backup, redirects, and rollback (and remaining §2 items).  
+**Engineering readiness:** PI identity/role/profile text approved and rendered on People; **production deployment remains on HOLD**.
 
 ---
 
@@ -15,24 +13,24 @@
 
 | Field | Value |
 |---|---|
-| Branch | `release/mvp-production-readiness` |
-| Proposed release SHA | `b8bcff40fb90b2c7a5bfb46a3d15981f757b2141` (hardening content: `c62a43157300465e00e7d956acdc47ae1ced7515`) |
-| Production artifact SHA-256 | `9c04b5234f539eed4d7cc871a56d68e729677aa355292d39c1ca064a4d8825f9` (see `MVP-PRODUCTION-ARTIFACT.sha256`) |
+| Prior merged readiness | `f1038e749df88d92736bebaba9f50c004a250a7a` (#21) |
+| Proposed release SHA | tip of `release/mvp-pi-profile-amendment` after this amendment lands (see PR) |
+| Production artifact SHA-256 | `23d869681466fa6e282af424869649cc6ace63c2be44750cc96054c2e49b069c` (see `MVP-PRODUCTION-ARTIFACT.sha256`) |
 | Build command | `npm run build:production` |
 | Artifact root | `dist/` (immutable checksum of file paths + bytes) |
 
-Faculty must approve **this exact SHA** (or a subsequent fixing commit) before cutover.
+Faculty/IT must cut over from **this exact post-amendment SHA**.
 
 ---
 
 ## 2. Remaining P0 blockers (process — not code defects)
 
-1. **People directory PI acceptance** — Director profile `jainendra-shukla` is sourced from https://www.iiitd.ac.in/jainendra and institutional listings; no portrait/email. Requires explicit PI acceptance to publish on production.
-2. **Contact block confirmation** — Footer uses `hmi@iiitd.ac.in`, `+91-11-26907523`, `A-413, RnD Block, Okhla Phase III, New Delhi 110020` (matches current live site). Needs PI/IT confirmation that these remain current.
-3. **Variant B host ownership** — Authorized IIIT-Delhi administrator must confirm who deploys to `hmi.iiitd.edu.in`, upload method, Apache `AllowOverride` for `.htaccess`, backup location, rollback owner, and that DNS/TLS stay unchanged. Sensitive details stay **out of this repository**.
-4. **Redirect rehearsal on institutional host** — Local Astro/`serve` cannot exercise Apache `.htaccess`. Run `SMOKE_CHECK_REDIRECTS=1` against a production-shaped Apache preview before cutover.
-5. **Faculty go/no-go on this release SHA** — Separate from engineering CI green.
+1. **Contact block confirmation** — Footer uses `hmi@iiitd.ac.in`, `+91-11-26907523`, `A-413, RnD Block, Okhla Phase III, New Delhi 110020` (matches current live site). Needs PI/IT confirmation that these remain current.
+2. **Variant B host ownership** — Authorized IIIT-Delhi administrator must confirm who deploys to `hmi.iiitd.edu.in`, upload method, Apache `AllowOverride` for `.htaccess`, backup location, rollback owner, and that DNS/TLS stay unchanged. Sensitive details stay **out of this repository**.
+3. **Redirect rehearsal on institutional host** — Local Astro/`serve` cannot exercise Apache `.htaccess`. Run `SMOKE_CHECK_REDIRECTS=1` against a production-shaped Apache preview before cutover.
+4. **Hosting go for cutover** — Separate authorization after backup/deploy/rollback confirmation.
 
+**Cleared:** PI identity, role, and People profile prose for Jainendra Shukla (no portrait; institutional link retained).
 No fabrication of news, projects, or additional people was performed. Empty News and Projects sections are omitted.
 
 ---
@@ -70,7 +68,7 @@ If Variant B is unavailable, document blockers (e.g. no Apache overrides, no sta
 | T-C Batch 1 five summaries | Remain `ai_assisted_draft` (unpublished) | No elevation |
 | News | Section omitted (no verified items) | OK until content exists |
 | Projects / Research Stories | Section omitted (none public) | M4.3 deferred |
-| People | Director only, no portrait | **PI accept identity/role** |
+| People | Director only; approved bio rendered; no portrait | **PI identity/role/profile approved** |
 | Contact email / phone / address | Matches live site | **PI/IT confirm** |
 
 ---
