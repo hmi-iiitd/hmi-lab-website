@@ -34,7 +34,8 @@ test.describe("M2 homepage structure", () => {
     await expect(page.locator("#selected-research")).toBeVisible();
     await expect(page.locator("#research-themes")).toBeVisible();
     await expect(page.locator("#community")).toBeVisible();
-    await expect(page.locator("#news-highlights")).toBeVisible();
+    // News is omitted entirely until verified news content exists.
+    await expect(page.locator("#news-highlights")).toHaveCount(0);
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Interactive Intelligence/i);
     await expect(page.locator("#hero .hero-deck")).toHaveText(
@@ -67,7 +68,9 @@ test.describe("M2 homepage structure", () => {
     }
   });
 
-  test("selected research uses verified papers; news stays honestly empty", async ({ page }) => {
+  test("selected research uses verified papers; empty news section is omitted", async ({
+    page,
+  }) => {
     await page.goto("./");
     const selected = page.locator("#selected-research");
     await expect(selected.getByText(/development placeholder/i)).toHaveCount(0);
@@ -76,10 +79,8 @@ test.describe("M2 homepage structure", () => {
       selected.getByText(/Epistemic Social Learning|MobiTangibles|social robots|pupil dynamics/i).first(),
     ).toBeVisible();
 
-    const news = page.locator("#news-highlights");
-    await expect(
-      news.getByText(/development placeholder|no verified highlights/i).first(),
-    ).toBeVisible();
+    await expect(page.locator("#news-highlights")).toHaveCount(0);
+    await expect(page.getByText(/development placeholder/i)).toHaveCount(0);
   });
 
   test("three research themes render with questions", async ({ page }) => {

@@ -92,17 +92,12 @@ function papersForTheme(themeId: string, limit = 3): PubEntry[] {
 
   <ApplicationPathways tags={applicationTags} compact />
 
-  <section class="section wrap" aria-labelledby="projects-title">
-    <h2 class="section-title" id="projects-title" style="font-size: 1.6rem;">Projects</h2>
-    {
-      projects.length === 0 ? (
-        <p class="muted" style="margin-top: 1rem;">
-          No verified project pages yet. Unfinished project drafts remain unpublished.
-          See the{" "}
-          <a class="text-link" href={withBase("publications/")}>publications archive</a>{" "}
-          for verified research records.
-        </p>
-      ) : (
+  {
+    projects.length > 0 && (
+      <section class="section wrap" aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title" style="font-size: 1.6rem;">
+          Projects
+        </h2>
         <ul class="theme-paper-list" style="margin-top: 1rem;">
           {projects.map((project) => (
             <li>
@@ -110,7 +105,7 @@ function papersForTheme(themeId: string, limit = 3): PubEntry[] {
             </li>
           ))}
         </ul>
-      )
-    }
-  </section>
+      </section>
+    )
+  }
 </BaseLayout>

@@ -1,31 +1,49 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { LAB_NAME } from "../../lib/identity";
 
-const people: CollectionEntry<"people">[] = (await getCollection("people")).filter(
-  (e: CollectionEntry<"people">) => e.data.published,
-);
+const people: CollectionEntry<"people">[] = (await getCollection("people"))
+  .filter((e: CollectionEntry<"people">) => e.data.published)
+  .sort((a: CollectionEntry<"people">, b: CollectionEntry<"people">) => {
+    const rank = (role: string) => (role === "director" || role === "faculty" ? 0 : 1);
+    const byRole = rank(a.data.role) - rank(b.data.role);
+    if (byRole !== 0) return byRole;
+    return a.data.name.localeCompare(b.data.name);
+  });
 ---
 
-<BaseLayout title="People · HMI Lab">
+<BaseLayout
+  title={`People · ${LAB_NAME}`}
+  description={`People of the ${LAB_NAME} at IIIT-Delhi.`}
+>
   <section class="section wrap">
     <p class="section-label">People</p>
     <h1 class="section-title">Research is a collective effort</h1>
     <p class="muted">
-      Profiles render only when marked published with approved metadata. Placeholder drafts stay out
-      of the public listing.
+      Verified public profiles for the HMI Research Group. Contact the lab at
+      <a href="mailto:hmi@iiitd.ac.in">hmi@iiitd.ac.in</a>.
     </p>
     {
       people.length === 0 ? (
-        <p style="margin-top: 2rem;">Public people profiles will appear after verification (M5).</p>
+        <p class="muted" style="margin-top: 2rem;">
+          No verified public profiles are listed at this time.
+        </p>
       ) : (
-        <div class="card-list">
+        <div class="card-list" style="margin-top: 2rem;">
           {people.map((person) => (
             <article>
               <h2 style="font-family: var(--font-display); font-weight: 400; font-size: 1.5rem;">
                 {person.data.name}
               </h2>
               <p class="muted">{person.data.title ?? person.data.role}</p>
+              {person.data.website && (
+                <p>
+                  <a class="text-link" href={person.data.website} rel="noopener noreferrer">
+                    Institutional profile <span aria-hidden="true">↗</span>
+                  </a>
+                </p>
+              )}
             </article>
           ))}
         </div>

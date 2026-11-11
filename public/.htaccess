@@ -1,0 +1,38 @@
+# Variant B — institutional Apache/static hosting for https://hmi.iiitd.edu.in/
+# Deploy this file with the production artifact. Do not use on GitHub Pages staging.
+
+Options -MultiViews
+DirectoryIndex index.html
+
+# Directory-style routes (Astro build.format = directory)
+RewriteEngine On
+RewriteBase /
+
+# Prefer HTTPS when the host already terminates TLS
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Legacy HTML aliases → new Astro routes
+RewriteRule ^publication\.html$ /publications/ [R=301,L]
+RewriteRule ^team\.html$ /people/ [R=301,L]
+RewriteRule ^project\.html$ /research/ [R=301,L]
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Candidate paper aliases (verified M3 slugs)
+RewriteRule ^ExpressEar\.html$ /papers/express-ear/ [R=301,L]
+RewriteRule ^Feature-extraction-selection-for-emotion-recognition\.html$ /papers/emotion-recognition-eda/ [R=301,L]
+RewriteRule ^semi-supervised-learning-predicting-listener-backchannels\.html$ /papers/listener-backchannels/ [R=301,L]
+
+# Soft landings for deferred legacy content (no dedicated replacement yet)
+RewriteRule ^contact\.php$ /about/ [R=301,L]
+RewriteRule ^contact_us\.html$ /about/ [R=301,L]
+RewriteRule ^blog\.html$ / [R=302,L]
+RewriteRule ^updates\.html$ / [R=302,L]
+RewriteRule ^faq\.html$ /about/ [R=302,L]
+RewriteRule ^join_us\.html$ /about/ [R=302,L]
+RewriteRule ^resources\.html$ /research/ [R=302,L]
+RewriteRule ^old_projects\.html$ /research/ [R=302,L]
+
+# Flagship project aliases without published Research Stories yet → theme/research index
+RewriteRule ^HRI-for-ASD-Diagnosis\.html$ /research/ [R=302,L]
+RewriteRule ^Emotionalyzer\.html$ /research/ [R=302,L]

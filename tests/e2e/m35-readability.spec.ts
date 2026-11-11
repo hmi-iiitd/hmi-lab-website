@@ -42,14 +42,16 @@ test.describe("M3.5 readability and editorial gate", () => {
     await expect(selected.locator(".feature-viz")).toHaveCount(0);
   });
 
-  test("section labels are unique 01–05", async ({ page }) => {
+  test("section labels are unique 01–04 (05 News only when published)", async ({ page }) => {
     await page.goto("./");
     const labels = await page.locator(".section-label").allTextContents();
     const numbered = labels.map((l) => l.trim()).filter((l) => /^\d{2}\s*\//.test(l));
     expect(numbered.some((l) => l.startsWith("03"))).toBeTruthy();
     expect(numbered.filter((l) => l.startsWith("03"))).toHaveLength(1);
     expect(numbered.some((l) => l.startsWith("04"))).toBeTruthy();
-    expect(numbered.some((l) => l.startsWith("05"))).toBeTruthy();
+    // News (05) is omitted when no verified news items are published.
+    const hasNews = (await page.locator("#news-highlights").count()) > 0;
+    expect(numbered.some((l) => l.startsWith("05"))).toBe(hasNews);
   });
 
   test("desktop and mobile type floors for critical roles", async ({ page }) => {
